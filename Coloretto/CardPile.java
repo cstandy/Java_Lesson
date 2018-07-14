@@ -4,9 +4,9 @@ import java.util.Stack;
 //import coloretto.Card;
 
 public class CardPile{
-//variables
+    /* variables */
 	private Stack<Card>	cardPile;
-//functions
+    /* functions */
 	public CardPile(){
 		cardPile = new Stack();
 	}

@@ -1,13 +1,14 @@
 package coloretto;
 
 public class Card{
-//variables
-	protected String	type;		//color, rainbow, twice, finish
-	protected String	seat;		//cardpile, cardrow, player
-	protected int		num;		//cardpile or cardrow
-	protected int		player;		//12345
-	protected int		row;		//in which row
-//functions
+    /* variables */
+	protected String	type;		// color, rainbow, twice, finish
+	protected String	seat;		// cardpile, cardrow, player
+	protected int		num;		// cardpile or cardrow
+	protected int		player;		// 12345
+	protected int		row;		// in which row
+
+    /* functions */
 	public Card(int inNum, String inType){
 		setType(inType);
 		setSeat("cardpile");
@@ -15,36 +16,30 @@ public class Card{
 		setPlayer(0);
 		setRow(0);
 	}
-	public String	getType(){
-		return type;
-	}
+
+    /* get functions */
+	public String   getType()   {return type;}
+	public String	getSeat()   {return seat;}
+	public int		getNum()    {return num;}
+	public int		getPlayer() {return player;}
+	public int		getRow()    {return row;}
+
+    /* set functions */
 	public Card		setType(String inType){
 		type = inType;
 		return this;
-	}
-	public String	getSeat(){
-		return seat;
 	}
 	public Card		setSeat(String inSeat){
 		seat = inSeat;
 		return this;
 	}
-	public int		getNum(){
-		return num;
-	}
 	public Card		setNum(int inNum){
 		num = inNum;
 		return this;
 	}
-	public int		getPlayer(){
-		return player;
-	}
 	public Card		setPlayer(int inPlayer){
 		player = inPlayer;
 		return this;
-	}
-	public int		getRow(){
-		return row;
 	}
 	public Card		setRow(int inRow){
 		row = inRow;
@@ -53,9 +48,9 @@ public class Card{
 }
 
 class ColorCard extends Card{
-//variables
+    /* variables */
 	private String color;
-//functions
+    /* functions */
 	public ColorCard(int inNum, String inColor){
 		super(inNum, "color");
 		color = inColor;
