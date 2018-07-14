@@ -1,4 +1,4 @@
-package Coloretto;
+package coloretto;
 
 public class Card{
 //variables
@@ -81,4 +81,5 @@ class FinishCard extends Card{
 	public FinishCard(int inNum){
 		super(inNum, "finish");
 	}
+
 }
