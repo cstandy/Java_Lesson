@@ -3,11 +3,11 @@ package Coloretto;
 import java.util.Stack;
 
 public class CardPile{
-//variables
+    /* variables */
 	private Stack<Card>	cardPile;
-//functions
+    /* functions */
 	public CardPile(){
-		cardPile = new Stack;
+		cardPile = new Stack();
 	}
 	public void addCard(Card inCard){
 		cardPile.push(inCard);
