@@ -34,25 +34,25 @@ public class Card{
 	}
 	public Card		setNum(int inNum){
 		num = inNum;
-		return Card;
+		return this;
 	}
 	public int		getPlayer(){
 		return player;
 	}
 	public Card		setPlayer(int inPlayer){
 		player = inPlayer;
-		return Card;
+		return this;
 	}
 	public int		getRow(){
 		return row;
 	}
 	public Card		setRow(int inRow){
 		row = inRow;
-		return Card;
+		return this;
 	}
 }
 
-class ColorCard{
+class ColorCard extends Card{
 //variables
 	private String color;
 //functions
@@ -65,19 +65,19 @@ class ColorCard{
 	}
 }
 
-class RainbowCard{
+class RainbowCard extends Card{
 	public RainbowCard(int inNum){
 		super(inNum, "rainbow");
 	}
 }
 
-class TwiceCard{
+class TwiceCard extends Card{
 	public TwiceCard(int inNum){
 		super(inNum, "twice");
 	}
 }
 
-class FinishCard{
+class FinishCard extends Card{
 	public FinishCard(int inNum){
 		super(inNum, "finish");
 	}
