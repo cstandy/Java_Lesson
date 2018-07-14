@@ -15,7 +15,9 @@ For compiling a Java source code, for example, `HelloWorld.java`:
 $ javac HelloWorld.java
 ```
 
-+ Use javac -d 'path' HelloWorld.java to ensure that output file is in the package folder, or other classes in the same package cannot use that class even if import.
++ Use `javac -d {path} HelloWorld.java` to assign the output directory.
+    - ensure output file to be in the package folder
+    - enable other classes in the same package to use that class with `import`
 
 And the above command will produce a new file (`HelloWorld.class`). To run this application, enter:
 
