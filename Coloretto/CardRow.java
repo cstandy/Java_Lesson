@@ -24,7 +24,7 @@ public class CardRow{
 
 	/* get functions */
 	public String	getCard()	{
-		String cardType;
+		String cardType = new String();
 		for(int a=0; a < this.getNum(); a++){
 			cardType = cardType + cardRow.elementAt(a).getType() + ",";
 		}
