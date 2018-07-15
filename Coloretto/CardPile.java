@@ -1,7 +1,6 @@
 package coloretto;
 
 import java.util.Stack;
-//import coloretto.Card;
 
 public class CardPile{
     /* variables */

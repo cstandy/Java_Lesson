@@ -2,17 +2,15 @@ package coloretto;
 
 public class Card{
     /* variables */
-	protected String	type;		// color, rainbow, twice, finish
-	protected String	seat;		// cardpile, cardrow, player
-	protected int		num;		// cardpile or cardrow
-	protected int		player;		// 12345
-	protected int		row;		// in which row
+	private String	type;		// pink, brown, blue, green, gray, red, gold, rainbow, twice, finish
+	private String	seat;		// cardpile, cardrow, player
+	private int		player;		// 12345
+	private int		row;		// in which row
 
     /* functions */
-	public Card(int inNum, String inType){
-		setType(inType);
+	public Card(String inType){
+		type = inType;
 		setSeat("cardpile");
-		setNum(inNum);
 		setPlayer(0);
 		setRow(0);
 	}
@@ -20,21 +18,12 @@ public class Card{
     /* get functions */
 	public String   getType()   {return type;}
 	public String	getSeat()   {return seat;}
-	public int		getNum()    {return num;}
 	public int		getPlayer() {return player;}
 	public int		getRow()    {return row;}
 
     /* set functions */
-	public Card		setType(String inType){
-		type = inType;
-		return this;
-	}
 	public Card		setSeat(String inSeat){
 		seat = inSeat;
-		return this;
-	}
-	public Card		setNum(int inNum){
-		num = inNum;
 		return this;
 	}
 	public Card		setPlayer(int inPlayer){
@@ -47,34 +36,34 @@ public class Card{
 	}
 }
 
-class ColorCard extends Card{
-    /* variables */
-	private String color;
-    /* functions */
-	public ColorCard(int inNum, String inColor){
-		super(inNum, "color");
-		color = inColor;
-	}
-	public String	getColor(){
-		return color;
-	}
-}
-
-class RainbowCard extends Card{
-	public RainbowCard(int inNum){
-		super(inNum, "rainbow");
-	}
-}
-
-class TwiceCard extends Card{
-	public TwiceCard(int inNum){
-		super(inNum, "twice");
-	}
-}
-
-class FinishCard extends Card{
-	public FinishCard(int inNum){
-		super(inNum, "finish");
-	}
-
-}
+//class ColorCard extends Card{
+//    /* variables */
+//	private String color;
+//    /* functions */
+//	public ColorCard(int inNum, String inColor){
+//		super(inNum, "color");
+//		color = inColor;
+//	}
+//	public String	getColor(){
+//		return color;
+//	}
+//}
+//
+//class RainbowCard extends Card{
+//	public RainbowCard(int inNum){
+//		super(inNum, "rainbow");
+//	}
+//}
+//
+//class TwiceCard extends Card{
+//	public TwiceCard(int inNum){
+//		super(inNum, "twice");
+//	}
+//}
+//
+//class FinishCard extends Card{
+//	public FinishCard(int inNum){
+//		super(inNum, "finish");
+//	}
+//
+//}
