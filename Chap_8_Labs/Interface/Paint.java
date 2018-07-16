@@ -7,7 +7,7 @@ public class Paint {
 		Shape shape1 = new Rectangle();
 		printArea(shape1);
 
-		Shape shape2 = new Cirle();
+		Shape shape2 = new Circle();
 		printArea(shape2);
 	}
 
