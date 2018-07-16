@@ -3,37 +3,37 @@ package coloretto;
 public class Card{
     /* variables */
 	private String	type;		// pink, brown, blue, green, gray, red, gold, rainbow, twice, finish
-	private String	seat;		// cardpile, cardrow, player
-	private int		player;		// 12345
-	private int		row;		// in which row
+	//private String	seat;		// cardpile, cardrow, player
+	//private int		player;		// 12345
+	//private int		row;		// in which row
 
     /* functions */
 	public Card(String inType){
 		type = inType;
-		setSeat("cardpile");
-		setPlayer(0);
-		setRow(0);
+		//setSeat("cardpile");
+		//setPlayer(0);
+		//setRow(0);
 	}
 
     /* get functions */
 	public String   getType()   {return type;}
-	public String	getSeat()   {return seat;}
-	public int		getPlayer() {return player;}
-	public int		getRow()    {return row;}
+	//public String	getSeat()   {return seat;}
+	//public int		getPlayer() {return player;}
+	//public int		getRow()    {return row;}
 
     /* set functions */
-	public Card		setSeat(String inSeat){
-		seat = inSeat;
-		return this;
-	}
-	public Card		setPlayer(int inPlayer){
-		player = inPlayer;
-		return this;
-	}
-	public Card		setRow(int inRow){
-		row = inRow;
-		return this;
-	}
+	//public Card		setSeat(String inSeat){
+	//	seat = inSeat;
+	//	return this;
+	//}
+	//public Card		setPlayer(int inPlayer){
+	//	player = inPlayer;
+	//	return this;
+	//}
+	//public Card		setRow(int inRow){
+	//	row = inRow;
+	//	return this;
+	//}
 }
 
 //class ColorCard extends Card{

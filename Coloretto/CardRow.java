@@ -13,7 +13,7 @@ public class CardRow{
 		row = inRow;
 	}
 	public CardRow	addCard(Card inCard){
-		inCard.setSeat("cardrow").setRow(this.getRow());
+		//inCard.setSeat("cardrow").setRow(this.getRow());
 		cardRow.addElement(inCard);
 		return this;
 	}
@@ -30,7 +30,7 @@ public class CardRow{
 		}
 		return cardType;
 	}
-	public int		getNum()	{return cardRow.capacity();}
+	public int		getNum()	{return cardRow.size();}
 	public int		getRow()    {return row;}
 
 }

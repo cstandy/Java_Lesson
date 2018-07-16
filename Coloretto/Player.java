@@ -15,7 +15,7 @@ public class Player{
 		playerName = inName;
 	}
 	public Player addCard(Card inCard){
-		inCard.setSeat("player").setPlayer(this.getPlayerN());
+		//inCard.setSeat("player").setPlayer(this.getPlayerN());
 		cardOwn.addElement(inCard);
 		return this;
 	}
@@ -28,7 +28,7 @@ public class Player{
 		}
 		return cardType;
 	}
-	public int		getNum()		{return cardOwn.capacity();}
+	public int		getNum()		{return cardOwn.size();}
 	public int		getPlayerN()    {return playerN;}
 	public String	getPlayerName()	{return playerName;}
 
