@@ -6,7 +6,7 @@ public class ChatClient {
 	public static void main(String[] args) {
 		try {
 			// Connection to server on port 8000
-			Socket connectionSock = new Socket("192.168.21.227", 8000);
+			Socket connectionSock = new Socket("192.168.21.92", 8000);
 
 			DataOutputStream serverOutput = new DataOutputStream(connectionSock.getOutputStream());
 
