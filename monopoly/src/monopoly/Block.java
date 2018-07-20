@@ -10,6 +10,7 @@ public class Block {
 	private int		pricePassBy;
 	private int		color;
 	private String	owner;
+	private int		sequence;
 	
 	/* methods */
 	
@@ -18,7 +19,7 @@ public class Block {
 	 */
 	public Block(String name, boolean place, 
 				boolean normal, int priceBuy, 
-				int pricePassBy, int color) {
+				int pricePassBy, int color, int sequence) {
 		this.name = name;
 		this.place = place;
 		this.normal = normal;
@@ -26,6 +27,7 @@ public class Block {
 		this.pricePassBy = pricePassBy;
 		this.color = color;
 		this.owner = "";
+		this.sequence = sequence;
 	}
 	
 	/* get function */
@@ -36,6 +38,7 @@ public class Block {
 	public int		getPricePassBy() {return pricePassBy;}
 	public int		getColor()		{return color;}
 	public String	getOwner()		{return owner;}
+	public int		getSequence()		{return sequence;}
 	
 	/* set function */
 	public void		setOwner(String owner) {this.owner = owner;}
