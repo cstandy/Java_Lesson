@@ -3,6 +3,6 @@
 # eclipse project files
 /.metadata/
 
-/monopoly/bin/
-/monopoly/.classpath
-/monopoly/.project
+/bin/
+.classpath
+.project
