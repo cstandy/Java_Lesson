@@ -9,7 +9,15 @@ public class Role {
 	private int position;
 
 	/* methods */
-
+	/**
+	 * @brief The Constructor of the class.
+	 */
+	public Role(String name) {
+		this.name = name;
+		point = 0;
+		money = 0;
+		position = 0;
+	}
 	/**
 	  @brief Use the skill with super star.
 	  */
@@ -31,4 +39,10 @@ public class Role {
 	protected void useAbility_5() {}
 	protected void useAbility_6() {}
 
+	/* get function */
+	public String 	getName() 		{return name;}
+	public int		getPoint()		{return point;}
+	public int		getMoney()		{return money;}
+	public int		getPosition() 	{return position;}
+	
 }

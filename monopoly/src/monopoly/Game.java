@@ -1,4 +1,4 @@
-package monopoly
+package monopoly;
 
 import java.util.Stack;
 
