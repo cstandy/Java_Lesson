@@ -45,4 +45,20 @@ public class Role {
 	public int		getMoney()		{return money;}
 	public int		getPosition() 	{return position;}
 	
+	/**
+	 * @brief Add money to player.
+	 */
+	public void addMoney(int moneyAdded) {
+		this.money = this.money + moneyAdded;
+	}
+	
+	/**
+	 * @brief Minus money from player and return the money that others can get 
+	 * @brief (if the player runs out any money)<---????
+	 */
+	public int minusMoney(int moneyMinused) {return 0;}
+	/**
+	 * @brief Player's position +1.
+	 */
+	public void moveOn() {this.position = (this.position+1)%32;}
 }
