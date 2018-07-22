@@ -1,5 +1,6 @@
 package monopoly;
 
+
 public class Map {
 	/* variables */
 	Block[] blockList = new Block[32];
