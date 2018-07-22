@@ -50,8 +50,9 @@ public class Game {
 			for (int i = 0; i < 4; i++)
 			{
 				System.out.println("Role " + i
-						         + "is at " + map.walk(roles, input.nextInt(), i).getName()
-						         + "with $" + roles[i].getMoney());
+						         + " is at " + map.walk(roles, input.nextInt(), i).getName()
+						         + " with $" + roles[i].getMoney());
+				map.print(roles);
 			}
 			
 			// the ending condition of the game

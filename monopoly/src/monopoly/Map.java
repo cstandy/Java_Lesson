@@ -51,14 +51,16 @@ public class Map {
 	 * @return reference of next block 
 	 */
 	public Block nextBlock(int input) {return blockList[(input+1)%32];}
+	
 	/**
 	 * @return true->price*2	false->price*1
 	 */
 	public boolean ownCouple(int input) {
-		if(blockList[input].getOwner() == blockList[(input+2)%32].getOwner())	return true;
+		if     (blockList[input].getOwner() == blockList[(input+2) %32].getOwner())	return true;
 		else if(blockList[input].getOwner() == blockList[(input+30)%32].getOwner())	return true;
 		else	return false;
 	}
+	
 	/**
 	 * @brief 一步一步走，每步都看有沒有錢可以拿，走到底之後看是不是水管，是的話就從下一個水管出去並且把中間的錢都拿走
 	 * @parame place:		原本位置
@@ -83,6 +85,7 @@ public class Map {
 		this.event(roleList, nowRole);
 		return blockList[roleList[nowRole].getPosition()];
 	}
+
 	/**
 	 * @brief 
 	 * @param roleList
@@ -178,5 +181,28 @@ public class Map {
 		poorGuy.addMoney(sellMoney);//拿錢
 		blockList[poorGuy.getPosition()].setOwner("");//失去土地（owner
 		return sellMoney;
+	}
+
+	/**
+	 * @brief print out the current condition of the map, including where the roles are
+	 */
+	public void print(Role[] roleList) {
+		for (int i = 0; i < 32; i++) {
+			System.out.println(blockList[i].getName() + "\t" + ((anyRoleHere(roleList, i) == -1) ? "" : ("<-" + roleList[anyRoleHere(roleList, i)].getName())));
+		}
+	}
+	
+	/**
+	 * @brief check if there is any role here
+	 * @return which roles is in this position
+	 */
+	private int anyRoleHere(Role[] roleList, int place) {
+		for (int i = 0; i < 4; i++)
+		{
+			if (roleList[i].getPosition() == place)
+				return i;
+		}
+		
+		return -1;
 	}
 }
