@@ -2,3 +2,9 @@
 
 # eclipse project files
 /.metadata/
+
+.recommenders/
+.settings/
+/bin/
+.classpath
+.project
