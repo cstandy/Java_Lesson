@@ -36,7 +36,7 @@ public class Game {
 
 		roles[0] = new Role("Vicky");
 		roles[1] = new Role("Andy");
-		roles[2] = new Role("Juliana");
+		roles[2] = new Role("Lucy");
 		roles[3] = new Role("Alan");
 	}
 

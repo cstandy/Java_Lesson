@@ -45,6 +45,7 @@ public class Map {
 		blockList[29] = new Block("東安路迷客夏",           false, true, 5, 8);
 		blockList[30] = new Block("Star",                   true, false, 0, 0);
 		blockList[31] = new Block("世界彼端伊都",           false, true, 5, 8);
+		
 	}
 	/**
 	 * @param input
@@ -172,7 +173,7 @@ public class Map {
 		}
 		//問玩家要賣哪一塊
 		System.out.println("你現在有這些地：");
-		for(int b = 0; b <= pointer; b++) {
+		for(int b = 0; b < pointer; b++) {
 			System.out.println(b+1 + "." + blockBelong[b].getName() + " 價值" + blockBelong[b].getPrice() + "元");
 		}
 		System.out.print("請問你要賣哪塊？");
@@ -180,6 +181,7 @@ public class Map {
 		int sellMoney = blockBelong[whichSold].getPrice();
 		poorGuy.addMoney(sellMoney);//拿錢
 		blockList[poorGuy.getPosition()].setOwner("");//失去土地（owner
+		poorGuy.setBlockNumber(false);
 		return sellMoney;
 	}
 
