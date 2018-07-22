@@ -100,9 +100,9 @@ public class Map {
 				System.out.println("此地無人，風水寶地不買嗎？ yes/1 no/0");
 				//買
 				if(mapInput.nextInt() == 1) {
-					roleList[nowRole].lossMoney(blockList[roleList[nowRole].getPosition()].getPrice());//付錢
+					roleList[nowRole].setMoney(roleList[nowRole].getMoney() - blockList[roleList[nowRole].getPosition()].getPrice());//付錢
 					blockList[roleList[nowRole].getPosition()].setOwner(roleList[nowRole].getName());//得到土地（owner
-					System.out.println("買到了" + blockList[roleList[nowRole].getPosition()].getName());
+					System.out.println(roleList[nowRole].getName() + "買到了" + blockList[roleList[nowRole].getPosition()].getName());
 				}
 				//不買
 				else {
@@ -116,14 +116,72 @@ public class Map {
 		}
 		//有人的
 		else{
-			int payment = blockList[roleList[nowRole].getPosition()].getPrice();
-			System.out.println("有人啦笨蛋，吐錢出來，請付" + payment + "$");
-			//找owner
+			//找owner給錢
 			for(int b=1; b<=3; b++) {
 				if(blockList[roleList[nowRole].getPosition()].getOwner().equals(roleList[(nowRole+b)%4].getName()))
-					roleList[(nowRole+b)%4].addMoney(1);
+					giveMoney(roleList[nowRole], roleList[(nowRole+b)%4]);
 			}
 		}
+	}
+	public void giveMoney(Role poorGuy, Role luckyGuy) {
+		int payment = this.blockList[poorGuy.getPosition()].getPrice();
+		int moneyReceived  = poorGuy.getMoney();
+		System.out.println("有人啦笨蛋，吐錢出來，請付" + payment + "$");
+		//先把錢給吐出來
+		while((!poorGuy.lossMoney(payment)) && poorGuy.getBlockNumber() > 0) {//當錢不夠並且還有地就繼續賣（賣到脫褲子
+			moneyReceived = moneyReceived + sell(poorGuy);
+		}
+		//把錢給他
+		if(moneyReceived > payment) {//夠還
+			System.out.println(poorGuy.getName() + "付給" + luckyGuy.getName() + payment + "元");
+			poorGuy.setMoney(moneyReceived - payment);
+			luckyGuy.addMoney(payment);
+		}
+		else {//不用賣直接還
+			System.out.println(poorGuy.getName() + "錢不夠，只付給" + luckyGuy.getName() + moneyReceived + "元");
+			poorGuy.setMoney(0);
+			luckyGuy.addMoney(moneyReceived);
+		}
+	}
+	public int dropMoney(Role poorGuy) {
+		int payment = this.blockList[poorGuy.getPosition()].getPrice();
+		int moneyReceived  = poorGuy.getMoney();
+		//先把錢給吐出來
+		while((!poorGuy.lossMoney(payment)) && poorGuy.getBlockNumber() > 0) {//當錢不夠並且還有地就繼續賣（賣到脫褲子
+			moneyReceived = moneyReceived + sell(poorGuy);
+		}
+		//把錢給他
+		if(moneyReceived > payment) {//夠還
+			poorGuy.setMoney(moneyReceived - payment);
+			return payment;
+		}
+		else {//不用賣直接還
+			poorGuy.setMoney(0);
+			return moneyReceived;
+		}
+	}
+	private int sell(Role poorGuy) {
+		System.out.println("該賣地囉，請問你要賣哪塊地");
+		Block[] blockBelong = new Block[poorGuy.getBlockNumber()];
+		//找有哪些地屬於他
+		int pointer = 0;
+		for(int a=1; a < 32; a=a+2) {
+			if(blockList[a].getOwner().equals(poorGuy.getName())) {
+				blockBelong[pointer] = blockList[a];
+				pointer = pointer + 1;
+			}
+		}
+		//問玩家要賣哪一塊
+		System.out.println("你現在有這些地：");
+		for(int b = 0; b <= pointer; b++) {
+			System.out.println(b+1 + "." + blockBelong[b].getName() + " 價值" + blockBelong[b].getPrice() + "元");
+		}
+		System.out.print("請問你要賣哪塊？");
+		int whichSold = mapInput.nextInt()-1;
+		int sellMoney = blockBelong[whichSold].getPrice();
+		poorGuy.addMoney(sellMoney);//拿錢
+		blockList[poorGuy.getPosition()].setOwner("");//失去土地（owner
+		return sellMoney;
 	}
 
 	/**
