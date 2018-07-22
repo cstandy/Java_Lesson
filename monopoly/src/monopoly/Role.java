@@ -7,6 +7,7 @@ public class Role {
 	private int point;
 	private int money;
 	private int position;
+	private int blockNumber;//How many block this role have
 
 	/* methods */
 	/**
@@ -15,8 +16,9 @@ public class Role {
 	public Role(String name) {
 		this.name = name;
 		point = 0;
-		money = 0;
+		money = 10;
 		position = 0;
+		blockNumber = 0;
 	}
 	/**
 	  @brief Use the skill with super star.
@@ -43,6 +45,7 @@ public class Role {
 	public int		getPoint()		{return point;}
 	public int		getMoney()		{return money;}
 	public int		getPosition() 	{return position;}
+	public int		getBlockNumber() {return blockNumber;}
 
 	/**
 	 * @brief Add money to player.
@@ -58,12 +61,20 @@ public class Role {
 	public boolean lossMoney(int moneyMinused) {
 		//Role have enough money
 		if(moneyMinused <= this.getMoney()) {
-			this.money = this.money - moneyMinused;
+			//this.money = this.money - moneyMinused;
 			return true;
 		}
 		//Role does not have enough money
 		else {
 			return false;
+		}
+	}
+	public void setMoney(int inputMoney) {this.money = inputMoney;}
+	public void setBlockNumber(boolean buyOrSale) {//true ++, false --
+		if(buyOrSale) {//買地
+			this.blockNumber = this.blockNumber + 1;
+		}else {//賣地
+			this.blockNumber = this.blockNumber - 1;
 		}
 	}
 	/**
