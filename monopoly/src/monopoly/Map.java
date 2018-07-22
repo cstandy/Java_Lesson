@@ -58,9 +58,9 @@ public class Map {
 	}
 	/**
 	 * @brief 一步一步走，每步都看有沒有錢可以拿，走到底之後看是不是水管，是的話就從下一個水管出去並且把中間的錢都拿走
-	 * @param place:		原本位置
 	 * @param playerList:	所有人的資料
 	 * @param movement:		要走幾步
+	 * @param nowPlayer:	是誰在走路
 	 */
 	public Block walk(Role[] playerList, int movement, int nowPlayer) {
 		//一步一步走（要看撿錢）
@@ -71,8 +71,8 @@ public class Map {
 		}
 		//如果要付錢
 		if(!blockList[playerList[nowPlayer].getPosition()].getOwner().equals(playerList[nowPlayer].getName())) {
-			int moneyGet = playerList[nowPlayer].minusMoney(blockList[playerList[nowPlayer].getPosition()].getPricePassBy());
-			//找onwer
+			int moneyGet = playerList[nowPlayer].lossMoney(blockList[playerList[nowPlayer].getPosition()].getPricePassBy());
+			//找owner
 			for(int b=1; b<=3; b++) {
 				if(blockList[playerList[nowPlayer].getPosition()].getOwner().equals(playerList[(nowPlayer+b)%4].getName()))
 					playerList[(nowPlayer+b)%4].addMoney(moneyGet);

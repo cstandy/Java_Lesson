@@ -20,18 +20,18 @@ public class Role {
 	}
 	/**
 	  @brief Use the skill with super star.
-	  */
+	 */
 	public void useSuperStar() {}
 
 	/**
-	  * @brief        Use the ability.
-	  * @parame dice  The face of dice thrown.
-	  */
+	 * @brief        Use the ability.
+	 * @parame dice  The face of dice thrown.
+	 */
 	public void useAbility(int dice) {}
 
 	/**
-	  * @brief functions called by useAbility()
-	  */
+	 * @brief functions called by useAbility()
+	 */
 	protected void useAbility_1() {}
 	protected void useAbility_2() {}
 	protected void useAbility_3() {}
@@ -44,19 +44,21 @@ public class Role {
 	public int		getPoint()		{return point;}
 	public int		getMoney()		{return money;}
 	public int		getPosition() 	{return position;}
-	
+
 	/**
 	 * @brief Add money to player.
 	 */
 	public void addMoney(int moneyAdded) {
 		this.money = this.money + moneyAdded;
 	}
-	
+
 	/**
 	 * @brief Minus money from player and return the money that others can get 
 	 * @brief (if the player runs out any money)<---????
 	 */
-	public int minusMoney(int moneyMinused) {return 0;}
+	public int lossMoney(int moneyMinused) {
+		return 0;
+	}
 	/**
 	 * @brief Player's position +1.
 	 */
