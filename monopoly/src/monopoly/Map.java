@@ -46,6 +46,7 @@ public class Map {
 		blockList[30] = new Block("Star",                   true, false, 0, 0);
 		blockList[31] = new Block("世界彼端伊都",           false, true, 5, 8);
 	}
+	
 	/**
 	 * @param input
 	 * @return reference of next block 
@@ -120,7 +121,7 @@ public class Map {
 			//找owner
 			for(int b=1; b<=3; b++) {
 				if(blockList[roleList[nowRole].getPosition()].getOwner().equals(roleList[(nowRole+b)%4].getName()))
-					roleList[(nowRole+b)%4].addMoney();
+					roleList[(nowRole+b)%4].addMoney(1);
 			}
 		}
 	}
@@ -146,5 +147,118 @@ public class Map {
 		}
 		
 		return -1;
+	}
+	
+	/**
+	 * @brief        Use the ability.
+	 * @parame dice  The face of dice thrown.
+	 */
+	public void useAbility(Role[] roles, int curRole, int dice) {
+		switch (dice) {
+		case 1:  useAbility_1(roles[curRole]);
+		case 2:  useAbility_2(roles, curRole);
+		case 3:  useAbility_3(roles, curRole);
+		case 4:  useAbility_4(roles, curRole);
+		case 5:  useAbility_5(roles, curRole);
+		case 6:
+		default: useAbility_1(roles[curRole]);
+		}
+	}
+	
+	/**
+	 * @brief get money from the bank
+	 */
+	protected void useAbility_1(Role luckyGuy) {
+		luckyGuy.addMoney(3);
+		System.out.println("Ability dice: Get 3 coins from the bank.");
+	}
+	
+	/**
+	 * @brief steal 2 coins from another role
+	 * @parameter roles   the role list
+	 * @parameter curRole the order of the current role
+	 */
+	protected void useAbility_2(Role[] roles, int curRole) {
+		System.out.println("1st candidate: " + roles[(curRole + 1) % 4].getName());
+		System.out.println("2nd candidate: " + roles[(curRole + 2) % 4].getName());
+		System.out.println("3rd candidate: " + roles[(curRole + 3) % 4].getName());
+		
+		System.out.print("Please choose a poor guy for his/her money: ");
+		int goal = (mapInput.nextInt() + curRole) % 4;
+		
+		giveMoney(roles[goal], roles[curRole]);
+		System.out.println("Ability dice: " + roles[curRole].getName() + " get 3 coins from " + roles[goal].getName() + ".");
+	}
+	
+	/**
+	 * @brief let the forward poorGuy drop 3 coins on the block
+	 */
+	protected void useAbility_3(Role[] roles, int curRole) {
+		int goal = findForwardRole(roles, curRole);
+		int drop = dropMoney(roles[goal]);
+		
+		blockList[roles[goal].getPosition()].setMoneyDropped(blockList[roles[goal].getPosition()].getMoneyDropped() + drop);
+		System.out.println("Ability dice: " + roles[goal].getName() + " dropped " + drop + " on " + blockList[roles[goal].getPosition()].getName());
+		System.out.println("On the block " + blockList[roles[goal].getPosition()].getName() + " is $" + blockList[roles[goal].getPosition()].getMoneyDropped();
+	}
+	
+	/**
+	 * @brief let the backward poorGuy drop 3 coins on the block
+	 */
+	protected void useAbility_4(Role[] roles, int curRole) {
+		int goal = findBackwardRole(roles, curRole);
+		int drop = dropMoney(roles[goal]);
+		
+		blockList[roles[goal].getPosition()].setMoneyDropped(blockList[roles[goal].getPosition()].getMoneyDropped() + drop);
+		System.out.println("Ability dice: " + roles[goal].getName() + " dropped " + drop + " on " + blockList[roles[goal].getPosition()].getName());
+		System.out.println("On the block " + blockList[roles[goal].getPosition()].getName() + " is $" + blockList[roles[goal].getPosition()].getMoneyDropped();
+	}
+	
+	/**
+	 * @brief let the all other poorGuy drop 3 coins on the block
+	 */
+	protected void useAbility_5(Role[] roles, int curRole) {
+		int drop = 0;
+		for (int goal = 0; goal < 4; goal++)
+		{
+			drop = dropMoney(roles[goal]);
+			blockList[roles[goal].getPosition()].setMoneyDropped(blockList[roles[goal].getPosition()].getMoneyDropped() + drop);
+			System.out.println("Ability dice: " + roles[goal].getName() + " dropped " + drop + " on " + blockList[roles[goal].getPosition()].getName());
+			System.out.println("On the block " + blockList[roles[goal].getPosition()].getName() + " is $" + blockList[roles[goal].getPosition()].getMoneyDropped();
+		}
+	}
+	
+	
+	private int findForwardRole(Role[] roles, int curRole) {
+		int[] diff = {0, 0, 0, 0};
+		int minDiff = 32;
+		int forwardPosition = 0;
+		for (int i = 0; i < 4; i++)
+		{
+			diff[i] = roles[i].getPosition() - roles[curRole].getPosition();
+			if (diff[i] <= 0) diff[i] = diff[i] + 32;
+			if (diff[i] < minDiff) {
+				minDiff = diff[i];
+				forwardPosition = i;
+			}
+		}
+		return forwardPosition;
+	}
+	
+	private int findBackwardRole(Role[] roles, int curRole) {
+		int[] diff = {0, 0, 0, 0};
+		int minDiff = 32;
+		int backwardPosition = 0;
+		
+		for (int i = 0; i < 4; i++)
+		{
+			diff[i] = roles[curRole].getPosition() - roles[i].getPosition();
+			if (diff[i] <= 0) diff[i] = diff[i] + 32;
+			if (diff[i] < minDiff) {
+				minDiff = diff[i];
+				backwardPosition = i;
+			}
+		}
+		return backwardPosition;
 	}
 }
