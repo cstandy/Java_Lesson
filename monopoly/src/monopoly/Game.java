@@ -12,7 +12,6 @@ public class Game {
 	private int curRole;      // current role
 
 	public static void main(String[] args) {
-		System.out.println("sghdjfk");
 		
 		Game game = new Game();
 		game.run();
@@ -45,13 +44,11 @@ public class Game {
 	  * @brief Run the game, containing all flow.
 	  */
 	public void run() {
-		System.out.println("sghdjfk");
 		Scanner input = new Scanner(System.in);
 		
 		while (true) {
 			for (int i = 0; i < 4; i++)
 			{
-				System.out.println("33333");
 				System.out.println("Role " + i
 						         + "is at " + map.walk(roles, input.nextInt(), i).getName()
 						         + "with $" + roles[i].getMoney());

@@ -1,12 +1,14 @@
 package monopoly;
 
+import java.util.Scanner;
 
 public class Map {
 	/* variables */
 	Block[] blockList = new Block[32];
-	
+	Scanner mapInput = new Scanner(System.in);
+
 	/* methods */
-	
+
 	/**
 	 * @brief The Constructor of the class.
 	 */
@@ -70,23 +72,53 @@ public class Map {
 			//撿錢
 			roleList[nowRole].addMoney(blockList[roleList[nowRole].getPosition()].pickMoney());
 		}
-		//如果要付錢
-		//if(!blockList[roleList[nowRole].getPosition()].getOwner().equals(roleList[nowRole].getName())) {
-		//	int moneyGet = roleList[nowRole].lossMoney(blockList[roleList[nowRole].getPosition()].getPrice());
-		//	//找owner
-		//	for(int b=1; b<=3; b++) {
-		//		if(blockList[roleList[nowRole].getPosition()].getOwner().equals(roleList[(nowRole+b)%4].getName()))
-		//			roleList[(nowRole+b)%4].addMoney(moneyGet);
-		//	}
-		//}
 		//如果最後是水管
 		if(blockList[roleList[nowRole].getPosition()].getName()=="Tube") {
-			for(int a=1; a < 8; a++) {
+			for(int a=1; a <= 8; a++) {
 				roleList[nowRole].moveOn();
 				//撿錢
 				roleList[nowRole].addMoney(blockList[roleList[nowRole].getPosition()].pickMoney());
 			}
 		}
+		this.event(roleList, nowRole);
 		return blockList[roleList[nowRole].getPosition()];
+	}
+	/**
+	 * @brief 
+	 * @param roleList
+	 * @param nowRole
+	 */
+	private void event(Role[] roleList, int nowRole) {
+		//沒有人的
+		if(blockList[roleList[nowRole].getPosition()].getOwner()=="") {
+			//錢夠
+			if(blockList[roleList[nowRole].getPosition()].getPrice() <= roleList[nowRole].getMoney()) {
+				System.out.println("此地無人，風水寶地不買嗎？ yes/1 no/0");
+				//買
+				if(mapInput.nextInt() == 1) {
+					roleList[nowRole].lossMoney(blockList[roleList[nowRole].getPosition()].getPrice());//付錢
+					blockList[roleList[nowRole].getPosition()].setOwner(roleList[nowRole].getName());//得到土地（owner
+					System.out.println("買到了" + blockList[roleList[nowRole].getPosition()].getName());
+				}
+				//不買
+				else {
+					System.out.println("你什麼都沒做，又度過一回合");
+				}
+			}
+			//錢不夠
+			else {
+				System.out.println("此地無人，但你沒錢233333");
+			}
+		}
+		//有人的
+		else{
+			int payment = blockList[roleList[nowRole].getPosition()].getPrice();
+			System.out.println("有人啦笨蛋，吐錢出來，請付" + payment + "$");
+			//找owner
+			for(int b=1; b<=3; b++) {
+				if(blockList[roleList[nowRole].getPosition()].getOwner().equals(roleList[(nowRole+b)%4].getName()))
+					roleList[(nowRole+b)%4].addMoney();
+			}
+		}
 	}
 }
