@@ -45,15 +45,15 @@ public class Map {
 		blockList[29] = new Block("東安路迷客夏",           false, true, 5, 8);
 		blockList[30] = new Block("Star",                   true, false, 0, 0);
 		blockList[31] = new Block("世界彼端伊都",           false, true, 5, 8);
-		
+
 	}
-	
+
 	/**
 	 * @param input
 	 * @return reference of next block 
 	 */
 	public Block nextBlock(int input) {return blockList[(input+1)%32];}
-	
+
 	/**
 	 * @return true->price*2	false->price*1
 	 */
@@ -62,7 +62,7 @@ public class Map {
 		else if(blockList[input].getOwner() == blockList[(input+30)%32].getOwner())	return true;
 		else	return false;
 	}
-	
+
 	/**
 	 * @brief 一步一步走，每步都看有沒有錢可以拿，走到底之後看是不是水管，是的話就從下一個水管出去並且把中間的錢都拿走
 	 * @parame place:		原本位置
@@ -120,14 +120,14 @@ public class Map {
 			//找owner給錢
 			for(int b=1; b<=3; b++) {
 				if(blockList[roleList[nowRole].getPosition()].getOwner().equals(roleList[(nowRole+b)%4].getName()))
-					giveMoney(roleList[nowRole], roleList[(nowRole+b)%4]);
+					giveMoney(roleList[nowRole], roleList[(nowRole+b)%4], this.blockList[roleList[nowRole].getPosition()].getPrice());
 			}
 		}
 	}
-	public void giveMoney(Role poorGuy, Role luckyGuy) {
-		int payment = this.blockList[poorGuy.getPosition()].getPrice();
+	public int giveMoney(Role poorGuy, Role luckyGuy, int pay) {
+		int payment = pay;//;
 		int moneyReceived  = poorGuy.getMoney();
-		System.out.println("有人啦笨蛋，吐錢出來，請付" + payment + "$");
+		System.out.println("吐錢啦笨蛋，請付" + payment + "$");
 		//先把錢給吐出來
 		while((!poorGuy.lossMoney(payment)) && poorGuy.getBlockNumber() > 0) {//當錢不夠並且還有地就繼續賣（賣到脫褲子
 			moneyReceived = moneyReceived + sell(poorGuy);
@@ -137,15 +137,17 @@ public class Map {
 			System.out.println(poorGuy.getName() + "付給" + luckyGuy.getName() + payment + "元");
 			poorGuy.setMoney(moneyReceived - payment);
 			luckyGuy.addMoney(payment);
+			return payment;
 		}
 		else {//不用賣直接還
 			System.out.println(poorGuy.getName() + "錢不夠，只付給" + luckyGuy.getName() + moneyReceived + "元");
 			poorGuy.setMoney(0);
 			luckyGuy.addMoney(moneyReceived);
+			return moneyReceived;
 		}
 	}
-	public int dropMoney(Role poorGuy) {
-		int payment = this.blockList[poorGuy.getPosition()].getPrice();
+	public int dropMoney(Role poorGuy, int pay) {
+		int payment = pay;
 		int moneyReceived  = poorGuy.getMoney();
 		//先把錢給吐出來
 		while((!poorGuy.lossMoney(payment)) && poorGuy.getBlockNumber() > 0) {//當錢不夠並且還有地就繼續賣（賣到脫褲子
@@ -194,7 +196,7 @@ public class Map {
 			System.out.println(blockList[i].getName() + "\t" + ((anyRoleHere(roleList, i) == -1) ? "" : ("<-" + roleList[anyRoleHere(roleList, i)].getName())));
 		}
 	}
-	
+
 	/**
 	 * @brief check if there is any role here
 	 * @return which roles is in this position
@@ -205,26 +207,26 @@ public class Map {
 			if (roleList[i].getPosition() == place)
 				return i;
 		}
-		
+
 		return -1;
 	}
-	
+
 	/**
 	 * @brief        Use the ability.
 	 * @parame dice  The face of dice thrown.
 	 */
 	public void useAbility(Role[] roles, int curRole, int dice) {
 		switch (dice) {
-		case 1:  useAbility_1(roles[curRole]);
-		case 2:  useAbility_2(roles, curRole);
-		case 3:  useAbility_3(roles, curRole);
-		case 4:  useAbility_4(roles, curRole);
-		case 5:  useAbility_5(roles, curRole);
+		case 1:  useAbility_1(roles[curRole]); break;
+		case 2:  useAbility_2(roles, curRole); break;
+		case 3:  useAbility_3(roles, curRole); break;
+		case 4:  useAbility_4(roles, curRole); break;
+		case 5:  useAbility_5(roles, curRole); break;
 		case 6:
-		default: useAbility_1(roles[curRole]);
+		default: useAbility_1(roles[curRole]); break;
 		}
 	}
-	
+
 	/**
 	 * @brief get money from the bank
 	 */
@@ -232,7 +234,7 @@ public class Map {
 		luckyGuy.addMoney(3);
 		System.out.println("Ability dice: Get 3 coins from the bank.");
 	}
-	
+
 	/**
 	 * @brief steal 2 coins from another role
 	 * @parameter roles   the role list
@@ -242,38 +244,38 @@ public class Map {
 		System.out.println("1st candidate: " + roles[(curRole + 1) % 4].getName());
 		System.out.println("2nd candidate: " + roles[(curRole + 2) % 4].getName());
 		System.out.println("3rd candidate: " + roles[(curRole + 3) % 4].getName());
-		
+
 		System.out.print("Please choose a poor guy for his/her money: ");
 		int goal = (mapInput.nextInt() + curRole) % 4;
-		
-		giveMoney(roles[goal], roles[curRole]);
-		System.out.println("Ability dice: " + roles[curRole].getName() + " get 3 coins from " + roles[goal].getName() + ".");
+
+		int moneyReceived = giveMoney(roles[goal], roles[curRole], 2);
+		System.out.println("Ability dice: " + roles[curRole].getName() + " get " + moneyReceived + " coins from " + roles[goal].getName() + ".");
 	}
-	
+
 	/**
 	 * @brief let the forward poorGuy drop 3 coins on the block
 	 */
 	protected void useAbility_3(Role[] roles, int curRole) {
 		int goal = findForwardRole(roles, curRole);
-		int drop = dropMoney(roles[goal]);
-		
+		int drop = dropMoney(roles[goal], 3);
+
 		blockList[roles[goal].getPosition()].setMoneyDropped(blockList[roles[goal].getPosition()].getMoneyDropped() + drop);
 		System.out.println("Ability dice: " + roles[goal].getName() + " dropped " + drop + " on " + blockList[roles[goal].getPosition()].getName());
 		System.out.println("On the block " + blockList[roles[goal].getPosition()].getName() + " is $" + blockList[roles[goal].getPosition()].getMoneyDropped());
 	}
-	
+
 	/**
 	 * @brief let the backward poorGuy drop 3 coins on the block
 	 */
 	protected void useAbility_4(Role[] roles, int curRole) {
 		int goal = findBackwardRole(roles, curRole);
-		int drop = dropMoney(roles[goal]);
-		
+		int drop = dropMoney(roles[goal], 3);
+
 		blockList[roles[goal].getPosition()].setMoneyDropped(blockList[roles[goal].getPosition()].getMoneyDropped() + drop);
 		System.out.println("Ability dice: " + roles[goal].getName() + " dropped " + drop + " on " + blockList[roles[goal].getPosition()].getName());
 		System.out.println("On the block " + blockList[roles[goal].getPosition()].getName() + " is $" + blockList[roles[goal].getPosition()].getMoneyDropped());
 	}
-	
+
 	/**
 	 * @brief let the all other poorGuy drop 3 coins on the block
 	 */
@@ -281,14 +283,16 @@ public class Map {
 		int drop = 0;
 		for (int goal = 0; goal < 4; goal++)
 		{
-			drop = dropMoney(roles[goal]);
-			blockList[roles[goal].getPosition()].setMoneyDropped(blockList[roles[goal].getPosition()].getMoneyDropped() + drop);
-			System.out.println("Ability dice: " + roles[goal].getName() + " dropped " + drop + " on " + blockList[roles[goal].getPosition()].getName());
-			System.out.println("On the block " + blockList[roles[goal].getPosition()].getName() + " is $" + blockList[roles[goal].getPosition()].getMoneyDropped());
+			if(!roles[goal].getName().equals(roles[curRole].getName())) {
+				drop = dropMoney(roles[goal], 1);
+				blockList[roles[goal].getPosition()].setMoneyDropped(blockList[roles[goal].getPosition()].getMoneyDropped() + drop);
+				System.out.println("Ability dice: " + roles[goal].getName() + " dropped " + drop + " on " + blockList[roles[goal].getPosition()].getName());
+				System.out.println("On the block " + blockList[roles[goal].getPosition()].getName() + " is $" + blockList[roles[goal].getPosition()].getMoneyDropped());
+			}
 		}
 	}
-	
-	
+
+
 	private int findForwardRole(Role[] roles, int curRole) {
 		int[] diff = {0, 0, 0, 0};
 		int minDiff = 32;
@@ -304,12 +308,12 @@ public class Map {
 		}
 		return forwardPosition;
 	}
-	
+
 	private int findBackwardRole(Role[] roles, int curRole) {
 		int[] diff = {0, 0, 0, 0};
 		int minDiff = 32;
 		int backwardPosition = 0;
-		
+
 		for (int i = 0; i < 4; i++)
 		{
 			diff[i] = roles[curRole].getPosition() - roles[i].getPosition();
