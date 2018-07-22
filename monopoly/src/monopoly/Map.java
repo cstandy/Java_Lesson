@@ -77,8 +77,8 @@ public class Map {
 		}
 		//如果要付錢
 		if(!blockList[roleList[nowRole].getPosition()].getOwner().equals(roleList[nowRole].getName())) {
-			int moneyGet = roleList[nowRole].minusMoney(blockList[roleList[nowRole].getPosition()].getPricePassBy());
-			//找onwer
+			int moneyGet = roleList[nowRole].lossMoney(blockList[roleList[nowRole].getPosition()].getPricePassBy());
+			//找owner
 			for(int b=1; b<=3; b++) {
 				if(blockList[roleList[nowRole].getPosition()].getOwner().equals(roleList[(nowRole+b)%4].getName()))
 					roleList[(nowRole+b)%4].addMoney(moneyGet);
