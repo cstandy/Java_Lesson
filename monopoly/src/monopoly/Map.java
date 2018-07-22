@@ -58,15 +58,9 @@ public class Map {
 	}
 	/**
 	 * @brief 一步一步走，每步都看有沒有錢可以拿，走到底之後看是不是水管，是的話就從下一個水管出去並且把中間的錢都拿走
-<<<<<<< HEAD
-	 * @param playerList:	所有人的資料
-	 * @param movement:		要走幾步
-	 * @param nowPlayer:	是誰在走路
-=======
 	 * @parame place:		原本位置
 	 * @parame roleList:	所有人的資料
 	 * @parame movement:		要走幾步
->>>>>>> 0990d845d1baa7b91fcce6a3e71f50eb56494449
 	 */
 	public Block walk(Role[] roleList, int movement, int nowRole) {
 		//一步一步走（要看撿錢）
