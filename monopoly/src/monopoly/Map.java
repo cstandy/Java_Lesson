@@ -124,4 +124,27 @@ public class Map {
 			}
 		}
 	}
+
+	/**
+	 * @brief print out the current condition of the map, including where the roles are
+	 */
+	public void print(Role[] roleList) {
+		for (int i = 0; i < 32; i++) {
+			System.out.println(blockList[i].getName() + "\t" + ((anyRoleHere(roleList, i) == -1) ? "" : ("<-" + roleList[anyRoleHere(roleList, i)].getName())));
+		}
+	}
+	
+	/**
+	 * @brief check if there is any role here
+	 * @return which roles is in this position
+	 */
+	private int anyRoleHere(Role[] roleList, int place) {
+		for (int i = 0; i < 4; i++)
+		{
+			if (roleList[i].getPosition() == place)
+				return i;
+		}
+		
+		return -1;
+	}
 }
