@@ -70,14 +70,14 @@ public class Map {
 			roleList[nowRole].addMoney(blockList[roleList[nowRole].getPosition()].pickMoney());
 		}
 		//如果要付錢
-		if(!blockList[roleList[nowRole].getPosition()].getOwner().equals(roleList[nowRole].getName())) {
-			int moneyGet = roleList[nowRole].lossMoney(blockList[roleList[nowRole].getPosition()].getPrice());
-			//找owner
-			for(int b=1; b<=3; b++) {
-				if(blockList[roleList[nowRole].getPosition()].getOwner().equals(roleList[(nowRole+b)%4].getName()))
-					roleList[(nowRole+b)%4].addMoney(moneyGet);
-			}
-		}
+		//if(!blockList[roleList[nowRole].getPosition()].getOwner().equals(roleList[nowRole].getName())) {
+		//	int moneyGet = roleList[nowRole].lossMoney(blockList[roleList[nowRole].getPosition()].getPrice());
+		//	//找owner
+		//	for(int b=1; b<=3; b++) {
+		//		if(blockList[roleList[nowRole].getPosition()].getOwner().equals(roleList[(nowRole+b)%4].getName()))
+		//			roleList[(nowRole+b)%4].addMoney(moneyGet);
+		//	}
+		//}
 		//如果最後是水管
 		if(blockList[roleList[nowRole].getPosition()].getName()=="Tube") {
 			for(int a=1; a < 8; a++) {

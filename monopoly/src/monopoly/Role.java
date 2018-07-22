@@ -37,7 +37,6 @@ public class Role {
 	protected void useAbility_3() {}
 	protected void useAbility_4() {}
 	protected void useAbility_5() {}
-	protected void useAbility_6() {}
 
 	/* get function */
 	public String 	getName() 		{return name;}
@@ -53,11 +52,19 @@ public class Role {
 	}
 
 	/**
-	 * @brief Minus money from player and return the money that others can get 
-	 * @brief (if the player runs out any money)<---????
+	 * @brief if the player runs out any money and not enough, than return false
+	 * @param moneyMinuse
 	 */
-	public int lossMoney(int moneyMinused) {
-		return 0;
+	public boolean lossMoney(int moneyMinused) {
+		//Role have enough money
+		if(moneyMinused <= this.getMoney()) {
+			this.money = this.money - moneyMinused;
+			return true;
+		}
+		//Role does not have enough money
+		else {
+			return false;
+		}
 	}
 	/**
 	 * @brief Player's position +1.

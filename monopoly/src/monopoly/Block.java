@@ -25,7 +25,7 @@ public class Block {
 		this.price = price;
 		this.color = color;
 		this.owner = "";
-		this.moneyDropped = 0;
+		this.moneyDropped = 1;
 	}
 	/**
 	 * @brief set moneyDropped 0 and return money get 
