@@ -58,34 +58,34 @@ public class Map {
 	}
 	/**
 	 * @brief 一步一步走，每步都看有沒有錢可以拿，走到底之後看是不是水管，是的話就從下一個水管出去並且把中間的錢都拿走
-	 * @param place:		原本位置
-	 * @param playerList:	所有人的資料
-	 * @param movement:		要走幾步
+	 * @parame place:		原本位置
+	 * @parame roleList:	所有人的資料
+	 * @parame movement:		要走幾步
 	 */
-	public Block walk(Role[] playerList, int movement, int nowPlayer) {
+	public Block walk(Role[] roleList, int movement, int nowRole) {
 		//一步一步走（要看撿錢）
 		for(int a=0; a < movement; a++) {
-			playerList[nowPlayer].moveOn();
+			roleList[nowRole].moveOn();
 			//撿錢
-			playerList[nowPlayer].addMoney(blockList[playerList[nowPlayer].getPosition()].pickMoney());
+			roleList[nowRole].addMoney(blockList[roleList[nowRole].getPosition()].pickMoney());
 		}
 		//如果要付錢
-		if(!blockList[playerList[nowPlayer].getPosition()].getOwner().equals(playerList[nowPlayer].getName())) {
-			int moneyGet = playerList[nowPlayer].minusMoney(blockList[playerList[nowPlayer].getPosition()].getPricePassBy());
+		if(!blockList[roleList[nowRole].getPosition()].getOwner().equals(roleList[nowRole].getName())) {
+			int moneyGet = roleList[nowRole].minusMoney(blockList[roleList[nowRole].getPosition()].getPricePassBy());
 			//找onwer
 			for(int b=1; b<=3; b++) {
-				if(blockList[playerList[nowPlayer].getPosition()].getOwner().equals(playerList[(nowPlayer+b)%4].getName()))
-					playerList[(nowPlayer+b)%4].addMoney(moneyGet);
+				if(blockList[roleList[nowRole].getPosition()].getOwner().equals(roleList[(nowRole+b)%4].getName()))
+					roleList[(nowRole+b)%4].addMoney(moneyGet);
 			}
 		}
 		//如果最後是水管
-		if(blockList[playerList[nowPlayer].getPosition()].getName()=="Tube") {
+		if(blockList[roleList[nowRole].getPosition()].getName()=="Tube") {
 			for(int a=1; a < 8; a++) {
-				playerList[nowPlayer].moveOn();
+				roleList[nowRole].moveOn();
 				//撿錢
-				playerList[nowPlayer].addMoney(blockList[playerList[nowPlayer].getPosition()].pickMoney());
+				roleList[nowRole].addMoney(blockList[roleList[nowRole].getPosition()].pickMoney());
 			}
 		}
-		return blockList[playerList[nowPlayer].getPosition()];
+		return blockList[roleList[nowRole].getPosition()];
 	}
 }
