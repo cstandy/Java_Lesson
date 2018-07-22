@@ -1,5 +1,6 @@
 package monopoly;
 
+import java.util.Scanner;
 import java.util.Stack;
 
 public class Game {
@@ -33,26 +34,32 @@ public class Game {
 		// boss.push(new Boss());
 		// boss.push(new Boss());
 
-		// roles[0] = new Role();
-		// roles[1] = new Role();
-		// roles[2] = new Role();
-		// roles[3] = new Role();
+		roles[0] = new Role("Vicky");
+		roles[1] = new Role("Andy");
+		roles[2] = new Role("Juliana");
+		roles[3] = new Role("Alan");
 	}
 
 	/**
 	  * @brief Run the game, containing all flow.
 	  */
 	public void run() {
+		Scanner input = new Scanner(System.in);
 		
 		while (true) {
+			for (int i = 0; i < 4; i++)
+			{
+				System.out.println("Role " + i
+						         + "is at " + map.walk(roles, input.nextInt(), i).getName()
+						         + "with $" + roles[i].getMoney());
+			}
 			
 			// the ending condition of the game
-			if (boss.empty() == true)
-				break;
+			// if (boss.empty() == true)
+			// 	break;
 		}
 
-		calculateScore();
-
+		// calculateScore();
 	}
 
 
