@@ -297,15 +297,33 @@ public class Map {
 		int[] diff = {0, 0, 0, 0};
 		int minDiff = 32;
 		int forwardPosition = 0;
+		int samePosition = 0;
+		
 		for (int i = 0; i < 4; i++)
 		{
 			diff[i] = roles[i].getPosition() - roles[curRole].getPosition();
 			if (diff[i] <= 0) diff[i] = diff[i] + 32;
 			if (diff[i] < minDiff) {
+				samePosition = 1;
 				minDiff = diff[i];
 				forwardPosition = i;
+			} else if (diff[i] == minDiff) {
+				samePosition++;
 			}
 		}
+		
+		if (samePosition != 1) {
+			System.out.println("有多於一個人在同一個位置：");
+			
+			for (int i = 0; i < 4; i++)
+				if (diff[i] == minDiff)
+					System.out.println("編號：" + (i + 1) + ", 名字：" + roles[i].getName());
+			
+			System.out.println("請選擇：");
+			
+			forwardPosition = mapInput.nextInt() - 1;
+		}
+		
 		return forwardPosition;
 	}
 
@@ -313,6 +331,7 @@ public class Map {
 		int[] diff = {0, 0, 0, 0};
 		int minDiff = 32;
 		int backwardPosition = 0;
+		int samePosition = 0;
 
 		for (int i = 0; i < 4; i++)
 		{
@@ -321,8 +340,23 @@ public class Map {
 			if (diff[i] < minDiff) {
 				minDiff = diff[i];
 				backwardPosition = i;
+			} else if (diff[i] == minDiff) {
+				samePosition++;
 			}
 		}
+
+		if (samePosition != 1) {
+			System.out.println("有多於一個人在同一個位置：");
+			
+			for (int i = 0; i < 4; i++)
+				if (diff[i] == minDiff)
+					System.out.println("編號：" + (i + 1) + ", 名字：" + roles[i].getName());
+			
+			System.out.println("請選擇：");
+			
+			backwardPosition = mapInput.nextInt() - 1;
+		}
+		
 		return backwardPosition;
 	}
 }

@@ -52,7 +52,7 @@ public class Game {
 				System.out.println("Role " + i
 				         + " is at " + map.walk(roles, input.nextInt(), i).getName()
 				         + " with $" + roles[i].getMoney());
-				map.useAbility(roles, i, 5);
+				map.useAbility(roles, i, 4);
 				// map.print(roles);
 			}
 			
