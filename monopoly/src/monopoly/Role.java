@@ -31,14 +31,26 @@ public class Role {
 	 */
 	public void useAbility(int dice) {}
 
-	/**
-	 * @brief functions called by useAbility()
-	 */
-	protected void useAbility_1() {}
-	protected void useAbility_2() {}
-	protected void useAbility_3() {}
-	protected void useAbility_4() {}
-	protected void useAbility_5() {}
+	
+	// /**
+	//  * @brief get money from the bank
+	//  */
+	// protected void useAbility_1() {
+	// 	this.addMoney(3);
+	// 	System.out.println("Ability dice: Get 3 coins from the bank.");
+	// }
+	// 
+	// /**
+	//  * @brief steal 2 coins from another role
+	//  */
+	// protected void useAbility_2(Role poorGuy) {
+	// 	Map.giveMoney(this, poorGuy);
+	// }
+	// 
+	// protected void useAbility_3() {}
+	// protected void useAbility_4() {}
+	// protected void useAbility_5() {}
+	
 
 	/* get function */
 	public String 	getName() 		{return name;}
@@ -69,6 +81,7 @@ public class Role {
 			return false;
 		}
 	}
+
 	public void setMoney(int inputMoney) {this.money = inputMoney;}
 	public void setBlockNumber(boolean buyOrSale) {//true ++, false --
 		if(buyOrSale) {//買地
@@ -77,6 +90,7 @@ public class Role {
 			this.blockNumber = this.blockNumber - 1;
 		}
 	}
+
 	/**
 	 * @brief Player's position +1.
 	 */

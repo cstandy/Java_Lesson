@@ -47,5 +47,5 @@ public class Block {
 	
 	/* set function */
 	public void		setOwner(String owner)	        {this.owner = owner;}
-	public void		setMoneyDropped(int moneyIn)	{this.moneyDropped = this.moneyDropped+moneyIn;}
+	public void		setMoneyDropped(int moneyIn)	{this.moneyDropped = moneyIn;}
 }
