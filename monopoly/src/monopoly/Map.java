@@ -259,7 +259,7 @@ public class Map {
 		
 		blockList[roles[goal].getPosition()].setMoneyDropped(blockList[roles[goal].getPosition()].getMoneyDropped() + drop);
 		System.out.println("Ability dice: " + roles[goal].getName() + " dropped " + drop + " on " + blockList[roles[goal].getPosition()].getName());
-		System.out.println("On the block " + blockList[roles[goal].getPosition()].getName() + " is $" + blockList[roles[goal].getPosition()].getMoneyDropped();
+		System.out.println("On the block " + blockList[roles[goal].getPosition()].getName() + " is $" + blockList[roles[goal].getPosition()].getMoneyDropped());
 	}
 	
 	/**
@@ -271,7 +271,7 @@ public class Map {
 		
 		blockList[roles[goal].getPosition()].setMoneyDropped(blockList[roles[goal].getPosition()].getMoneyDropped() + drop);
 		System.out.println("Ability dice: " + roles[goal].getName() + " dropped " + drop + " on " + blockList[roles[goal].getPosition()].getName());
-		System.out.println("On the block " + blockList[roles[goal].getPosition()].getName() + " is $" + blockList[roles[goal].getPosition()].getMoneyDropped();
+		System.out.println("On the block " + blockList[roles[goal].getPosition()].getName() + " is $" + blockList[roles[goal].getPosition()].getMoneyDropped());
 	}
 	
 	/**
@@ -284,7 +284,7 @@ public class Map {
 			drop = dropMoney(roles[goal]);
 			blockList[roles[goal].getPosition()].setMoneyDropped(blockList[roles[goal].getPosition()].getMoneyDropped() + drop);
 			System.out.println("Ability dice: " + roles[goal].getName() + " dropped " + drop + " on " + blockList[roles[goal].getPosition()].getName());
-			System.out.println("On the block " + blockList[roles[goal].getPosition()].getName() + " is $" + blockList[roles[goal].getPosition()].getMoneyDropped();
+			System.out.println("On the block " + blockList[roles[goal].getPosition()].getName() + " is $" + blockList[roles[goal].getPosition()].getMoneyDropped());
 		}
 	}
 	
