@@ -3,6 +3,7 @@ package monopoly;
 public class Boss {
 
 	/* Variable */
+	private String name;		//名字
 	private int order;			// 順序
 	private int cost;			// 參加打鬥花費
 	private int point;			// 獲得分數
@@ -15,7 +16,8 @@ public class Boss {
 	  * @parame point       The prize of point.
 	  * @parame requirement The low bound to win this boss.
 	  */
-	public Boss(int order, int cost, int point, int requirement) {
+	public Boss(String name, int order, int cost, int point, int requirement) {
+		this.name = name;
 		this.order = order;
 		this.cost = cost;
 		this.point = point;
@@ -23,6 +25,7 @@ public class Boss {
 	}
 	
 	/* Get Function */
+	public String getName()		{return name;}
 	public int getOrder()	 	{return order;}
 	public int getCost()		{return cost;}
 	public int getPoint()		{return point;}
