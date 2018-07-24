@@ -1,5 +1,6 @@
 package monopoly;
 
+import java.util.Random;
 import java.util.Scanner;
 import java.util.Stack;
 
@@ -10,7 +11,8 @@ public class Game {
 	private Stack<Boss> boss; // stack storing 6 boss
 	private Role[] roles;     // list of 4 roles
 	private int curRole;      // current role
-
+	Random random = new Random(); //use for dice to random 1~6
+	
 	public static void main(String[] args) {
 		
 		Game game = new Game();
@@ -49,9 +51,9 @@ public class Game {
 		while (true) {
 			for (int i = 0; i < 4; i++)
 			{
-				System.out.println("Role " + i
-				         + " is at " + map.walk(roles, input.nextInt(), i).getName()
-				         + " with $" + roles[i].getMoney());
+				System.out.println("玩家 " + roles[i].getName()
+				         + " 目前位於 " + map.walk(roles, input.nextInt(), i).getName()
+				         + "，身上有 " + roles[i].getMoney() + " 枚金幣");
 				map.useAbility(roles, i, 4);
 				// map.print(roles);
 			}
