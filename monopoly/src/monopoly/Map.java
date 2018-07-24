@@ -262,8 +262,9 @@ public class Map {
 	 * @brief get money from the bank
 	 */
 	protected void useAbility_1(Role luckyGuy) {
+		System.out.println("錢錢錢");
 		luckyGuy.addMoney(3);
-		System.out.println("能力骰子：跟銀行領取3枚金幣");
+		System.out.println("能力骰子：跟銀行領取 3 枚金幣");
 	}
 
 	/**
@@ -272,7 +273,8 @@ public class Map {
 	 * @parameter curRole the order of the current role
 	 */
 	protected void useAbility_2(Role[] roles, int curRole) {
-		System.out.println("能力骰子：你現在可以向某位玩家奪取2枚金幣！");
+		System.out.println("小烏賊");
+		System.out.println("能力骰子：你現在可以向某位玩家奪取 2 枚金幣！");
 		System.out.println("第1位： " + roles[(curRole + 1) % 4].getName());
 		System.out.println("第2位： " + roles[(curRole + 2) % 4].getName());
 		System.out.println("第3位： " + roles[(curRole + 3) % 4].getName());
@@ -290,12 +292,15 @@ public class Map {
 	 * @brief let the forward poorGuy drop 3 coins on the block
 	 */
 	protected void useAbility_3(Role[] roles, int curRole) {
+		
+		System.out.println("綠龜殼");
+		
 		int goal = findForwardRole(roles, curRole);
 		int drop = dropMoney(roles[goal], 3);
-
+		
 		blockList[roles[goal].getPosition()].setMoneyDropped(blockList[roles[goal].getPosition()].getMoneyDropped() + drop);
 		System.out.println("能力骰子：" + roles[curRole].getName() + " 的前方一位玩家 " + roles[goal].getName() + " 被綠龜殼打落了 " + drop + " 枚金幣在 " + blockList[roles[goal].getPosition()].getName() + " 上");
-		System.out.println("現在" + blockList[roles[goal].getPosition()].getName() + " 上有 " + blockList[roles[goal].getPosition()].getMoneyDropped() + " 枚金幣了");
+		System.out.print("現在" + blockList[roles[goal].getPosition()].getName() + " 上有 " + blockList[roles[goal].getPosition()].getMoneyDropped() + " 枚金幣了，");
 		System.out.println("而 " + roles[goal].getName() + " 剩 " + roles[goal].getMoney() + " 枚金幣");
 	}
 
@@ -303,12 +308,15 @@ public class Map {
 	 * @brief let the backward poorGuy drop 3 coins on the block
 	 */
 	protected void useAbility_4(Role[] roles, int curRole) {
+		
+		System.out.println("紅龜殼");
+		
 		int goal = findBackwardRole(roles, curRole);
 		int drop = dropMoney(roles[goal], 3);
-
+		
 		blockList[roles[goal].getPosition()].setMoneyDropped(blockList[roles[goal].getPosition()].getMoneyDropped() + drop);
-		System.out.println("能力骰子：" + roles[curRole].getName() + " 的後方一位玩家 " + roles[goal].getName() + " 被紅龜殼打落了 " + drop + " 枚金幣在 " + blockList[roles[goal].getPosition()].getName() + " 上");
-		System.out.println("現在" + blockList[roles[goal].getPosition()].getName() + " 上有 " + blockList[roles[goal].getPosition()].getMoneyDropped() + " 枚金幣了");
+		System.out.println("能力骰子：" + roles[curRole].getName() + " 的後方一位玩家 " + roles[goal].getName() + " 被紅龜殼打落了  " + drop + " 枚金幣在 " + blockList[roles[goal].getPosition()].getName() + " 上");
+		System.out.print("現在 " + blockList[roles[goal].getPosition()].getName() + " 上有  " + blockList[roles[goal].getPosition()].getMoneyDropped() + " 枚金幣了，");
 		System.out.println("而 " + roles[goal].getName() + " 剩 " + roles[goal].getMoney() + " 枚金幣");
 	}
 
@@ -317,6 +325,7 @@ public class Map {
 	 */
 	protected void useAbility_5(Role[] roles, int curRole) {
 		int drop = 0;
+		System.out.println("碰！！");
 		System.out.println("能力骰子：碰！ 所有其他玩家受到攻擊！");
 		for (int goal = 0; goal < 4; goal++)
 		{
@@ -324,7 +333,7 @@ public class Map {
 				drop = dropMoney(roles[goal], 1);
 				blockList[roles[goal].getPosition()].setMoneyDropped(blockList[roles[goal].getPosition()].getMoneyDropped() + drop);
 				System.out.println( roles[goal].getName() + " 被打落 " + drop + " 枚金幣在 " + blockList[roles[goal].getPosition()].getName() + " 上");
-				System.out.println("現在" + blockList[roles[goal].getPosition()].getName() + " 上有 " + blockList[roles[goal].getPosition()].getMoneyDropped() + " 枚金幣了");
+				System.out.print("現在" + blockList[roles[goal].getPosition()].getName() + " 上有 " + blockList[roles[goal].getPosition()].getMoneyDropped() + " 枚金幣了，");
 				System.out.println("而 " + roles[goal].getName() + " 剩 " + roles[goal].getMoney() + " 枚金幣");
 			}
 		}
