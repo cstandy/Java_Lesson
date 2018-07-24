@@ -46,16 +46,21 @@ public class Game {
 	  * @brief Run the game, containing all flow.
 	  */
 	public void run() {
-		Scanner input = new Scanner(System.in);
+		int dice = 0;
 		
 		while (true) {
 			for (int i = 0; i < 4; i++)
 			{
-				System.out.println(" . " + roles[i].getName() + " 的回合：");
-				System.out.println(" $ 玩家 " + roles[i].getName()
-				         + " 目前位於 " + map.walk(roles, input.nextInt(), i).getName()
-				         + "，身上有 " + roles[i].getMoney() + " 枚金幣");
+				dice = 1 + random.nextInt(6);
+				
+				System.out.print(" . " + roles[i].getName() + " 的回合：");
+				try { System.in.read(); } catch (Exception e) {}
+				System.out.println("   . 擲出了 " + dice + "。");
+				System.out.println("   $ 玩家 " + roles[i].getName()
+				         + " 目前位於 " + map.walk(roles, dice, i).getName()
+				         + "，身上有 " + roles[i].getMoney() + " 枚金幣。");
 				System.out.print(" . " + roles[i].getName() + " 使用能力骰子：");
+				try { System.in.read(); } catch (Exception e) {}
 				map.useAbility(roles, i, 1 + random.nextInt(6));
 				// map.print(roles);
 			}
