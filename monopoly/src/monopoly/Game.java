@@ -52,11 +52,11 @@ public class Game {
 			for (int i = 0; i < 4; i++)
 			{
 				System.out.println(" . " + roles[i].getName() + " 的回合：");
-				System.out.println("玩家 " + roles[i].getName()
+				System.out.println(" $ 玩家 " + roles[i].getName()
 				         + " 目前位於 " + map.walk(roles, input.nextInt(), i).getName()
 				         + "，身上有 " + roles[i].getMoney() + " 枚金幣");
 				System.out.print(" . " + roles[i].getName() + " 使用能力骰子：");
-				map.useAbility(roles, i, 4);
+				map.useAbility(roles, i, 1 + random.nextInt(6));
 				// map.print(roles);
 			}
 			
