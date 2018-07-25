@@ -24,6 +24,7 @@ public class Game {
 	  */
 	public Game() {
 
+		Gui gui = new Gui();
 		map     = new Map();
 		boss    = new Stack<Boss>();
 		roles   = new Role[4];
