@@ -30,7 +30,7 @@ public class Gui {
 			//roleArea[b].setFont(new Font("monospaced", Font.PLAIN, 16));
 		}
 		
-		input = new JTextField(5);
+		input = new JTextField(2);
 		
 		frame.setLayout(new GridBagLayout());
 		
@@ -91,8 +91,8 @@ public class Gui {
 		c2.weightx = 0;
 		c2.weighty = 0.0;
 		c2.fill = GridBagConstraints.BOTH;
-		c2.anchor = GridBagConstraints.WEST;
-		c2.ipady = 10;
+		c2.anchor = GridBagConstraints.CENTER;
+		c2.ipady = 0;
 		frame.add(input, c2);
 		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
