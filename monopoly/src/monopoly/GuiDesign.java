@@ -4,11 +4,14 @@ import java.awt.EventQueue;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 
 import java.awt.GridBagLayout;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.ScrollPaneConstants;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridLayout;
@@ -37,6 +40,7 @@ public class GuiDesign {
 	public JTextArea diceArea;
 	public JTextArea bossArea;
 	private String userInput = null;
+	JTextArea display;
 
 	/**
 	 * Create the application.
@@ -55,6 +59,26 @@ public class GuiDesign {
 		frame.getContentPane().setLayout(null);
 
 		LineBorder lineBorder=new LineBorder(new Color(190,190,190),2);
+		
+		// 輸出界面
+	    outputArea = new JTextArea (23, 74);
+	    //outputArea.setBounds(0,0,500, 300);
+		outputArea.setForeground(Color.BLACK);
+		outputArea.setEditable(false);
+		outputArea.setBackground(Color.WHITE);
+		outputArea.setBorder(lineBorder);
+		outputArea.setFont(new Font("monospaced", Font.PLAIN, 14));
+		
+	    // create the middle panel components
+		JPanel middlePanel = new JPanel ();
+		
+	    middlePanel.setBounds(110, 117, 610, 386);
+	    JScrollPane scroll = new JScrollPane ( outputArea );
+	    
+	    //Add Textarea in to middle panel
+	    middlePanel.add ( scroll );
+	    //middlePanel.setBackground(Color.BLACK);
+	    frame.getContentPane().add(middlePanel);
 
 		// 遊戲方塊區
 		for(int a=0; a < 32; a++) {
@@ -95,7 +119,7 @@ public class GuiDesign {
 		blockArea[27].setBorder(new LineBorder(new Color(0,205,0), 		4));
 		blockArea[29].setBorder(new LineBorder(new Color(135,206,250), 	4));
 		blockArea[31].setBorder(new LineBorder(new Color(135,206,250), 	4));
-
+		
 		// 右邊角色列表
 		for(int a=0; a < 4; a++) {
 			roleArea[a] = new JTextArea(""+a);
@@ -107,17 +131,21 @@ public class GuiDesign {
 			roleArea[a].setFont(new Font("monospaced", Font.PLAIN, 14));
 			frame.getContentPane().add(roleArea[a]);
 		}
+		
+	    
+	    outputArea.setText("727384950483772738495048377273849504837727");
+	    outputArea.append("dcfjhgfdfghjjfhdh\n");
+	    outputArea.append("dcfjhgfdfghjjfhdh\n");
+	    outputArea.append("dcfjhgfdfghjjfhdh\n");
+	    outputArea.append("dcfjhgfdfghjjfhdh\n");
+	    outputArea.append("dcfjhgfdfghjjfhdh\n");
+	    outputArea.append("dcfjhgfdfghjjfhdh\n");
+	    outputArea.append("dcfjhgfdfghjjfhdh\n");
+	    outputArea.append("dcfjhgfdfghjjfhdh\n");
+	    outputArea.append("dcfjhgfdfghjjfhdh\n");
+	    outputArea.append("dcfjhgfdfghjjfhdh\n");
+	    outputArea.append("dcfjhgfdfghjjfhdh\n");
 
-		// 輸出界面
-		outputArea = new JTextArea();
-		outputArea.setForeground(Color.BLACK);
-		outputArea.setEditable(false);
-		outputArea.setBackground(Color.WHITE);
-		outputArea.setBounds(110, 117, 610, 386);
-		outputArea.setBorder(lineBorder);
-		outputArea.setFont(new Font("monospaced", Font.PLAIN, 14));
-		JScrollPane scroll = new JScrollPane(outputArea);
-		frame.getContentPane().add(outputArea);
 
 		// 輸入文字條
 		input = new JTextField();

@@ -26,11 +26,16 @@ public class Game {
 	public Game() {
 
 		GuiDesign gui = new GuiDesign();
-		String name = gui.signUp();
+		/*String name = gui.signUp();
 		System.out.println(name);
 		
 		int inininin = gui.getDecision();
-		System.out.println(inininin);
+		System.out.println(inininin);*/
+		
+		for(int w=0; w<40; w++) {
+			gui.outputArea.append("sdfegh"+w + "\n");
+		}
+		
 		
 		
 		map     = new Map();
