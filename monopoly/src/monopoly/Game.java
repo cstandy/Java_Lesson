@@ -62,9 +62,7 @@ public class Game {
 		
 loop:	while (true) {
 			for (int i = 0; i < 4; i++)
-			{
-				if (i >= 3) calculateScore();
-				
+			{				
 				int prePosition = 0;
 				int postPosition = 0;
 				
