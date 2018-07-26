@@ -3,6 +3,7 @@ package monopoly;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.Stack;
+import javax.swing.*;
 
 public class Game {
 
@@ -24,7 +25,14 @@ public class Game {
 	  */
 	public Game() {
 
-		Gui gui = new Gui();
+		GuiDesign gui = new GuiDesign();
+		String name = gui.signUp();
+		System.out.println(name);
+		
+		int inininin = gui.getDecision();
+		System.out.println(inininin);
+		
+		
 		map     = new Map();
 		boss    = new Stack<Boss>();
 		roles   = new Role[4];
