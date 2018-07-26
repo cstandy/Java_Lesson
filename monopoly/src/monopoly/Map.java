@@ -15,38 +15,38 @@ public class Map {
 	 * @brief The Constructor of the class.
 	 */
 	public Map() {
-		blockList[0]  = new Block("Start",           	true,  false, 0, 0);
-		blockList[1]  = new Block("台南後站（遊俠聚集地）",	false, true,  1, 1);
-		blockList[2]  = new Block("Tube",            	false, false, 0, 0);
-		blockList[3]  = new Block("後站大遠百",           	false, true,  1, 1);
-		blockList[4]  = new Block("Money",              false, false, 0, 0);
-		blockList[5]  = new Block("消失的牛車伯",          	false, true,  1, 2);
-		blockList[6]  = new Block("Star",               false, false, 0, 0);
-		blockList[7]  = new Block("育樂街紅樓",            false, true,  1, 2);
-		blockList[8]  = new Block("Jail",               true,  false, 0, 0);
-		blockList[9]  = new Block("勝利早點",             	false, true,  2, 3);
-		blockList[10] = new Block("Tube",               false, false, 0, 0);
-		blockList[11] = new Block("老邱",                	false, true,  2, 3);
-		blockList[12] = new Block("Trap",               false, false, 0, 0);
-		blockList[13] = new Block("九乘九",               false, true,  2, 4);
-		blockList[14] = new Block("Star",               false, false, 0, 0);
-		blockList[15] = new Block("21世紀風味館",         	false, true,  2, 4);
-		blockList[16] = new Block("Park",               true,  false, 0, 0);
-		blockList[17] = new Block("電機三館麥當勞",         false, true,  3, 5);
-		blockList[18] = new Block("Tube",               false, false, 0, 0);
-		blockList[19] = new Block("7-11大學店",           false, true,  3, 5);
-		blockList[20] = new Block("Money",              false, false, 0, 0);
-		blockList[21] = new Block("Double Cheese",      false, true,  3, 6);
-		blockList[22] = new Block("Star",               false, false, 0, 0);
-		blockList[23] = new Block("錢鼠",                	false, true,  3, 6);
-		blockList[24] = new Block("ToJail",             true,  false, 0, 0);
-		blockList[25] = new Block("電機本館",             	false, true,  4, 7);
-		blockList[26] = new Block("Tube",               false, false, 0, 0);
-		blockList[27] = new Block("奇美樓",               false, true,  4, 7);
-		blockList[28] = new Block("Trap",               false, false, 0, 0);
-		blockList[29] = new Block("東安路迷客夏",          	false, true,  5, 8);
-		blockList[30] = new Block("Star",               false, false, 0, 0);
-		blockList[31] = new Block("世界彼端伊都",         	false, true,  5, 8);
+		blockList[0]  = new Block("\033[0;94m[Start]\u001B[37m",           	true,  false, 0, 0);
+		blockList[1]  = new Block("\033[0;94m[台南後站（遊俠聚集地）]\u001B[37m",	false, true,  1, 1);
+		blockList[2]  = new Block("\033[0;94m[Tube]\u001B[37m",            	false, false, 0, 0);
+		blockList[3]  = new Block("\033[0;94m[後站大遠百]\u001B[37m",           	false, true,  1, 1);
+		blockList[4]  = new Block("\033[0;94m[Money]\u001B[37m",              false, false, 0, 0);
+		blockList[5]  = new Block("\033[0;94m[消失的牛車伯]\u001B[37m",          	false, true,  1, 2);
+		blockList[6]  = new Block("\033[0;94m[Star]\u001B[37m",               false, false, 0, 0);
+		blockList[7]  = new Block("\033[0;94m[育樂街紅樓]\u001B[37m",            false, true,  1, 2);
+		blockList[8]  = new Block("\033[0;94m[Jail]\u001B[37m",               true,  false, 0, 0);
+		blockList[9]  = new Block("\033[0;94m[勝利早點]\u001B[37m",             	false, true,  2, 3);
+		blockList[10] = new Block("\033[0;94m[Tube]\u001B[37m",               false, false, 0, 0);
+		blockList[11] = new Block("\033[0;94m[老邱]\u001B[37m",                	false, true,  2, 3);
+		blockList[12] = new Block("\033[0;94m[Trap]\u001B[37m",               false, false, 0, 0);
+		blockList[13] = new Block("\033[0;94m[九乘九]\u001B[37m",               false, true,  2, 4);
+		blockList[14] = new Block("\033[0;94m[Star]\u001B[37m",               false, false, 0, 0);
+		blockList[15] = new Block("\033[0;94m[21世紀風味館]\u001B[37m",         	false, true,  2, 4);
+		blockList[16] = new Block("\033[0;94m[Park]\u001B[37m",               true,  false, 0, 0);
+		blockList[17] = new Block("\033[0;94m[電機三館麥當勞]\u001B[37m",         false, true,  3, 5);
+		blockList[18] = new Block("\033[0;94m[Tube]\u001B[37m",               false, false, 0, 0);
+		blockList[19] = new Block("\033[0;94m[7-11大學店]\u001B[37m",           false, true,  3, 5);
+		blockList[20] = new Block("\033[0;94m[Money]\u001B[37m",              false, false, 0, 0);
+		blockList[21] = new Block("\033[0;94m[Double Cheese]\u001B[37m",      false, true,  3, 6);
+		blockList[22] = new Block("\033[0;94m[Star]\u001B[37m",               false, false, 0, 0);
+		blockList[23] = new Block("\033[0;94m[錢鼠]\u001B[37m",                	false, true,  3, 6);
+		blockList[24] = new Block("\033[0;94m[ToJail]\u001B[37m",             true,  false, 0, 0);
+		blockList[25] = new Block("\033[0;94m[電機本館]\u001B[37m",             	false, true,  4, 7);
+		blockList[26] = new Block("\033[0;94m[Tube]\u001B[37m",               false, false, 0, 0);
+		blockList[27] = new Block("\033[0;94m[奇美樓]\u001B[37m",               false, true,  4, 7);
+		blockList[28] = new Block("\033[0;94m[Trap]\u001B[37m",               false, false, 0, 0);
+		blockList[29] = new Block("\033[0;94m[東安路迷客夏]\u001B[37m",          	false, true,  5, 8);
+		blockList[30] = new Block("\033[0;94m[Star]\u001B[37m",               false, false, 0, 0);
+		blockList[31] = new Block("\033[0;94m[世界彼端伊都]\u001B[37m",         	false, true,  5, 8);
 
 	}
 
@@ -69,7 +69,7 @@ public class Map {
 	 * @brief 一步一步走，每步都看有沒有錢可以拿，走到底之後看是不是水管，是的話就從下一個水管出去並且把中間的錢都拿走
 	 * @parame place:		原本位置
 	 * @parame roleList:	所有人的資料
-	 * @parame movement:		要走幾步
+	 * @parame movement:	要走幾步
 	 */
 	public Block walk(Role[] roleList, int movement, int nowRole) {
 		//一步一步走（要看撿錢）
@@ -124,13 +124,13 @@ public class Map {
 		if(blockList[roleList[nowRole].getPosition()].getOwner() == "") {
 			//錢夠
 			if(blockList[roleList[nowRole].getPosition()].getPrice() <= roleList[nowRole].getMoney()) {
-				System.out.print("   ? " + roleList[nowRole].getName() + "，你到了一塊無主地，風水寶地不買嗎？ 是(1)/否(0)：");
+				System.out.print("   ? " + roleList[nowRole].getName() + "，你到了一塊無主地" + blockList[roleList[nowRole].getPosition()].getName() + "，風水寶地不買嗎？ 是(1)/否(0)：");
 				//買
 				if(mapInput.nextInt() == 1) {
 					roleList[nowRole].setMoney(roleList[nowRole].getMoney() - blockList[roleList[nowRole].getPosition()].getPrice());//付錢
 					blockList[roleList[nowRole].getPosition()].setOwner(roleList[nowRole].getName());//得到土地（owner
 					roleList[nowRole].setBlockNumber(true);//增加土地數量+1
-					System.out.println("   * " + roleList[nowRole].getName() + " 買到了 " + blockList[roleList[nowRole].getPosition()].getName() + "。");
+					System.out.println("   * " + roleList[nowRole].getName() + " 買到了" + blockList[roleList[nowRole].getPosition()].getName() + "。");
 				}
 				//不買
 				else {
@@ -195,7 +195,7 @@ public class Map {
 	}
 	
 	private int sell(Role poorGuy) {
-		System.out.println("   ! " + poorGuy.getName() + "，你的金幣不足，該賣地囉，請問你要賣哪塊地？");
+		System.out.println("   ! " + poorGuy.getName() + "，你的金幣不足（剩 " + poorGuy.getMoney() + " 枚金幣），該賣地囉，請問你要賣哪塊地？");
 		Block[] blockBelong = new Block[poorGuy.getBlockNumber()];
 		//找有哪些地屬於他
 		int pointer = 0;
@@ -208,13 +208,13 @@ public class Map {
 		//問玩家要賣哪一塊
 		System.out.println("   ? 你現在有這些地：");
 		for(int b = 0; b < pointer; b++) {
-			System.out.println(" $ " + (b+1) + ". " + blockBelong[b].getName() + " 價值 " + blockBelong[b].getPrice() + " 枚金幣。");
+			System.out.println("     ? " + (b+1) + ". " + blockBelong[b].getName() + "價值 " + blockBelong[b].getPrice() + " 枚金幣。");
 		}
 		System.out.print("   ? 請問你要賣哪塊？");
 		int whichSold = mapInput.nextInt()-1;
 		int sellMoney = blockBelong[whichSold].getPrice();
 		poorGuy.addMoney(sellMoney);//拿錢
-		blockList[poorGuy.getPosition()].setOwner("");//失去土地（owner
+		blockBelong[whichSold].setOwner("");//失去土地（owner
 		poorGuy.setBlockNumber(false);
 		return sellMoney;
 	}
@@ -262,7 +262,7 @@ public class Map {
 	 * @brief get money from the bank
 	 */
 	protected void useAbility_1(Role luckyGuy) {
-		System.out.println("   . 發動能力：錢錢錢");
+		System.out.println("   . 發動能力：\033[0;95m錢錢錢\033[0m");
 		luckyGuy.addMoney(3);
 		System.out.println("   $ " + luckyGuy.getName() + " 跟銀行領取 3 枚金幣。");
 	}
@@ -273,11 +273,11 @@ public class Map {
 	 * @parameter curRole the order of the current role
 	 */
 	protected void useAbility_2(Role[] roles, int curRole) {
-		System.out.println("   . 發動能力：小烏賊");
+		System.out.println("   . 發動能力：\033[0;95m小烏賊\033[0m");
 		System.out.println("   % 你現在可以向某位玩家奪取 2 枚金幣！");
-		System.out.println("     ? 第1位： " + roles[(curRole + 1) % 4].getName());
-		System.out.println("     ? 第2位： " + roles[(curRole + 2) % 4].getName());
-		System.out.println("     ? 第3位： " + roles[(curRole + 3) % 4].getName());
+		System.out.println("     ? 第 1 位： " + roles[(curRole + 1) % 4].getName());
+		System.out.println("     ? 第 2 位： " + roles[(curRole + 2) % 4].getName());
+		System.out.println("     ? 第 3 位： " + roles[(curRole + 3) % 4].getName());
 
 		System.out.print("     ? 選擇一位： ");
 		int goal = (mapInput.nextInt() + curRole) % 4;
@@ -293,14 +293,14 @@ public class Map {
 	 */
 	protected void useAbility_3(Role[] roles, int curRole) {
 		
-		System.out.println("   . 發動能力：綠龜殼");
+		System.out.println("   . 發動能力：\033[0;95m綠龜殼\033[0m");
 		
 		int goal = findForwardRole(roles, curRole);
 		int drop = dropMoney(roles[goal], 3);
 		
 		blockList[roles[goal].getPosition()].setMoneyDropped(blockList[roles[goal].getPosition()].getMoneyDropped() + drop);
 		System.out.println("   ! " + roles[curRole].getName() + " 的前方一位玩家 " + roles[goal].getName() + " 被綠龜殼打落了 " + drop + " 枚金幣在 " + blockList[roles[goal].getPosition()].getName() + " 上。");
-		System.out.print("   $ 現在" + blockList[roles[goal].getPosition()].getName() + " 上有 " + blockList[roles[goal].getPosition()].getMoneyDropped() + " 枚金幣了，");
+		System.out.print("   $ 現在" + blockList[roles[goal].getPosition()].getName() + "上有 " + blockList[roles[goal].getPosition()].getMoneyDropped() + " 枚金幣了，");
 		System.out.println("而 " + roles[goal].getName() + " 剩 " + roles[goal].getMoney() + " 枚金幣。");
 	}
 
@@ -309,14 +309,14 @@ public class Map {
 	 */
 	protected void useAbility_4(Role[] roles, int curRole) {
 		
-		System.out.println("   . 發動能力：紅龜殼");
+		System.out.println("   . 發動能力：\033[0;95m紅龜殼\033[0m");
 		
 		int goal = findBackwardRole(roles, curRole);
 		int drop = dropMoney(roles[goal], 3);
 		
 		blockList[roles[goal].getPosition()].setMoneyDropped(blockList[roles[goal].getPosition()].getMoneyDropped() + drop);
 		System.out.println("   ! " + roles[curRole].getName() + " 的後方一位玩家 " + roles[goal].getName() + " 被紅龜殼打落了  " + drop + " 枚金幣在 " + blockList[roles[goal].getPosition()].getName() + " 上。");
-		System.out.print("   $ 現在 " + blockList[roles[goal].getPosition()].getName() + " 上有  " + blockList[roles[goal].getPosition()].getMoneyDropped() + " 枚金幣了，");
+		System.out.print("   $ 現在" + blockList[roles[goal].getPosition()].getName() + "上有  " + blockList[roles[goal].getPosition()].getMoneyDropped() + " 枚金幣了，");
 		System.out.println("而 " + roles[goal].getName() + " 剩 " + roles[goal].getMoney() + " 枚金幣。");
 	}
 
@@ -325,14 +325,14 @@ public class Map {
 	 */
 	protected void useAbility_5(Role[] roles, int curRole) {
 		int drop = 0;
-		System.out.println("   . 發動能力：碰！！");
+		System.out.println("   . 發動能力：\033[0;95m碰！！\033[0m");
 		System.out.println("   ! 碰！ 所有其他玩家受到攻擊！");
 		for (int goal = 0; goal < 4; goal++)
 		{
 			if(!roles[goal].getName().equals(roles[curRole].getName())) {
 				drop = dropMoney(roles[goal], 1);
 				blockList[roles[goal].getPosition()].setMoneyDropped(blockList[roles[goal].getPosition()].getMoneyDropped() + drop);
-				System.out.println("   ! " + roles[goal].getName() + " 被打落 " + drop + " 枚金幣在 " + blockList[roles[goal].getPosition()].getName() + " 上。");
+				System.out.println("   ! " + roles[goal].getName() + " 被打落 " + drop + " 枚金幣在" + blockList[roles[goal].getPosition()].getName() + "上。");
 				System.out.print("   $ 現在" + blockList[roles[goal].getPosition()].getName() + " 上有 " + blockList[roles[goal].getPosition()].getMoneyDropped() + " 枚金幣了，");
 				System.out.println("而 " + roles[goal].getName() + " 剩 " + roles[goal].getMoney() + " 枚金幣。");
 			}
