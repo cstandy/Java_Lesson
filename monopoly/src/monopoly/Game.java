@@ -25,14 +25,6 @@ public class Game {
 	  * @brief Constructor of Game.
 	  */
 	public Game() {
-
-		GuiDesign gui = new GuiDesign();
-		String name = gui.signUp();
-		System.out.println(name);
-		
-		int inininin = gui.getDecision();
-		System.out.println(inininin);
-		
 		map     = new Map();
 		boss    = new Stack<Boss>();
 		roles   = new Role[4];
@@ -49,6 +41,13 @@ public class Game {
 		roles[1] = new Role("Andy");
 		roles[2] = new Role("Lucy");
 		roles[3] = new Role("Alan");
+
+		GuiDesign gui = new GuiDesign();
+		String name = gui.signUp();
+		System.out.println(name);
+		
+		int inininin = gui.getDecision();
+		System.out.println(inininin);
 	}
 
 	/**

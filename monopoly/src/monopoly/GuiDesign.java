@@ -49,6 +49,7 @@ public class GuiDesign {
 	public ColorPane outputArea;
 	private JPanel[][] role = new JPanel[4][32];
 	private JLayeredPane layeredPane;
+	public int diceThrown;
 
 	/**
 	 * Create the application.
@@ -97,7 +98,7 @@ public class GuiDesign {
 		outputArea.append(Color.red,"dcfjhgfdfghjjfhdh\n");
 		outputArea.append(Color.red,"一個哇啦哇啦哇啦哇啦兩個哇啦哇啦哇啦哇啦三個哇啦哇啦哇啦哇啦四個哇啦哇啦哇啦哇啦五個哇啦哇啦哇啦哇啦\n");
 		outputArea.append(Color.red,"oneeeeeeeetwoooooooothreeeeeeefourrrrrrrfiveeeeeeesixxxxxxxxsevennnnnneighttttttnineeeeeeetennnnnnnn\n");
-		*/
+		 */
 
 		// 角色列表顯示於block上的四角
 		for(int b=0; b<4; b++) {
@@ -127,7 +128,7 @@ public class GuiDesign {
 		for(int c=0; c<4; c++) {
 			role[c][0].setVisible(true);
 		}
-		
+
 		// 遊戲方塊區
 		for(int a=0; a < 32; a++) {
 			blockArea[a] = new JTextArea("哇啦哇啦哇啦哇啦哇啦哇啦哇啦哇啦哇啦哇啦"+"\n金幣\n價錢\n所有人");
@@ -209,9 +210,10 @@ public class GuiDesign {
 		diceButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//if() {
+				//if(map.dice) {
 					Random random = new Random();
 					int a = random.nextInt(6)+1;
+					diceThrown = a;
 					diceArea.setText("你骰到了" + a + "點");
 				//}
 			}
@@ -279,4 +281,35 @@ public class GuiDesign {
 			}
 		}
 	}
+	public void refreshBlock(Block[] blockIn) {
+		for(int a=0; a<32; a++) {
+			blockArea[a].setText(blockIn[a].getName() + "\n" 
+					+ "金幣：" + blockIn[a].getMoneyDropped() + "\n" 
+					+ "價錢：" + blockIn[a].getPrice() + "\n" 
+					+ blockIn[a].getOwner() + "的");
+		}
+	}
+	public void refreshRole(Role[] roleIn) {
+		for(int a=0; a<4; a++) {
+			blockArea[a].setText(roleIn[a] + "\n" 
+					+ "：" + roleIn[a] + "\n" 
+					+ "：" + roleIn[a] + "\n" 
+					+ roleIn[a] + "");
+		}
+	}
+	public void refreshBoss(Boss bossIn, Boolean turnOn) {
+		if(turnOn) {
+			bossArea.setText(bossIn + "\n" 
+					+ "：" + bossIn + "\n" 
+					+ "：" + bossIn + "\n" 
+					+ bossIn + "");
+		}
+		else {
+			bossArea.setText("?????" + "\n" 
+					+ "：" + "?????" + "\n" 
+					+ "：" + "?????" + "\n" 
+					+ "?????" + "");
+		}
+	}
 }
+
