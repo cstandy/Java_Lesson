@@ -124,7 +124,8 @@ public class Map {
 		if(blockList[roleList[nowRole].getPosition()].getOwner() == "") {
 			//錢夠
 			if(blockList[roleList[nowRole].getPosition()].getPrice() <= roleList[nowRole].getMoney()) {
-				System.out.print("   ? " + roleList[nowRole].getName() + "，你到了一塊無主地" + blockList[roleList[nowRole].getPosition()].getName() + "，風水寶地不買嗎？ 是(1)/否(0)：");
+				System.out.println("   ? " + roleList[nowRole].getName() + "，你到了一塊無主地" + blockList[roleList[nowRole].getPosition()].getName() + "，風水寶地不買嗎？");
+				System.out.print("   ? \033[0;32m是(1)/否(0)\033[0m：");
 				//買
 				if(mapInput.nextInt() == 1) {
 					roleList[nowRole].setMoney(roleList[nowRole].getMoney() - blockList[roleList[nowRole].getPosition()].getPrice());//付錢
@@ -275,11 +276,11 @@ public class Map {
 	protected void useAbility_2(Role[] roles, int curRole) {
 		System.out.println("   . 發動能力：\033[0;95m小烏賊\033[0m");
 		System.out.println("   % 你現在可以向某位玩家奪取 2 枚金幣！");
-		System.out.println("     ? 第 1 位： " + roles[(curRole + 1) % 4].getName());
-		System.out.println("     ? 第 2 位： " + roles[(curRole + 2) % 4].getName());
-		System.out.println("     ? 第 3 位： " + roles[(curRole + 3) % 4].getName());
+		System.out.println("     ? 第 1 位：" + roles[(curRole + 1) % 4].getName());
+		System.out.println("     ? 第 2 位：" + roles[(curRole + 2) % 4].getName());
+		System.out.println("     ? 第 3 位：" + roles[(curRole + 3) % 4].getName());
 
-		System.out.print("     ? 選擇一位： ");
+		System.out.print("     ? \033[0;32m選擇一位\033[0m： ");
 		int goal = (mapInput.nextInt() + curRole) % 4;
 
 		int moneyReceived = giveMoney(roles[goal], roles[curRole], 2);
@@ -315,7 +316,7 @@ public class Map {
 		int drop = dropMoney(roles[goal], 3);
 		
 		blockList[roles[goal].getPosition()].setMoneyDropped(blockList[roles[goal].getPosition()].getMoneyDropped() + drop);
-		System.out.println("   ! " + roles[curRole].getName() + " 的後方一位玩家 " + roles[goal].getName() + " 被紅龜殼打落了  " + drop + " 枚金幣在 " + blockList[roles[goal].getPosition()].getName() + " 上。");
+		System.out.println("   ! " + roles[curRole].getName() + " 的後方一位玩家 " + roles[goal].getName() + " 被紅龜殼打落了 " + drop + " 枚金幣在 " + blockList[roles[goal].getPosition()].getName() + " 上。");
 		System.out.print("   $ 現在" + blockList[roles[goal].getPosition()].getName() + "上有  " + blockList[roles[goal].getPosition()].getMoneyDropped() + " 枚金幣了，");
 		System.out.println("而 " + roles[goal].getName() + " 剩 " + roles[goal].getMoney() + " 枚金幣。");
 	}
@@ -365,7 +366,7 @@ public class Map {
 				if (diff[i] == minDiff && i != curRole)
 					System.out.println("   ? 編號：" + (i + 1) + ", 名字：" + roles[i].getName());
 			
-			System.out.print("   ? 請選擇：");
+			System.out.print("   ? \033[0;32m請選擇\033[0m：");
 			
 			forwardPosition = mapInput.nextInt() - 1;
 		}
@@ -399,7 +400,7 @@ public class Map {
 				if (diff[i] == minDiff && i != curRole)
 					System.out.println("     ? 編號：" + (i + 1) + ", 名字：" + roles[i].getName());
 			
-			System.out.print("     ? 請選擇：");
+			System.out.print("     ? \033[0;32m請選擇\033[0m：");
 			
 			backwardPosition = mapInput.nextInt() - 1;
 		}

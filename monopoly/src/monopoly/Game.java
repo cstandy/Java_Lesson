@@ -176,34 +176,36 @@ loop:	while (true) {
 			
 			System.out.println("   $ 要獲得食物需先付出 " + boss.peek().getCost() + " 枚金幣。");
 			System.out.println("   $ " + roles[curRole].getName() + " 目前有 " + roles[curRole].getMoney() + " 枚金幣。");
-			System.out.println("   ! " + boss.peek().getName() + " 如果吃 " + boss.peek().getRequirement() + " 個桃太郎糰子，就會跟你回家。");
-			System.out.print("   ? " + roles[curRole].getName() + " 要嘗試餵食？ 是(1)/否(0)：");
 			
-			if (input.nextInt() == 0) {
-				skip[curRole] = true;
-			} else if (remainMoney < 0) {
+			if (remainMoney < 0) {
 				System.out.println("   * " + roles[curRole].getName() + " 太窮了，動物都不理你！狗不理！");
-				System.out.println(" . 輪到 " + roles[(curRole + 1) % 4].getName() + " 挑戰。");
 				skip[curRole] = true;
 			} else {
-				System.out.println("   * " + roles[curRole].getName() +  " 挑戰餵食！");
-				roles[curRole].setMoney(remainMoney);
-				System.out.print("   * " + roles[curRole].getName() + " 花了錢買桃太郎糰子，剩 " + roles[curRole].getMoney() + " 元，");
-				
-				dice = 1 + random.nextInt(6);
-				System.out.println("餵了 " + dice + " 個桃太郎糰子。");
-				
-				// 獲勝
-				if (dice >= boss.peek().getRequirement()) {
-					System.out.println(" ! "+ boss.peek().getName() + " 吃得好飽喔，好爽喔。");
-					System.out.println(" ! " + boss.peek().getName() + " 跟著 " + roles[curRole].getName() + " 回家了，而且該玩家得到 " + boss.peek().getPoint() + " 分。");
-					roles[curRole].addPoint(boss.peek().getPoint());
-					boss.pop();
-					System.out.println(" =================================================================");
-					System.out.println("");
-					break;
+				System.out.println("   ! " + boss.peek().getName() + " 如果吃 " + boss.peek().getRequirement() + " 個桃太郎糰子，就會跟你回家。");
+				System.out.print("   ? " + roles[curRole].getName() + " 要嘗試餵食？ \033[0;32m是(1)/否(0)\033[0m：");
+			
+				if (input.nextInt() == 0) {
+					skip[curRole] = true;
 				} else {
-					System.out.println(" ! "+ boss.peek().getName() + " 只吃 " + dice + " 個桃太郎糰子不會被騙回家，而要 " + boss.peek().getRequirement() + " 個才夠。");
+					System.out.println("   * " + roles[curRole].getName() +  " 挑戰餵食！");
+					roles[curRole].setMoney(remainMoney);
+					System.out.print("   * " + roles[curRole].getName() + " 花了錢買桃太郎糰子，剩 " + roles[curRole].getMoney() + " 元，");
+					
+					dice = 1 + random.nextInt(6);
+					System.out.println("餵了 " + dice + " 個桃太郎糰子。");
+					
+					// 獲勝
+					if (dice >= boss.peek().getRequirement()) {
+						System.out.println(" ! "+ boss.peek().getName() + " 吃得好飽喔，好爽喔。");
+						System.out.println(" ! " + boss.peek().getName() + " 跟著 " + roles[curRole].getName() + " 回家了，而且該玩家得到 " + boss.peek().getPoint() + " 分。");
+						roles[curRole].addPoint(boss.peek().getPoint());
+						boss.pop();
+						System.out.println(" =================================================================");
+						System.out.println("");
+						break;
+					} else {
+						System.out.println(" ! "+ boss.peek().getName() + " 只吃 " + dice + " 個桃太郎糰子不會被騙回家，而要 " + boss.peek().getRequirement() + " 個才夠。");
+					}
 				}
 			}
 			
