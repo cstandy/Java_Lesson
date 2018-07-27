@@ -36,10 +36,10 @@ public class Game {
 		boss.push(new Boss("\033[1;31m<普物龜>\033[0m",   2, 1, 20, 3));
 		boss.push(new Boss("\033[1;31m<松鼠>\033[0m",    1, 1, 10, 3));
 
-		roles[0] = new Role("\033[0;33mVicky\033[0m");
-		roles[1] = new Role("\033[0;33mAndy\033[0m");
-		roles[2] = new Role("\033[0;33mLucy\033[0m");
-		roles[3] = new Role("\033[0;33mLeo\033[0m");
+		roles[0] = new Role("\033[0;33mVicky\033[0m", "\033[1;93m<劍士>\033[0m");
+		roles[1] = new Role("\033[0;33mAndy\033[0m",  "\033[1;93m<法師>\033[0m");
+		roles[2] = new Role("\033[0;33mLucy\033[0m",  "\033[1;93m<弓手>\033[0m");
+		roles[3] = new Role("\033[0;33mAlan\033[0m",   "\033[1;93m<盜賊>\033[0m");
 	}
 
 	/**
@@ -61,8 +61,9 @@ public class Game {
 		try { System.in.read(); } catch (Exception e) {}
 		
 loop:	while (true) {
+	
 			for (int i = 0; i < 4; i++)
-			{				
+			{
 				int prePosition = 0;
 				int postPosition = 0;
 				
@@ -72,8 +73,6 @@ loop:	while (true) {
 				System.out.print(" . " + roles[i].getName() + " 的回合（按 Enter 繼續）：");
 				try { System.in.read(); } catch (Exception e) {}
 				try { System.in.read(); } catch (Exception e) {}
-				// dice = input.nextInt();
-				dice = 1 + random.nextInt(6);
 				System.out.println("   . 擲出了 " + dice + "。");
 				System.out.println("   $ 玩家 " + roles[i].getName()
 				         + " 目前位於" + map.walk(roles, dice, i).getName()
@@ -119,13 +118,19 @@ loop:	while (true) {
 		System.out.println("                                           $$ |                    $$    $$/                                                 ");
 		System.out.println("                                           $$/                      $$$$$$/                                                  ");
 	
+		// 將所有人的分數分別加總
 		for (int i = 0; i < 4; i++) {
 			System.out.println(" # " + roles[i].getName() + ":");
 			System.out.println("   # 帶回寵物所得的分數為：" + roles[i].getPoint() + " 分。");
 			System.out.println("   # 用錢換得的分數為：" + ((int)(roles[i].getMoney() / 5) * 10) + " 分。");
+			
+			// 帶寵物所得到的分數
 			score[i] += roles[i].getPoint();
+			
+			// 用身上的錢換到的分數（每 5 枚金幣換 10 分，少於 5 枚的不計）
 			score[i] += (int)(roles[i].getMoney() / 5) * 10;
 			
+			// 列出所有的土地並加分
 			System.out.println("   # 擁有的土地有：");
 			for (int j = 0; j < 32; j++) {
 				if (map.blockList[j].getOwner() == roles[i].getName()) {
@@ -134,6 +139,7 @@ loop:	while (true) {
 				}
 			}
 			
+			// 求出最高分者的分數
 			if (score[i] > winScore) winScore = score[i];
 			
 			System.out.println("   # " + roles[i].getName() + " 的最後分數為：\033[0;91m" + score[i] + " \033[0m分。");
@@ -147,7 +153,7 @@ loop:	while (true) {
 				" \\____|_|_| |_|_| |_|\\____)_|    \r\n" + 
 				"                                 ");
 
-		
+		// 印出一個或複數個優勝者
 		for (int i = 0; i < 4; i++) {
 			if (score[i] == winScore)
 				System.out.println(" & " + roles[i].getName());
@@ -162,6 +168,7 @@ loop:	while (true) {
 		int dice = 0;
 		boolean[] skip = {false, false, false, false};
 		
+		// 雖然寫經過原點，但其實判斷不在這個 method 裡
 		System.out.println("");
 		System.out.println(" . 有玩家經過原點，出現 boss。");
 		System.out.println(" =================================================================");
@@ -177,28 +184,36 @@ loop:	while (true) {
 			System.out.println("   $ 要獲得食物需先付出 " + boss.peek().getCost() + " 枚金幣。");
 			System.out.println("   $ " + roles[curRole].getName() + " 目前有 " + roles[curRole].getMoney() + " 枚金幣。");
 			
+			// 如果錢不夠，就不能挑戰
 			if (remainMoney < 0) {
 				System.out.println("   * " + roles[curRole].getName() + " 太窮了，動物都不理你！狗不理！");
 				skip[curRole] = true;
 			} else {
 				System.out.println("   ! " + boss.peek().getName() + " 如果吃 " + boss.peek().getRequirement() + " 個桃太郎糰子，就會跟你回家。");
-				System.out.print("   ? " + roles[curRole].getName() + " 要嘗試餵食？ \033[0;32m是(1)/否(0)\033[0m：");
+				System.out.print("   ? " + roles[curRole].getName() + " 要嘗試餵食（隨機餵食桃太郎糰子）？ \033[0;32m是(1)/否(0)\033[0m：");
 			
+				// 如果不挑戰，就標示起來
 				if (input.nextInt() == 0) {
 					skip[curRole] = true;
 				} else {
-					System.out.println("   * " + roles[curRole].getName() +  " 挑戰餵食！");
+					System.out.print("   * " + roles[curRole].getName() +  " 挑戰餵食！（按 Enter 繼續）");
+					try { System.in.read(); } catch (Exception e) {}
 					roles[curRole].setMoney(remainMoney);
 					System.out.print("   * " + roles[curRole].getName() + " 花了錢買桃太郎糰子，剩 " + roles[curRole].getMoney() + " 元，");
 					
+					// 隨機產生 1-6 的數字
 					dice = 1 + random.nextInt(6);
 					System.out.println("餵了 " + dice + " 個桃太郎糰子。");
 					
-					// 獲勝
+					// 如果產生的數字超過要求就獲勝
 					if (dice >= boss.peek().getRequirement()) {
 						System.out.println(" ! "+ boss.peek().getName() + " 吃得好飽喔，好爽喔。");
 						System.out.println(" ! " + boss.peek().getName() + " 跟著 " + roles[curRole].getName() + " 回家了，而且該玩家得到 " + boss.peek().getPoint() + " 分。");
+						
+						// 將寵物的分數加到玩家身上
 						roles[curRole].addPoint(boss.peek().getPoint());
+						
+						// 移除那個 boss
 						boss.pop();
 						System.out.println(" =================================================================");
 						System.out.println("");
@@ -209,13 +224,15 @@ loop:	while (true) {
 				}
 			}
 			
-			if (allSkip(skip)) { // break the while loop if all roles skipped this boss
+			// 如果所有人都不打王，就跳過這個王
+			if (allSkip(skip)) {
 				System.out.println(" !  因為所有玩家都不餵食，所以 " + boss.peek().getName() + " 走掉了，奔向自由。");
 				System.out.println(" =================================================================");
 				System.out.println("");
 				boss.pop();
 				break;
 			} else {
+				// 如果下一個人已經被標示放棄，就再往後找下去
 				do {
 					nextRole = (++curRole) % 4;
 				} while (skip[nextRole]);
@@ -225,6 +242,7 @@ loop:	while (true) {
 		}
 	}
 	
+	// 在 fightBoss() 中幫助判斷是否所有玩家都跳過這個王
 	private boolean allSkip(boolean[] skip) {
 		for (int i = 0; i < 4; i++)
 			if (!skip[i]) return false;
