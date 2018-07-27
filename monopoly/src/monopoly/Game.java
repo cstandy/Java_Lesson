@@ -56,7 +56,7 @@ public class Game {
 		System.out.println("\\_|  |_/\\___/|_| |_|\\___/| .__/ \\___/|_|\\__, |      \\_| \\_/\\____|_| \\_/\\___/ ");
 		System.out.println("                         | |             __/ |                               ");
 		System.out.println("                         |_|            |___/                                ");
-		System.out.println("                                                       ~~~~~~~~~ [\033[0;91m電\033[1;93m機\033[0;92m漢\033[0;96m化\033[0;94m組\033[0;37m]");
+		System.out.println("                                                       ~~~~~~~~~ [\033[0;91m電\033[1;93m機\033[0;92m漢\033[0;96m化\033[0;94m組\033[0m]");
 		System.out.print("（按 Enter 繼續）");
 		try { System.in.read(); } catch (Exception e) {}
 		

@@ -15,38 +15,38 @@ public class Map {
 	 * @brief The Constructor of the class.
 	 */
 	public Map() {
-		blockList[0]  = new Block("\033[0;94m[Start]\u001B[37m",           	true,  false, 0, 0);
-		blockList[1]  = new Block("\033[0;94m[台南後站（遊俠聚集地）]\u001B[37m",	false, true,  1, 1);
-		blockList[2]  = new Block("\033[0;94m[Tube]\u001B[37m",            	false, false, 0, 0);
-		blockList[3]  = new Block("\033[0;94m[後站大遠百]\u001B[37m",           	false, true,  1, 1);
-		blockList[4]  = new Block("\033[0;94m[Money]\u001B[37m",              false, false, 0, 0);
-		blockList[5]  = new Block("\033[0;94m[消失的牛車伯]\u001B[37m",          	false, true,  1, 2);
-		blockList[6]  = new Block("\033[0;94m[Star]\u001B[37m",               false, false, 0, 0);
-		blockList[7]  = new Block("\033[0;94m[育樂街紅樓]\u001B[37m",            false, true,  1, 2);
-		blockList[8]  = new Block("\033[0;94m[Jail]\u001B[37m",               true,  false, 0, 0);
-		blockList[9]  = new Block("\033[0;94m[勝利早點]\u001B[37m",             	false, true,  2, 3);
-		blockList[10] = new Block("\033[0;94m[Tube]\u001B[37m",               false, false, 0, 0);
-		blockList[11] = new Block("\033[0;94m[老邱]\u001B[37m",                	false, true,  2, 3);
-		blockList[12] = new Block("\033[0;94m[Trap]\u001B[37m",               false, false, 0, 0);
-		blockList[13] = new Block("\033[0;94m[九乘九]\u001B[37m",               false, true,  2, 4);
-		blockList[14] = new Block("\033[0;94m[Star]\u001B[37m",               false, false, 0, 0);
-		blockList[15] = new Block("\033[0;94m[21世紀風味館]\u001B[37m",         	false, true,  2, 4);
-		blockList[16] = new Block("\033[0;94m[Park]\u001B[37m",               true,  false, 0, 0);
-		blockList[17] = new Block("\033[0;94m[電機三館麥當勞]\u001B[37m",         false, true,  3, 5);
-		blockList[18] = new Block("\033[0;94m[Tube]\u001B[37m",               false, false, 0, 0);
-		blockList[19] = new Block("\033[0;94m[7-11大學店]\u001B[37m",           false, true,  3, 5);
-		blockList[20] = new Block("\033[0;94m[Money]\u001B[37m",              false, false, 0, 0);
-		blockList[21] = new Block("\033[0;94m[Double Cheese]\u001B[37m",      false, true,  3, 6);
-		blockList[22] = new Block("\033[0;94m[Star]\u001B[37m",               false, false, 0, 0);
-		blockList[23] = new Block("\033[0;94m[錢鼠]\u001B[37m",                	false, true,  3, 6);
-		blockList[24] = new Block("\033[0;94m[ToJail]\u001B[37m",             true,  false, 0, 0);
-		blockList[25] = new Block("\033[0;94m[電機本館]\u001B[37m",             	false, true,  4, 7);
-		blockList[26] = new Block("\033[0;94m[Tube]\u001B[37m",               false, false, 0, 0);
-		blockList[27] = new Block("\033[0;94m[奇美樓]\u001B[37m",               false, true,  4, 7);
-		blockList[28] = new Block("\033[0;94m[Trap]\u001B[37m",               false, false, 0, 0);
-		blockList[29] = new Block("\033[0;94m[東安路迷客夏]\u001B[37m",          	false, true,  5, 8);
-		blockList[30] = new Block("\033[0;94m[Star]\u001B[37m",               false, false, 0, 0);
-		blockList[31] = new Block("\033[0;94m[世界彼端伊都]\u001B[37m",         	false, true,  5, 8);
+		blockList[0]  = new Block("\033[0;94m[Start]\033[0m",           	true,  false, 0, 0);
+		blockList[1]  = new Block("\033[0;94m[台南後站（遊俠聚集地）]\033[0m",	false, true,  1, 1);
+		blockList[2]  = new Block("\033[0;94m[Tube]\033[0m",            	false, false, 0, 0);
+		blockList[3]  = new Block("\033[0;94m[後站大遠百]\033[0m",           	false, true,  1, 1);
+		blockList[4]  = new Block("\033[0;94m[Money]\033[0m",              false, false, 0, 0);
+		blockList[5]  = new Block("\033[0;94m[消失的牛車伯]\033[0m",          	false, true,  1, 2);
+		blockList[6]  = new Block("\033[0;94m[Star]\033[0m",               false, false, 0, 0);
+		blockList[7]  = new Block("\033[0;94m[育樂街紅樓]\033[0m",            false, true,  1, 2);
+		blockList[8]  = new Block("\033[0;94m[Jail]\033[0m",               true,  false, 0, 0);
+		blockList[9]  = new Block("\033[0;94m[勝利早點]\033[0m",             	false, true,  2, 3);
+		blockList[10] = new Block("\033[0;94m[Tube]\033[0m",               false, false, 0, 0);
+		blockList[11] = new Block("\033[0;94m[老邱]\033[0m",                	false, true,  2, 3);
+		blockList[12] = new Block("\033[0;94m[Trap]\033[0m",               false, false, 0, 0);
+		blockList[13] = new Block("\033[0;94m[九乘九]\033[0m",               false, true,  2, 4);
+		blockList[14] = new Block("\033[0;94m[Star]\033[0m",               false, false, 0, 0);
+		blockList[15] = new Block("\033[0;94m[21世紀風味館]\033[0m",         	false, true,  2, 4);
+		blockList[16] = new Block("\033[0;94m[Park]\033[0m",               true,  false, 0, 0);
+		blockList[17] = new Block("\033[0;94m[電機三館麥當勞]\033[0m",         false, true,  3, 5);
+		blockList[18] = new Block("\033[0;94m[Tube]\033[0m",               false, false, 0, 0);
+		blockList[19] = new Block("\033[0;94m[7-11大學店]\033[0m",           false, true,  3, 5);
+		blockList[20] = new Block("\033[0;94m[Money]\033[0m",              false, false, 0, 0);
+		blockList[21] = new Block("\033[0;94m[Double Cheese]\033[0m",      false, true,  3, 6);
+		blockList[22] = new Block("\033[0;94m[Star]\033[0m",               false, false, 0, 0);
+		blockList[23] = new Block("\033[0;94m[錢鼠]\033[0m",                	false, true,  3, 6);
+		blockList[24] = new Block("\033[0;94m[ToJail]\033[0m",             true,  false, 0, 0);
+		blockList[25] = new Block("\033[0;94m[電機本館]\033[0m",             	false, true,  4, 7);
+		blockList[26] = new Block("\033[0;94m[Tube]\033[0m",               false, false, 0, 0);
+		blockList[27] = new Block("\033[0;94m[奇美樓]\033[0m",               false, true,  4, 7);
+		blockList[28] = new Block("\033[0;94m[Trap]\033[0m",               false, false, 0, 0);
+		blockList[29] = new Block("\033[0;94m[東安路迷客夏]\033[0m",          	false, true,  5, 8);
+		blockList[30] = new Block("\033[0;94m[Star]\033[0m",               false, false, 0, 0);
+		blockList[31] = new Block("\033[0;94m[世界彼端伊都]\033[0m",         	false, true,  5, 8);
 
 	}
 
