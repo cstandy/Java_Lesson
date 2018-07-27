@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import javax.print.attribute.AttributeSet;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
@@ -46,7 +47,8 @@ public class GuiDesign {
 	private String userInput = null;
 	JTextArea display;
 	public ColorPane outputArea;
-	//private JPanel[][] role = new JPanel[4][32];
+	private JPanel[][] role = new JPanel[4][32];
+	private JLayeredPane layeredPane;
 
 	/**
 	 * Create the application.
@@ -63,13 +65,11 @@ public class GuiDesign {
 		frame.setBounds(0, 0, 1080, 720);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		layeredPane = frame.getLayeredPane();
 
-		LineBorder lineBorder=new LineBorder(new Color(190,190,190),2);
+		LineBorder lineBorder=new LineBorder(new Color(190,190,190),3);
 
 		// 輸出界面
-		//outputArea = new JTextArea (23, 74);
-
-		//////////
 		outputArea = new ColorPane();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		JScrollPane jj = new JScrollPane(outputArea);
@@ -77,7 +77,6 @@ public class GuiDesign {
 		jj.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		jj.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		frame.getContentPane().add(jj);
-		///////////
 
 		outputArea.setForeground(Color.BLACK);
 		outputArea.setEditable(false);
@@ -85,7 +84,7 @@ public class GuiDesign {
 		outputArea.setBorder(lineBorder);
 		outputArea.setFont(new Font("monospaced", Font.PLAIN, 14));
 
-		//outputArea.setText("727384950483772738495048377273849504837727\n");
+		/*just for test
 		outputArea.append(Color.red,"dcfjhgfdfghjjfhdh\n");
 		outputArea.append(Color.red,"dcfjhgfdfghjjfhdh\n");
 		outputArea.append(Color.red,"dcfjhgfdfghjjfhdh\n");
@@ -98,11 +97,37 @@ public class GuiDesign {
 		outputArea.append(Color.red,"dcfjhgfdfghjjfhdh\n");
 		outputArea.append(Color.red,"一個哇啦哇啦哇啦哇啦兩個哇啦哇啦哇啦哇啦三個哇啦哇啦哇啦哇啦四個哇啦哇啦哇啦哇啦五個哇啦哇啦哇啦哇啦\n");
 		outputArea.append(Color.red,"oneeeeeeeetwoooooooothreeeeeeefourrrrrrrfiveeeeeeesixxxxxxxxsevennnnnneighttttttnineeeeeeetennnnnnnn\n");
+		*/
 
-
+		// 角色列表顯示於block上的四角
+		for(int b=0; b<4; b++) {
+			for(int a=0; a<32; a++) {
+				role[b][a] = new JPanel();
+				if(a/8 == 0) {
+					role[b][a].setBounds((8-a)*90+10+70+b%2*10-3, 611+52+b/2*10-3, 9, 9);
+				}
+				else if(a/8 == 1) {
+					role[b][a].setBounds(10+70+b%2*10-3, (16-a)*72+35+52+b/2*10-3, 9, 9);
+				}
+				else if(a/8 == 2) {
+					role[b][a].setBounds((a-16)*90+10+70+b%2*10-3, 35+52+b/2*10-3, 9, 9);
+				}
+				else{
+					role[b][a].setBounds(730+70+b%2*10-3, (a%8)*72+35+52+b/2*10-3, 9, 9);
+				}
+				if(b==0) {role[b][a].setBackground(new Color(255,69,0));}
+				else if(b==1) {role[b][a].setBackground(new Color(154,205,50));}
+				else if(b==2) {role[b][a].setBackground(new Color(92,172,238));}
+				else{role[b][a].setBackground(new Color(255,215,0));}
+				role[b][a].setVisible(false);
+				frame.getContentPane().add(role[b][a]);
+				layeredPane.add(role[b][a],new Integer(300));
+			}
+		}
+		for(int c=0; c<4; c++) {
+			role[c][0].setVisible(true);
+		}
 		
-
-
 		// 遊戲方塊區
 		for(int a=0; a < 32; a++) {
 			blockArea[a] = new JTextArea("哇啦哇啦哇啦哇啦哇啦哇啦哇啦哇啦哇啦哇啦"+"\n金幣\n價錢\n所有人");
@@ -124,6 +149,7 @@ public class GuiDesign {
 			blockArea[a].setFont(new Font("monospaced", Font.PLAIN, 12));
 			blockArea[a].setBorder(lineBorder);
 			frame.getContentPane().add(blockArea[a]);
+			layeredPane.add(blockArea[a],new Integer(200));
 		}
 		// 設置顏色
 		blockArea[1].setBorder(new LineBorder(new Color(65,105,225), 	3));
@@ -142,9 +168,6 @@ public class GuiDesign {
 		blockArea[27].setBorder(new LineBorder(new Color(0,205,0), 		3));
 		blockArea[29].setBorder(new LineBorder(new Color(135,206,250), 	3));
 		blockArea[31].setBorder(new LineBorder(new Color(135,206,250), 	3));
-		
-		
-		
 
 		// 右邊角色列表
 		for(int a=0; a < 4; a++) {
@@ -153,7 +176,10 @@ public class GuiDesign {
 			roleArea[a].setEditable(false);
 			roleArea[a].setBackground(Color.WHITE);
 			roleArea[a].setBounds(830, 35+a*108, 240, 108);
-			roleArea[a].setBorder(lineBorder);
+			if(a==0) {roleArea[a].setBorder(new LineBorder(new Color(255,69,0), 3));}
+			else if(a==1) {roleArea[a].setBorder(new LineBorder(new Color(154,205,50), 3));}
+			else if(a==2) {roleArea[a].setBorder(new LineBorder(new Color(92,172,238), 3));}
+			else{roleArea[a].setBorder(new LineBorder(new Color(255,215,0), 3));}
 			roleArea[a].setFont(new Font("monospaced", Font.PLAIN, 14));
 			frame.getContentPane().add(roleArea[a]);
 		}
@@ -169,7 +195,6 @@ public class GuiDesign {
 				src.setText("");
 			}
 		});
-
 		input.setBounds(110, 540, 145, 40);
 		input.setColumns(10);
 		input.setBorder(lineBorder);
@@ -184,10 +209,11 @@ public class GuiDesign {
 		diceButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Random random = new Random();
-				int a = random.nextInt(6)+1;
-				diceArea.setText("你骰到了" + a + "點");
-				//methodA();
+				//if() {
+					Random random = new Random();
+					int a = random.nextInt(6)+1;
+					diceArea.setText("你骰到了" + a + "點");
+				//}
 			}
 		});
 		frame.getContentPane().add(diceButton);
@@ -200,9 +226,7 @@ public class GuiDesign {
 		diceArea.setBounds(575, 540, 145, 40);
 		diceArea.setBorder(lineBorder);
 		diceArea.setFont(new Font("monospaced", Font.PLAIN, 21));
-		//diceArea.set
 		frame.getContentPane().add(diceArea);
-
 
 		// 右下角BOSS顯示
 		bossArea = new JTextArea("ioot");
@@ -213,31 +237,6 @@ public class GuiDesign {
 		bossArea.setBorder(lineBorder);
 		bossArea.setFont(new Font("monospaced", Font.PLAIN, 14));
 		frame.getContentPane().add(bossArea);
-
-		// 角色列表顯示於block上的四角
-		/*for(int b=0; b<4; b++) {
-			for(int a=0; a<32; a++) {
-				role[b][a] = new JPanel();
-				if(a/8 == 0) {
-					blockArea[a].setBounds((8-a)*90+10+70+(b-1)%2*10, 611+52+(b-1)/2*10, 10, 10);
-				}
-				else if(a/8 == 1) {
-					blockArea[a].setBounds(10+70+(b-1)%2*10, (16-a)*72+35+52+(b-1)/2*10, 10, 10);
-				}
-				else if(a/8 == 2) {
-					blockArea[a].setBounds((a%8)*90+10+70+(b-1)%2*10, 35+52+(b-1)/2*10, 10, 10);
-				}
-				else{
-					blockArea[a].setBounds(730+70+(b-1)%2*10, (a%8)*72+35+52+(b-1)/2*10, 10, 10);
-				}
-				if(b==0)role[b][a].setBackground(Color.RED);
-				else if(b==1)role[b][a].setBackground(Color.GREEN);
-				else if(b==2)role[b][a].setBackground(Color.BLUE);
-				else if(b==3)role[b][a].setBackground(Color.GREEN);
-				role[b][a].setVisible(true);
-				frame.getContentPane().add(role[b][a]);
-			}
-		}*/
 
 		frame.setVisible(true);
 	}
@@ -257,12 +256,7 @@ public class GuiDesign {
 
 	public int getDecision() {
 		outputArea.append(Color.blue,"輸入數字：");
-		while(/*(this.userInput != "0" 
-				&& this.userInput != "1" 
-				&& this.userInput != "2" 
-				&& this.userInput != "3" 
-				&& this.userInput != "4")
-				|| */this.userInput == null) {
+		while(this.userInput == null) {
 			System.out.println("還在等待中．．．");
 		}
 		int integerInput = 0;
@@ -272,4 +266,17 @@ public class GuiDesign {
 		return integerInput;
 	}
 
+	/**
+	 * @brief set role's position on the map
+	 */
+	public void movePosition(Role roleIn, int whichOne) {
+		for(int a=0; a<32; a++) {
+			if(a==roleIn.getPosition()) {
+				role[whichOne][a].setVisible(true);
+			}
+			else {
+				role[whichOne][a].setVisible(false);
+			}
+		}
+	}
 }
