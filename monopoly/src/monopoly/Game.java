@@ -1,5 +1,6 @@
 package monopoly;
 
+import java.awt.Color;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.Stack;
@@ -32,9 +33,6 @@ public class Game {
 		int inininin = gui.getDecision();
 		System.out.println(inininin);*/
 		
-		for(int w=0; w<40; w++) {
-			gui.outputArea.append("sdfegh"+w + "\n");
-		}
 		
 		
 		
