@@ -175,11 +175,14 @@ loop:	while (true) {
 		System.out.print(" ! BOSS 討伐戰：" + roles[curRole].getName() + " 遇到了生物 No." + boss.peek().getOrder() + "：小 " + boss.peek().getName() + "。（請按 Enter 繼續）");
 		try { System.in.read(); } catch (Exception e) {}
 		
+		// 最後一隻王，特別規則，會計算大家付的錢，送給打死最後一隻王的人
+		int lastBonus = 0;
 
 		while (true) {
 			dice = -1;
 			int nextRole = 0;
 			int remainMoney = roles[curRole].getMoney() - boss.peek().getCost();
+					
 			
 			System.out.println("   $ 要獲得食物需先付出 " + boss.peek().getCost() + " 枚金幣。");
 			System.out.println("   $ " + roles[curRole].getName() + " 目前有 " + roles[curRole].getMoney() + " 枚金幣。");
@@ -188,7 +191,7 @@ loop:	while (true) {
 			if (remainMoney < 0) {
 				System.out.println("   * " + roles[curRole].getName() + " 太窮了，動物都不理你！狗不理！");
 				skip[curRole] = true;
-			} else {
+			} else {	// 錢夠挑戰才詢問
 				System.out.println("   ! " + boss.peek().getName() + " 如果吃 " + boss.peek().getRequirement() + " 個桃太郎糰子，就會跟你回家。");
 				System.out.print("   ? " + roles[curRole].getName() + " 要嘗試餵食（隨機餵食桃太郎糰子）？ \033[0;32m是(1)/否(0)\033[0m：");
 			
@@ -201,6 +204,9 @@ loop:	while (true) {
 					roles[curRole].setMoney(remainMoney);
 					System.out.print("   * " + roles[curRole].getName() + " 花了錢買桃太郎糰子，剩 " + roles[curRole].getMoney() + " 元，");
 					
+					// 把大家花的錢存起來，在打最後一隻王時才會返還該次全體費用作為Bonus					
+					lastBonus += boss.peek().getCost();
+					
 					// 隨機產生 1-6 的數字
 					dice = 1 + random.nextInt(6);
 					System.out.println("餵了 " + dice + " 個桃太郎糰子。");
@@ -209,12 +215,20 @@ loop:	while (true) {
 					if (dice >= boss.peek().getRequirement()) {
 						System.out.println(" ! "+ boss.peek().getName() + " 吃得好飽喔，好爽喔。");
 						System.out.println(" ! " + boss.peek().getName() + " 跟著 " + roles[curRole].getName() + " 回家了，而且該玩家得到 " + boss.peek().getPoint() + " 分。");
-						
+												
 						// 將寵物的分數加到玩家身上
 						roles[curRole].addPoint(boss.peek().getPoint());
 						
 						// 移除那個 boss
 						boss.pop();
+						
+						// 最後一隻Boss，可以額外獲得金幣
+						if(boss.isEmpty()) {
+							roles[curRole].addMoney(lastBonus);
+							System.out.println(" ! 擊敗最後一隻boss可獲得額外 Bonus ，可以領取這次戰鬥大家繳納的金幣！ 總共是 " + lastBonus + " 枚金幣！");
+							System.out.println(" $ 現在 " + roles[curRole].getName() + "身上有 " + roles[curRole].getMoney() + " 枚金幣！");					
+						}
+						
 						System.out.println(" =================================================================");
 						System.out.println("");
 						break;
