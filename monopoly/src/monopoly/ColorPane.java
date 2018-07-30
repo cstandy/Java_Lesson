@@ -73,7 +73,7 @@ public class ColorPane extends JTextPane {
 			} else {
 				pane.append(Color.black, String.valueOf(n) + ' ');
 			}
-		}
+		}z
 
 		JFrame f = new JFrame("ColorPane example");
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

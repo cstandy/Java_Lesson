@@ -151,7 +151,7 @@ public class Map {
 				
 				gui.outputArea.append(Color.BLACK, "   $ " + roleList[nowRole].getName() + " 走到了提款機，可以丟骰子拿錢：\n");
 				gui.dice = true;
-				gui.outputArea.append(Color.BLACK, " . 請按下Throw Dice\n");
+				gui.outputArea.append(Color.BLACK, " . 玩家 " + roleList[nowRole].getName() + " 請按下 Throw Dice\n");
 				// 等待按按鈕，如果輸入有值才會繼續
 				while(this.gui.diceThrown == 0) {
 					try { Thread.sleep(1000); } catch (InterruptedException e) {}
@@ -219,7 +219,7 @@ public class Map {
 					gui.outputArea.append(Color.BLACK, "   & " + roleList[nowRole].getCareer()
 							+ "的星星能力：再丟一次骰子並獲得該值 + 5 枚金幣。\n");
 					gui.dice = true;
-					gui.outputArea.append(Color.BLACK, " . 請按下Throw Dice\n");
+					gui.outputArea.append(Color.BLACK, " . 玩家 " + roleList[nowRole].getName() + " 請按下Throw Dice\n");
 					// 等待按按鈕，如果輸入有值才會繼續
 					while(this.gui.diceThrown == 0) {
 						try { Thread.sleep(1000); } catch (InterruptedException e) {}
