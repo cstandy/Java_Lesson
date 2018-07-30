@@ -78,7 +78,7 @@ public class Map {
 		
 		// 一步一步走（要看撿錢）
 		for(int a=0; a < movement; a++) {
-			roleList[nowRole].moveOn();
+			roleList[nowRole].moveOn(nowRole);
 			// 撿錢
 			pickedMoney += blockList[roleList[nowRole].getPosition()].pickMoney();
 		}
@@ -102,7 +102,7 @@ public class Map {
 			if(blockList[roleList[nowRole].getPosition()].getName().equals("\033[1;96m[傳送門]\033[0m")) { // Tube 水管
 				int moneyPick = 0;
 				for(int a=1; a <= 8; a++) {	// 走8步撿錢
-					roleList[nowRole].moveOn();
+					roleList[nowRole].moveOn(nowRole);
 					moneyPick += blockList[roleList[nowRole].getPosition()].pickMoney();
 				}
 				roleList[nowRole].addMoney(moneyPick);
@@ -139,7 +139,7 @@ public class Map {
 					
 					// 一步一步走（要看撿錢）
 					for(int i = 0; i < 32; i++) {
-						roleList[nowRole].moveOn();
+						roleList[nowRole].moveOn(nowRole);
 						
 						// 撿錢
 						pickedMoney += blockList[roleList[nowRole].getPosition()].pickMoney();
