@@ -4,20 +4,22 @@ public class Role {
 
 	/* variables */
 	private String name;
+	private String career;
 	private int point;
 	private int money;
-	private int position;
-	private int blockNumber;//How many block this role have
+	private int position;    // the position this role is
+	private int blockNumber; // How many block this role have
 
 	/* methods */
 	/**
 	 * @brief The Constructor of the class.
 	 */
-	public Role(String name) {
-		this.name = name;
-		point = 0;
-		money = 10;
-		position = 0;
+	public Role(String name, String career) {
+		this.name   = name;
+		this.career = career;
+		point       = 0;
+		money       = 10;
+		position    = 0;
 		blockNumber = 0;
 	}
 	/**
@@ -53,10 +55,11 @@ public class Role {
 	
 
 	/* get function */
-	public String 	getName() 		{return name;}
-	public int		getPoint()		{return point;}
-	public int		getMoney()		{return money;}
-	public int		getPosition() 	{return position;}
+	public String 	getName() 		 {return name;}
+	public String   getCareer()      {return career;}
+	public int		getPoint()		 {return point;}
+	public int		getMoney()		 {return money;}
+	public int		getPosition() 	 {return position;}
 	public int		getBlockNumber() {return blockNumber;}
 
 	/**
@@ -82,11 +85,12 @@ public class Role {
 		}
 	}
 
+	public void addPoint(int addition)   {this.point += addition;}
 	public void setMoney(int inputMoney) {this.money = inputMoney;}
-	public void setBlockNumber(boolean buyOrSale) {//true ++, false --
-		if(buyOrSale) {//買地
+	public void setBlockNumber(boolean buyOrSale) { // true ++, false --
+		if(buyOrSale) { // 買地
 			this.blockNumber = this.blockNumber + 1;
-		}else {//賣地
+		}else { // 賣地
 			this.blockNumber = this.blockNumber - 1;
 		}
 	}

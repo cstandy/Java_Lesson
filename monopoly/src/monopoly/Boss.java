@@ -17,10 +17,10 @@ public class Boss {
 	  * @parame requirement The low bound to win this boss.
 	  */
 	public Boss(String name, int order, int cost, int point, int requirement) {
-		this.name = name;
-		this.order = order;
-		this.cost = cost;
-		this.point = point;
+		this.name        = name;
+		this.order       = order;
+		this.cost        = cost;
+		this.point       = point;
 		this.requirement = requirement;
 	}
 	
