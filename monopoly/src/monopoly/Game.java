@@ -48,12 +48,12 @@ public class Game {
 		try { Thread.sleep(1000); } catch (InterruptedException e) {}
 		//try { System.in.read(); } catch (Exception e) {}
 
-		boss.push(new Boss("\033[1;31m<系上同學>\033[0m", 6, 1, 100, 6));
-		boss.push(new Boss("\033[1;31m<阿國>\033[0m",    5, 3, 50, 5));
-		boss.push(new Boss("\033[1;31m<雲平狗>\033[0m",   4, 2, 40, 4));
-		boss.push(new Boss("\033[1;31m<大笨鳥>\033[0m",   3, 2, 30, 4));
-		boss.push(new Boss("\033[1;31m<普物龜>\033[0m",   2, 1, 20, 3));
-		boss.push(new Boss("\033[1;31m<松鼠>\033[0m",    1, 1, 10, 3));
+		boss.push(new Boss("<系上同學>", 6, 1, 100, 6));
+		boss.push(new Boss("<阿國>",    5, 3, 50, 5));
+		boss.push(new Boss("<雲平狗>",   4, 2, 40, 4));
+		boss.push(new Boss("<大笨鳥>",   3, 2, 30, 4));
+		boss.push(new Boss("<普物龜>",   2, 1, 20, 3));
+		boss.push(new Boss("<松鼠>",    1, 1, 10, 3));
 
 
 
@@ -134,12 +134,16 @@ public class Game {
 				}
 				System.out.println("   . 擲出了 " + gui.diceThrown + "。");
 				gui.outputArea.append(Color.BLACK, "   . 擲出了 " + gui.diceThrown + "。\n");
+				Block walkBlock = map.walk(roles, gui.diceThrown, i);
 				//System.out.println("   $ 玩家 " + roles[i].getName()
 				//		+ " 目前位於" + map.walk(roles, gui.diceThrown, i).getName()
 				//		+ "，身上有 " + roles[i].getMoney() + " 枚金幣。");
-				gui.outputArea.append(Color.BLACK, "   $ 玩家 " + roles[i].getName()
-						+ " 目前位於" + map.walk(roles, gui.diceThrown, i).getName()
-						+ "，身上有 " + roles[i].getMoney() + " 枚金幣。\n");
+				
+				gui.outputArea.append(Color.BLACK, "   $ 玩家 ");
+				gui.outputArea.append(Color.ORANGE, roles[i].getName());
+				gui.outputArea.append(Color.BLACK, " 目前位於");
+				gui.outputArea.append(new Color(210,105,30), walkBlock.getName());
+				gui.outputArea.append(Color.BLACK, "，身上有 " + roles[i].getMoney() + " 枚金幣。\n");
 				gui.diceThrown = 0;
 				gui.dice = false;
 				
@@ -217,7 +221,9 @@ public class Game {
 			for (int j = 0; j < 32; j++) {
 				if (map.blockList[j].getOwner() == roles[i].getName()) {
 					System.out.println("     # " + map.blockList[j].getName() + ": " + (map.blockList[j].getPrice() * 10 + 10) + " 分。");
-					gui.outputArea.append(Color.BLACK, "     # " + map.blockList[j].getName() + ": " + (map.blockList[j].getPrice() * 10 + 10) + " 分。\n");
+					gui.outputArea.append(Color.BLACK, "     # ");
+					gui.outputArea.append(new Color(210,105,30), map.blockList[j].getName());
+					gui.outputArea.append(Color.BLACK, ": " + (map.blockList[j].getPrice() * 10 + 10) + " 分。\n");
 					score[i] += map.blockList[j].getPrice() * 10 + 10;
 				}
 			}
@@ -226,7 +232,11 @@ public class Game {
 			if (score[i] > winScore) winScore = score[i];
 
 			System.out.println("   # " + roles[i].getName() + " 的最後分數為：\033[0;91m" + score[i] + " \033[0m分。");
-			gui.outputArea.append(Color.BLACK, "   # " + roles[i].getName() + " 的最後分數為：\033[0;91m" + score[i] + " \033[0m分。\n");
+			gui.outputArea.append(Color.BLACK, "   # ");
+			gui.outputArea.append(Color.ORANGE, roles[i].getName());
+			gui.outputArea.append(Color.BLACK,  " 的最後分數為：");
+			gui.outputArea.append(Color.RED, " " + score[i] + " ");
+			gui.outputArea.append(Color.BLACK, "分。\n");
 		}
 
 		System.out.println("       _                         \r\n" + 
@@ -248,7 +258,8 @@ public class Game {
 		for (int i = 0; i < 4; i++) {
 			if (score[i] == winScore) {
 				System.out.println(" & " + roles[i].getName());
-				gui.outputArea.append(Color.BLACK, " & " + roles[i].getName());
+				gui.outputArea.append(Color.BLACK, " & ");
+				gui.outputArea.append(Color.ORANGE, roles[i].getName());
 			}
 		}
 	}
@@ -269,7 +280,10 @@ public class Game {
 		System.out.println(" =================================================================");
 		gui.outputArea.append(Color.BLACK, " =================================================================\n");
 		//System.out.print(" ! BOSS 討伐戰：" + roles[curRole].getName() + " 遇到了生物 No." + boss.peek().getOrder() + "：小 " + boss.peek().getName() + "。（請按 Enter 繼續）");
-		gui.outputArea.append(Color.BLACK, " ! BOSS 討伐戰：" + roles[curRole].getName() + " 遇到了生物 No." + boss.peek().getOrder() + "：小 " + boss.peek().getName() + "\n");
+		gui.outputArea.append(Color.BLACK, " ! BOSS 討伐戰：");
+		gui.outputArea.append(Color.ORANGE, roles[curRole].getName());
+		gui.outputArea.append(Color.BLACK, " 遇到了生物 No." + boss.peek().getOrder() + "：小 ");
+		gui.outputArea.append(Color.RED, boss.peek().getName() + "\n");
 		try { Thread.sleep(1000); } catch (InterruptedException e) {}
 		//try { System.in.read(); } catch (Exception e) {}
 
@@ -285,18 +299,27 @@ public class Game {
 			System.out.println("   $ 要獲得食物需先付出 " + boss.peek().getCost() + " 枚金幣。");
 			gui.outputArea.append(Color.BLACK, "   $ 要獲得食物需先付出 " + boss.peek().getCost() + " 枚金幣。\n");
 			System.out.println("   $ " + roles[curRole].getName() + " 目前有 " + roles[curRole].getMoney() + " 枚金幣。");
-			gui.outputArea.append(Color.BLACK, "   $ " + roles[curRole].getName() + " 目前有 " + roles[curRole].getMoney() + " 枚金幣。\n");
+			gui.outputArea.append(Color.BLACK, "   $ ");
+			gui.outputArea.append(Color.ORANGE, roles[curRole].getName());
+			gui.outputArea.append(Color.BLACK," 目前有 " + roles[curRole].getMoney() + " 枚金幣。\n");
 
 			// 如果錢不夠，就不能挑戰
 			if (remainMoney < 0) {
 				System.out.println("   * " + roles[curRole].getName() + " 太窮了，動物都不理你！狗不理！");
-				gui.outputArea.append(Color.BLACK, "   * " + roles[curRole].getName() + " 太窮了，動物都不理你！狗不理！\n");
+				gui.outputArea.append(Color.BLACK, "   * ");
+				gui.outputArea.append(Color.ORANGE, roles[curRole].getName());
+				gui.outputArea.append(Color.BLACK," 太窮了，動物都不理你！狗不理！\n");
 				skip[curRole] = true;
 			} else {	// 錢夠挑戰才詢問
 				System.out.println("   ! " + boss.peek().getName() + " 如果吃 " + boss.peek().getRequirement() + " 個桃太郎糰子，就會跟你回家。");
-				gui.outputArea.append(Color.BLACK, "   ! " + boss.peek().getName() + " 如果吃 " + boss.peek().getRequirement() + " 個桃太郎糰子，就會跟你回家。\n");
+				gui.outputArea.append(Color.BLACK, "   ! ");
+				gui.outputArea.append(Color.RED, boss.peek().getName());
+				gui.outputArea.append(Color.BLACK, " 如果吃 " + boss.peek().getRequirement() + " 個桃太郎糰子，就會跟你回家。\n");
 				System.out.print("   ? " + roles[curRole].getName() + " 要嘗試餵食（隨機餵食桃太郎糰子）？ \033[0;32m是(1)/否(0)\033[0m：");
-				gui.outputArea.append(Color.BLACK, "   ? " + roles[curRole].getName() + " 要嘗試餵食（隨機餵食桃太郎糰子）？ \033[0;32m是(1)/否(0)\033[0m：\n");
+				gui.outputArea.append(Color.BLACK, "   ? ");
+				gui.outputArea.append(Color.ORANGE, roles[curRole].getName());
+				gui.outputArea.append(Color.BLACK, " 要嘗試餵食（隨機餵食桃太郎糰子）？");
+				gui.outputArea.append(Color.GREEN, "是(1)/否(0)");
 
 				// 如果不挑戰，就標示起來
 				//if (input.nextInt() == 0) {
@@ -308,7 +331,9 @@ public class Game {
 					//try { System.in.read(); } catch (Exception e) {}
 					roles[curRole].setMoney(remainMoney);
 					System.out.print("   * " + roles[curRole].getName() + " 花了錢買桃太郎糰子，剩 " + roles[curRole].getMoney() + " 元，");
-					gui.outputArea.append(Color.BLACK, "   * " + roles[curRole].getName() + " 花了錢買桃太郎糰子，剩 " + roles[curRole].getMoney() + " 元，\n");
+					gui.outputArea.append(Color.BLACK, "   * ");
+					gui.outputArea.append(Color.ORANGE, roles[curRole].getName());
+					gui.outputArea.append(Color.BLACK, " 花了錢買桃太郎糰子，剩 " + roles[curRole].getMoney() + " 元，\n");
 
 					// 把大家花的錢存起來，在打最後一隻王時才會返還該次全體費用作為Bonus					
 					lastBonus += boss.peek().getCost();
@@ -331,9 +356,15 @@ public class Game {
 					// 如果產生的數字超過要求就獲勝
 					if (dice >= boss.peek().getRequirement()) {
 						System.out.println(" ! "+ boss.peek().getName() + " 吃得好飽喔，好爽喔。");
-						gui.outputArea.append(Color.BLACK, " ! "+ boss.peek().getName() + " 吃得好飽喔，好爽喔。\n");
+						gui.outputArea.append(Color.BLACK, " ! ");
+						gui.outputArea.append(Color.RED, boss.peek().getName());
+						gui.outputArea.append(Color.BLACK, " 吃得好飽喔，好爽喔。\n");
 						System.out.println(" ! " + boss.peek().getName() + " 跟著 " + roles[curRole].getName() + " 回家了，而且該玩家得到 " + boss.peek().getPoint() + " 分。\n");
-						gui.outputArea.append(Color.BLACK, " ! " + boss.peek().getName() + " 跟著 " + roles[curRole].getName() + " 回家了，而且該玩家得到 " + boss.peek().getPoint() + " 分。\n\n");
+						gui.outputArea.append(Color.BLACK, " ! ");
+						gui.outputArea.append(Color.RED, boss.peek().getName());
+						gui.outputArea.append(Color.BLACK, " 跟著 ");
+						gui.outputArea.append(Color.ORANGE, roles[curRole].getName());
+						gui.outputArea.append(Color.BLACK, " 回家了，而且該玩家得到 " + boss.peek().getPoint() + " 分。\n\n");
 
 						// 將寵物的分數加到玩家身上
 						roles[curRole].addPoint(boss.peek().getPoint());
@@ -347,7 +378,9 @@ public class Game {
 							System.out.println(" ! 擊敗最後一隻boss可獲得額外 Bonus ，可以領取這次戰鬥大家繳納的金幣！ 總共是 " + lastBonus + " 枚金幣！");
 							gui.outputArea.append(Color.BLACK, " ! 擊敗最後一隻boss可獲得額外 Bonus ，可以領取這次戰鬥大家繳納的金幣！ 總共是 " + lastBonus + " 枚金幣！\n");
 							System.out.println(" $ 現在 " + roles[curRole].getName() + "身上有 " + roles[curRole].getMoney() + " 枚金幣！");
-							gui.outputArea.append(Color.BLACK, " $ 現在 " + roles[curRole].getName() + "身上有 " + roles[curRole].getMoney() + " 枚金幣！\n");
+							gui.outputArea.append(Color.BLACK, " $ 現在 ");
+							gui.outputArea.append(Color.ORANGE, roles[curRole].getName());
+							gui.outputArea.append(Color.BLACK, "身上有 " + roles[curRole].getMoney() + " 枚金幣！\n");
 						}
 
 						System.out.println(" =================================================================");
@@ -357,7 +390,9 @@ public class Game {
 						break;
 					} else {
 						System.out.println(" ! "+ boss.peek().getName() + " 只吃 " + dice + " 個桃太郎糰子不會被騙回家，而要 " + boss.peek().getRequirement() + " 個才夠。");
-						gui.outputArea.append(Color.BLACK, " ! "+ boss.peek().getName() + " 只吃 " + dice + " 個桃太郎糰子不會被騙回家，而要 " + boss.peek().getRequirement() + " 個才夠。\n");
+						gui.outputArea.append(Color.BLACK, " ! ");
+						gui.outputArea.append(Color.RED, boss.peek().getName());
+						gui.outputArea.append(Color.BLACK, " 只吃 " + dice + " 個桃太郎糰子不會被騙回家，而要 " + boss.peek().getRequirement() + " 個才夠。\n");
 					}
 				}
 			}
@@ -365,7 +400,9 @@ public class Game {
 			// 如果所有人都不打王，就跳過這個王
 			if (allSkip(skip)) {
 				System.out.println(" !  因為所有玩家都不餵食，所以 " + boss.peek().getName() + " 走掉了，奔向自由。");
-				gui.outputArea.append(Color.BLACK, " !  因為所有玩家都不餵食，所以 " + boss.peek().getName() + " 走掉了，奔向自由。\n");
+				gui.outputArea.append(Color.BLACK, " !  因為所有玩家都不餵食，所以 ");
+				gui.outputArea.append(Color.RED, boss.peek().getName());
+				gui.outputArea.append(Color.BLACK, " 走掉了，奔向自由。\n");
 				System.out.println(" =================================================================");
 				gui.outputArea.append(Color.BLACK, " =================================================================\n");
 				System.out.println("");
@@ -378,7 +415,9 @@ public class Game {
 					nextRole = (++curRole) % 4;
 				} while (skip[nextRole]);
 				System.out.println(" . 輪到 " + roles[nextRole].getName() + " 挑戰。\n");
-				gui.outputArea.append(Color.black, " . 輪到 " + roles[nextRole].getName() + " 挑戰。\n");
+				gui.outputArea.append(Color.BLACK, " . 輪到 ");
+				gui.outputArea.append(Color.ORANGE, roles[nextRole].getName());
+				gui.outputArea.append(Color.BLACK, " 挑戰。\n");
 				curRole = nextRole;
 			}
 		}
