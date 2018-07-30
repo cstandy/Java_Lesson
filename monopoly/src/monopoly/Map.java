@@ -121,6 +121,7 @@ public class Map {
 				System.out.print("   $ " + roleList[nowRole].getName() + " 走到了提款機，可以丟骰子拿錢（按 Enter 繼續）：");
 				try { System.in.read(); } catch (Exception e) {}
 				try { System.in.read(); } catch (Exception e) {}
+				
 				System.out.println("     * " + roleList[nowRole].getName() + " 丟出了 " + moneyBlock + "。");
 				System.out.println("     $ " + roleList[nowRole].getName() + " 可以跟銀行領取 " + moneyBlock + " 枚金幣，真幸運！");
 			}

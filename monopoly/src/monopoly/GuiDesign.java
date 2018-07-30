@@ -49,7 +49,8 @@ public class GuiDesign {
 	public ColorPane outputArea;
 	private JPanel[][] role = new JPanel[4][32];
 	private JLayeredPane layeredPane;
-	public int diceThrown;
+	public int diceThrown = 0;
+	public boolean dice = false;
 
 	/**
 	 * Create the application.
@@ -195,12 +196,12 @@ public class GuiDesign {
 		diceButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//if(map.dice) {
-				Random random = new Random();
-				int a = random.nextInt(6)+1;
-				diceThrown = a;
-				diceArea.setText("你骰到了" + a + "點");
-				//}
+				if(dice) {
+					Random random = new Random();
+					int a = random.nextInt(6)+1;
+					diceThrown = a;
+					diceArea.setText("你骰到了" + a + "點");
+				}
 			}
 		});
 		frame.getContentPane().add(diceButton);
@@ -231,7 +232,7 @@ public class GuiDesign {
 	public String signUp() {
 		// 等待輸入，如果輸入有值才會繼續
 		while(this.userInput == null) {
-			try { Thread.sleep(1000); } catch (InterruptedException e) {}
+			try { Thread.sleep(500); } catch (InterruptedException e) {}
 		}
 		String name = this.userInput;
 		outputArea.append(Color.blue,name + "\n");

@@ -34,6 +34,7 @@ public class Game {
 		roles   = new Role[4];
 		String name = "";
 
+		title();
 		System.out.println("___  ___                              _              _   _ _____ _   ___   _ ");
 		System.out.println("|  \\/  |                             | |            | \\ | /  __ \\ | / / | | |");
 		System.out.println("| .  . | ___  _ __   ___  _ __   ___ | |_   _ ______|  \\| | /  \\/ |/ /| | | |");
@@ -43,8 +44,9 @@ public class Game {
 		System.out.println("                         | |             __/ |                               ");
 		System.out.println("                         |_|            |___/                                ");
 		System.out.println("                                                       ~~~~~~~~~ [\033[0;91m電\033[1;93m機\033[0;92m漢\033[0;96m化\033[0;94m組\033[0m]");
-		System.out.print("（按 Enter 開始）");
-		try { System.in.read(); } catch (Exception e) {}
+		//System.out.print("（按 Enter 開始）");
+		try { Thread.sleep(1000); } catch (InterruptedException e) {}
+		//try { System.in.read(); } catch (Exception e) {}
 
 		boss.push(new Boss("\033[1;31m<系上同學>\033[0m", 6, 1, 100, 6));
 		boss.push(new Boss("\033[1;31m<阿國>\033[0m",    5, 3, 50, 5));
@@ -86,13 +88,15 @@ public class Game {
 				gui.outputArea.append(Color.black, "   ! 姓名需由大寫開頭。\n");
 				System.out.print("   ! 請重新輸入：");
 				gui.outputArea.append(Color.black, "   ! 請重新輸入：");
-				name = input.next();
+				// name = input.next();
+				name = gui.signUp();
 			} else if (name.length() > 8) {
 				System.out.println("   ! 姓名需在 8 個字元以內。");
 				gui.outputArea.append(Color.black, "   ! 姓名需在 8 個字元以內。\n");
 				System.out.print("   ! 請重新輸入：");
 				gui.outputArea.append(Color.black, "   ! 請重新輸入：");
-				name = input.next();
+				// name = input.next();
+				name = gui.signUp();
 			}
 		}
 
@@ -103,7 +107,6 @@ public class Game {
 	 * @brief Run the game, containing all flow.
 	 */
 	public void run() {
-		int dice = 0;
 		loop:	while (true) {
 
 			for (int i = 0; i < 4; i++)
@@ -112,25 +115,42 @@ public class Game {
 				int postPosition = 0;
 
 				prePosition = roles[i].getPosition();
-				dice = 1 + random.nextInt(6);
-
-				System.out.print(" . " + roles[i].getName() + " 的回合（按 Enter 繼續）：");
-				gui.outputArea.append(Color.BLACK, " . " + roles[i].getName() + " 的回合（按 Enter 繼續）：\n");
-				try { System.in.read(); } catch (Exception e) {}
-				try { System.in.read(); } catch (Exception e) {}
-				System.out.println("   . 擲出了 " + dice + "。");
-				gui.outputArea.append(Color.BLACK, "   . 擲出了 " + dice + "。\n");
-				System.out.println("   $ 玩家 " + roles[i].getName()
-						+ " 目前位於" + map.walk(roles, dice, i).getName()
-						+ "，身上有 " + roles[i].getMoney() + " 枚金幣。");
+				
+				
+				//System.out.print(" . " + roles[i].getName() + " 的回合（按 Enter 繼續）：");
+				//gui.outputArea.append(Color.BLACK, " . " + roles[i].getName() + " 的回合（按 Enter 繼續）：\n");
+				//try { System.in.read(); } catch (Exception e) {}
+				//try { System.in.read(); } catch (Exception e) {}
+				gui.dice = true;
+				gui.outputArea.append(Color.BLACK, "請按下Throw Dice\n");
+				// 等待按按鈕，如果輸入有值才會繼續
+				while(this.gui.diceThrown == 0) {
+					try { Thread.sleep(1000); } catch (InterruptedException e) {}
+				}
+				System.out.println("   . 擲出了 " + gui.diceThrown + "。");
+				gui.outputArea.append(Color.BLACK, "   . 擲出了 " + gui.diceThrown + "。\n");
+				//System.out.println("   $ 玩家 " + roles[i].getName()
+				//		+ " 目前位於" + map.walk(roles, gui.diceThrown, i).getName()
+				//		+ "，身上有 " + roles[i].getMoney() + " 枚金幣。");
 				gui.outputArea.append(Color.BLACK, "   $ 玩家 " + roles[i].getName()
-						+ " 目前位於" + map.walk(roles, dice, i).getName()
+						+ " 目前位於" + map.walk(roles, gui.diceThrown, i).getName()
 						+ "，身上有 " + roles[i].getMoney() + " 枚金幣。\n");
-				System.out.print(" . " + roles[i].getName() + " 使用能力骰子（按 Enter 繼續）：");
-				gui.outputArea.append(Color.BLACK, " . " + roles[i].getName() + " 使用能力骰子（按 Enter 繼續）：\n");
-				try { System.in.read(); } catch (Exception e) {}
-				input.nextLine();
-				map.useAbility(roles, i, 1 + random.nextInt(6));
+				gui.diceThrown = 0;
+				gui.dice = false;
+				
+				//System.out.print(" . " + roles[i].getName() + " 使用能力骰子（按 Enter 繼續）：");
+				//gui.outputArea.append(Color.BLACK, " . " + roles[i].getName() + " 使用能力骰子（按 Enter 繼續）：\n");
+				//try { System.in.read(); } catch (Exception e) {}
+				//input.nextLine();
+				gui.dice = true;
+				gui.outputArea.append(Color.BLACK, "請按下Throw Dice\n");
+				// 等待按按鈕，如果輸入有值才會繼續
+				while(this.gui.diceThrown == 0) {
+					try { Thread.sleep(1000); } catch (InterruptedException e) {}
+				}
+				map.useAbility(roles, i, gui.diceThrown);
+				gui.diceThrown = 0;
+				gui.dice = false;
 
 				postPosition = roles[i].getPosition();
 
@@ -167,6 +187,8 @@ public class Game {
 		System.out.println("                                           $$ |                    /  \\__$$ |                                                ");
 		System.out.println("                                           $$ |                    $$    $$/                                                 ");
 		System.out.println("                                           $$/                      $$$$$$/                                                  ");
+
+
 
 		// 將所有人的分數分別加總
 		for (int i = 0; i < 4; i++) {
@@ -239,9 +261,10 @@ public class Game {
 		gui.outputArea.append(Color.BLACK, " . 有玩家經過原點，出現 boss。\n");
 		System.out.println(" =================================================================");
 		gui.outputArea.append(Color.BLACK, " =================================================================\n");
-		System.out.print(" ! BOSS 討伐戰：" + roles[curRole].getName() + " 遇到了生物 No." + boss.peek().getOrder() + "：小 " + boss.peek().getName() + "。（請按 Enter 繼續）");
-		gui.outputArea.append(Color.BLACK, " ! BOSS 討伐戰：" + roles[curRole].getName() + " 遇到了生物 No." + boss.peek().getOrder() + "：小 " + boss.peek().getName() + "。（請按 Enter 繼續）\n");
-		try { System.in.read(); } catch (Exception e) {}
+		//System.out.print(" ! BOSS 討伐戰：" + roles[curRole].getName() + " 遇到了生物 No." + boss.peek().getOrder() + "：小 " + boss.peek().getName() + "。（請按 Enter 繼續）");
+		gui.outputArea.append(Color.BLACK, " ! BOSS 討伐戰：" + roles[curRole].getName() + " 遇到了生物 No." + boss.peek().getOrder() + "：小 " + boss.peek().getName() + "\n");
+		try { Thread.sleep(1000); } catch (InterruptedException e) {}
+		//try { System.in.read(); } catch (Exception e) {}
 
 		// 最後一隻王，特別規則，會計算大家付的錢，送給打死最後一隻王的人
 		int lastBonus = 0;
@@ -272,9 +295,10 @@ public class Game {
 				if (input.nextInt() == 0) {
 					skip[curRole] = true;
 				} else {
-					System.out.print("   * " + roles[curRole].getName() +  " 挑戰餵食！（按 Enter 繼續）");
-					gui.outputArea.append(Color.BLACK, "   * " + roles[curRole].getName() +  " 挑戰餵食！（按 Enter 繼續）\n");
-					try { System.in.read(); } catch (Exception e) {}
+					//System.out.print("   * " + roles[curRole].getName() +  " 挑戰餵食！（按 Enter 繼續）");
+					gui.outputArea.append(Color.BLACK, "   * " + roles[curRole].getName() +  " 挑戰餵食！\n");
+					try { Thread.sleep(1000); } catch (InterruptedException e) {}
+					//try { System.in.read(); } catch (Exception e) {}
 					roles[curRole].setMoney(remainMoney);
 					System.out.print("   * " + roles[curRole].getName() + " 花了錢買桃太郎糰子，剩 " + roles[curRole].getMoney() + " 元，");
 					gui.outputArea.append(Color.BLACK, "   * " + roles[curRole].getName() + " 花了錢買桃太郎糰子，剩 " + roles[curRole].getMoney() + " 元，\n");
@@ -348,5 +372,37 @@ public class Game {
 		for (int i = 0; i < 4; i++)
 			if (!skip[i]) return false;
 		return true;
+	}
+
+	private void title() {  
+		gui.outputArea.append(Color.black, "___  ___                              _       ");
+		gui.outputArea.append(Color.black, " _   _ _____ _   ___   _ \n");
+		gui.outputArea.append(Color.black, "|  \\/  |                             | |      ");
+		gui.outputArea.append(Color.black, "| \\ | /  __ \\ | / / | | |\n");
+		gui.outputArea.append(Color.black, "| .  . | ___  _ __   ___  _ __   ___ | |_   _ ");
+		gui.outputArea.append(Color.black, "|  \\| | /  \\/ |/ /| | | |\n");
+		gui.outputArea.append(Color.black, "| |\\/| |/ _ \\| '_ \\ / _ \\| '_ \\ / _ \\| | | | |");
+		gui.outputArea.append(Color.black, "| . ` | |   |    \\| | | |\n");
+		gui.outputArea.append(Color.black, "| |  | | (_) | | | | (_) | |_) | (_) | | |_| |");
+		gui.outputArea.append(Color.black, "| |\\  | \\__/\\ |\\  \\ |_| |\n");
+		gui.outputArea.append(Color.black, "\\_|  |_/\\___/|_| |_|\\___/| .__/ \\___/|_|\\__, |");
+		gui.outputArea.append(Color.black, "\\_| \\_/\\____|_| \\_/\\___/ \n");
+		gui.outputArea.append(Color.black, "                         | |             __/ |\n");
+		gui.outputArea.append(Color.black, "                         |_|            |___/ \n");
+		// gui.outputArea.append(Color.black, " _   _ _____ _   ___   _ \n");
+		// gui.outputArea.append(Color.black, "| \\ | /  __ \\ | / / | | |\n");
+		// gui.outputArea.append(Color.black, "|  \\| | /  \\/ |/ /| | | |\n");
+		// gui.outputArea.append(Color.black, "| . ` | |   |    \\| | | |\n");
+		// gui.outputArea.append(Color.black, "| |\\  | \\__/\\ |\\  \\ |_| |\n");
+		// gui.outputArea.append(Color.black, "\\_| \\_/\\____|_| \\_/\\___/ \n");
+		gui.outputArea.append(Color.black, "                                                    ~~~~~~~~ [");
+		gui.outputArea.append(Color.RED, "電");
+		gui.outputArea.append(Color.ORANGE, "機");
+		gui.outputArea.append(Color.GREEN, "漢");
+		gui.outputArea.append(Color.CYAN, "化");
+		gui.outputArea.append(Color.BLUE, "組");
+		gui.outputArea.append(Color.black, "]");
+		
+
 	}
 }
