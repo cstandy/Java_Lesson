@@ -125,7 +125,9 @@ public class Game {
 				//try { System.in.read(); } catch (Exception e) {}
 				//try { System.in.read(); } catch (Exception e) {}
 				gui.dice = true;
-				gui.outputArea.append(Color.BLACK, " . 玩家 " + roles[i].getName() + " 請按下 Throw Dice 走路\n");
+				gui.outputArea.append(Color.BLACK, " . 玩家 ");
+				gui.outputArea.append(Color.ORANGE, roles[i].getName());
+				gui.outputArea.append(Color.BLACK, " 請按下 Throw Dice 走路\n");
 				// 等待按按鈕，如果輸入有值才會繼續
 				while(this.gui.diceThrown == 0) {
 					try { Thread.sleep(1000); } catch (InterruptedException e) {}
@@ -146,7 +148,9 @@ public class Game {
 				//try { System.in.read(); } catch (Exception e) {}
 				//input.nextLine();
 				gui.dice = true;
-				gui.outputArea.append(Color.BLACK, " . 玩家 " + roles[i].getName() + " 請按下 Throw Dice 來發動能力\n");
+				gui.outputArea.append(Color.BLACK, " . 玩家 ");
+				gui.outputArea.append(Color.ORANGE, roles[i].getName());
+				gui.outputArea.append(Color.BLACK, " 請按下 Throw Dice 來發動能力\n");
 				// 等待按按鈕，如果輸入有值才會繼續
 				while(this.gui.diceThrown == 0) {
 					try { Thread.sleep(1000); } catch (InterruptedException e) {}
@@ -311,7 +315,9 @@ public class Game {
 
 					// 隨機產生 1-6 的數字
 					gui.dice = true;
-					gui.outputArea.append(Color.BLACK, " . 玩家 " + roles[curRole].getName() + " 請按下 Throw Dice 來餵食\n");
+					gui.outputArea.append(Color.BLACK, " . 玩家 ");
+					gui.outputArea.append(Color.ORANGE, roles[curRole].getName());
+					gui.outputArea.append(Color.BLACK, " 請按下 Throw Dice 來餵食\n");
 					// 等待按按鈕，如果輸入有值才會繼續
 					while(this.gui.diceThrown == 0) {
 						try { Thread.sleep(1000); } catch (InterruptedException e) {}
