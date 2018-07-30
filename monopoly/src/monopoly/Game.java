@@ -13,7 +13,7 @@ public class Game {
 	private Stack<Boss> boss; // stack storing 6 boss
 	private Role[] roles;     // list of 4 roles
 	Random random = new Random(); //use for dice to random 1~6
-	Scanner input = new Scanner(System.in);
+	//Scanner input = new Scanner(System.in);
 	GuiDesign gui;
 
 
@@ -67,6 +67,9 @@ public class Game {
 		name = gameSignUp("<盜賊>");
 		roles[3] = new Role(name,   "<盜賊>", gui);
 		System.out.println("");
+		
+		gui.refreshRole(roles);
+		gui.refreshBoss(boss.peek(), false);
 	}
 
 	/**
@@ -292,7 +295,8 @@ public class Game {
 				gui.outputArea.append(Color.BLACK, "   ? " + roles[curRole].getName() + " 要嘗試餵食（隨機餵食桃太郎糰子）？ \033[0;32m是(1)/否(0)\033[0m：\n");
 
 				// 如果不挑戰，就標示起來
-				if (input.nextInt() == 0) {
+				//if (input.nextInt() == 0) {
+				if(gui.getDecision() == 0) {
 					skip[curRole] = true;
 				} else {
 					//System.out.print("   * " + roles[curRole].getName() +  " 挑戰餵食！（按 Enter 繼續）");

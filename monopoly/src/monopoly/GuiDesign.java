@@ -241,7 +241,7 @@ public class GuiDesign {
 	}
 
 	public int getDecision() {
-		outputArea.append(Color.blue,"輸入數字：");
+		//outputArea.append(Color.blue,"輸入數字：");
 		// 等待輸入，如果輸入有值才會繼續
 		while(this.userInput == null) {
 			try { Thread.sleep(1000); } catch (InterruptedException e) {}
@@ -288,7 +288,7 @@ public class GuiDesign {
 	public void refreshRole(Role[] roleIn) {
 		for(int a=0; a<4; a++) {
 			switch (roleIn[a].getCareer()) {
-			case "\033[1;93m<劍士>\033[0m":
+			case "<劍士>":
 				roleArea[a].setText("名字：" + roleIn[a].getName() + "       " 
 						+ "職業：" + roleIn[a].getCareer() + "\n" 
 						+ "超級星星：\n  向每個人收 2 枚金幣\n"
@@ -296,7 +296,7 @@ public class GuiDesign {
 						+ "金錢： " + roleIn[a].getMoney() + "\n"
 						+ "分數累積： " + roleIn[a].getPoint() + "分");
 				break;
-			case "\033[1;93m<法師>\033[0m":
+			case "<法師>":
 				roleArea[a].setText("名字：" + roleIn[a].getName() + "       " 
 						+ "職業：" + roleIn[a].getCareer() + "\n" 
 						+ "超級星星：\n  收集全部地上所有的錢\n"
@@ -304,7 +304,7 @@ public class GuiDesign {
 						+ "金錢： " + roleIn[a].getMoney() + "\n"
 						+ "分數累積： " + roleIn[a].getPoint() + "分");
 				break;
-			case "\033[1;93m<弓手>\033[0m":
+			case "<弓手>":
 				roleArea[a].setText("名字：" + roleIn[a].getName() + "       " 
 						+ "職業：" + roleIn[a].getCareer() + "\n" 
 						+ "超級星星：\n  向銀行收所擁有的地租\n"
@@ -312,7 +312,7 @@ public class GuiDesign {
 						+ "金錢： " + roleIn[a].getMoney() + "\n"
 						+ "分數累積： " + roleIn[a].getPoint() + "分");
 				break;
-			case "\033[1;93m<盜賊>\033[0m":
+			case "<盜賊>":
 				roleArea[a].setText("名字：" + roleIn[a].getName() + "       " 
 						+ "職業：" + roleIn[a].getCareer() + "\n" 
 						+ "超級星星：\n  再次丟骰子並獲得該值 +5 枚金幣\n"

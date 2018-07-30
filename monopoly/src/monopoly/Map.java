@@ -51,6 +51,7 @@ public class Map {
 		blockList[30] = new Block("[超級星星]",               false, false, 0, 0);
 		blockList[31] = new Block("[世界彼端伊都]",         	false, true,  5, 8);
 
+		gui.refreshBlock(blockList);
 	}
 
 	/**
@@ -259,10 +260,11 @@ public class Map {
 						+ " 枚金幣，要買嗎？\n");
 				gui.outputArea.append(Color.BLACK, "     ? ");
 				gui.outputArea.append(Color.GREEN, "是(1)/否(0)");
-				gui.outputArea.append(Color.BLACK, "：\n");
+				gui.outputArea.append(Color.BLACK, "：");
 				
 				// 買
-				if(mapInput.nextInt() == 1) {
+				// if(mapInput.nextInt() == 1) {
+				if(gui.getDecision() == 1) {
 					roleList[nowRole].setMoney(roleList[nowRole].getMoney() - blockList[roleList[nowRole].getPosition()].getPrice()); // 付錢
 					blockList[roleList[nowRole].getPosition()].setOwner(roleList[nowRole].getName()); // 得到土地（owner
 					roleList[nowRole].setBlockNumber(true); // 增加土地數量 + 1
@@ -381,9 +383,10 @@ public class Map {
 		}
 		
 		System.out.print("   ? 請問你要賣哪塊？");
-		gui.outputArea.append(Color.BLACK, "   ? 請問你要賣哪塊？\n");
+		gui.outputArea.append(Color.BLACK, "   ? 請問你要賣哪塊？");
 		
-		int whichSold = mapInput.nextInt() - 1;
+		// int whichSold = mapInput.nextInt() - 1;
+		int whichSold = gui.getDecision() - 1;
 		int sellMoney = blockBelong[whichSold].getPrice();
 		
 		poorGuy.addMoney(sellMoney); // 拿錢
@@ -486,9 +489,10 @@ public class Map {
 		System.out.print("       ? \033[0;32m選擇一位\033[0m： ");
 		gui.outputArea.append(Color.BLACK, "       ? ");
 		gui.outputArea.append(Color.GREEN, "選擇一位");
-		gui.outputArea.append(Color.BLACK, "：\n");
+		gui.outputArea.append(Color.BLACK, "：");
 		
-		int goal = (mapInput.nextInt() + curRole) % 4;
+		// int goal = (mapInput.nextInt() + curRole) % 4;
+		int goal = (gui.getDecision() + curRole) % 4;
 
 		int moneyReceived = giveMoney(roles[goal], roles[curRole], (roles[curRole].getCareer().equals("\033[1;93m<盜賊>\033[0m")) ? 3 : 2);
 		
@@ -675,9 +679,10 @@ public class Map {
 			System.out.print("       ? \033[0;32m選擇一位\033[0m：");
 			gui.outputArea.append(Color.BLACK, "       ? ");
 			gui.outputArea.append(Color.GREEN, "選擇一位");
-			gui.outputArea.append(Color.BLACK, "：\n");
+			gui.outputArea.append(Color.BLACK, "：");
 			
-			forwardPosition = place[mapInput.nextInt() - 1];
+			// forwardPosition = place[mapInput.nextInt() - 1];
+			forwardPosition = place[gui.getDecision() - 1];
 		}
 		
 		return forwardPosition;
@@ -721,9 +726,10 @@ public class Map {
 			System.out.print("       ? \033[0;32m選擇一位\033[0m：");
 			gui.outputArea.append(Color.BLACK, "       ? ");
 			gui.outputArea.append(Color.GREEN, "選擇一位");
-			gui.outputArea.append(Color.BLACK, "：\n");
+			gui.outputArea.append(Color.BLACK, "：");
 			
-			backwardPosition = place[mapInput.nextInt() - 1];
+			// backwardPosition = place[mapInput.nextInt() - 1];
+			backwardPosition = place[gui.getDecision() - 1];
 		}
 		
 		return backwardPosition;
