@@ -272,6 +272,7 @@ public class Game {
 		gui.outputArea.append(Color.BLACK, " =================================================================\n");
 		//System.out.print(" ! BOSS 討伐戰：" + roles[curRole].getName() + " 遇到了生物 No." + boss.peek().getOrder() + "：小 " + boss.peek().getName() + "。（請按 Enter 繼續）");
 		gui.outputArea.append(Color.BLACK, " ! BOSS 討伐戰：" + roles[curRole].getName() + " 遇到了生物 No." + boss.peek().getOrder() + "：小 " + boss.peek().getName() + "\n");
+		gui.refreshBoss(boss.peek(), true);
 		try { Thread.sleep(1000); } catch (InterruptedException e) {}
 		//try { System.in.read(); } catch (Exception e) {}
 
@@ -342,6 +343,7 @@ public class Game {
 
 						// 移除那個 boss
 						boss.pop();
+						gui.refreshBoss(boss.peek(), false);
 
 						// 最後一隻Boss，可以額外獲得金幣
 						if(boss.isEmpty()) {
