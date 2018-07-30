@@ -362,6 +362,7 @@ public class Game {
 					} else {
 						System.out.println(" ! "+ boss.peek().getName() + " 只吃 " + dice + " 個桃太郎糰子不會被騙回家，而要 " + boss.peek().getRequirement() + " 個才夠。");
 						gui.outputArea.append(Color.BLACK, " ! "+ boss.peek().getName() + " 只吃 " + dice + " 個桃太郎糰子不會被騙回家，而要 " + boss.peek().getRequirement() + " 個才夠。\n");
+						try { Thread.sleep(2000); } catch (InterruptedException e) {}
 					}
 				}
 			}
@@ -397,17 +398,17 @@ public class Game {
 
 	private void title() {  
 		gui.outputArea.append(Color.black, "___  ___                              _       ");
-		gui.outputArea.append(Color.black, " _   _ _____ _   ___   _ \n");
+		gui.outputArea.append(new Color(205,38,38), " _   _ _____ _   ___   _ \n");
 		gui.outputArea.append(Color.black, "|  \\/  |                             | |      ");
-		gui.outputArea.append(Color.black, "| \\ | /  __ \\ | / / | | |\n");
+		gui.outputArea.append(new Color(205,38,38), "| \\ | /  __ \\ | / / | | |\n");
 		gui.outputArea.append(Color.black, "| .  . | ___  _ __   ___  _ __   ___ | |_   _ ");
-		gui.outputArea.append(Color.black, "|  \\| | /  \\/ |/ /| | | |\n");
+		gui.outputArea.append(new Color(205,38,38), "|  \\| | /  \\/ |/ /| | | |\n");
 		gui.outputArea.append(Color.black, "| |\\/| |/ _ \\| '_ \\ / _ \\| '_ \\ / _ \\| | | | |");
-		gui.outputArea.append(Color.black, "| . ` | |   |    \\| | | |\n");
+		gui.outputArea.append(new Color(205,38,38), "| . ` | |   |    \\| | | |\n");
 		gui.outputArea.append(Color.black, "| |  | | (_) | | | | (_) | |_) | (_) | | |_| |");
-		gui.outputArea.append(Color.black, "| |\\  | \\__/\\ |\\  \\ |_| |\n");
+		gui.outputArea.append(new Color(205,38,38), "| |\\  | \\__/\\ |\\  \\ |_| |\n");
 		gui.outputArea.append(Color.black, "\\_|  |_/\\___/|_| |_|\\___/| .__/ \\___/|_|\\__, |");
-		gui.outputArea.append(Color.black, "\\_| \\_/\\____|_| \\_/\\___/ \n");
+		gui.outputArea.append(new Color(205,38,38), "\\_| \\_/\\____|_| \\_/\\___/ \n");
 		gui.outputArea.append(Color.black, "                         | |             __/ |\n");
 		gui.outputArea.append(Color.black, "                         |_|            |___/ \n");
 		// gui.outputArea.append(Color.black, " _   _ _____ _   ___   _ \n");
