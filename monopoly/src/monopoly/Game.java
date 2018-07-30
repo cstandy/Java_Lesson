@@ -140,6 +140,7 @@ public class Game {
 				gui.outputArea.append(Color.BLACK, "   $ 玩家 " + roles[i].getName()
 						+ " 目前位於" + map.walk(roles, gui.diceThrown, i).getName()
 						+ "，身上有 " + roles[i].getMoney() + " 枚金幣。\n");
+				gui.refreshRole(roles);
 				gui.diceThrown = 0;
 				gui.dice = false;
 				
@@ -156,6 +157,7 @@ public class Game {
 					try { Thread.sleep(1000); } catch (InterruptedException e) {}
 				}
 				map.useAbility(roles, i, gui.diceThrown);
+				gui.refreshRole(roles);
 				gui.diceThrown = 0;
 				gui.dice = false;
 
