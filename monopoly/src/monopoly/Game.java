@@ -58,14 +58,14 @@ public class Game {
 
 
 		System.out.println("");
-		name = gameSignUp("\033[1;93m<劍士>\033[0m");
-		roles[0] = new Role("\033[0;33m" + name + "\033[0m", "\033[1;93m<劍士>\033[0m", gui);
-		name = gameSignUp("\033[1;93m<法師>\033[0m");
-		roles[1] = new Role("\033[0;33m" + name + "\033[0m",  "\033[1;93m<法師>\033[0m", gui);
-		name = gameSignUp("\033[1;93m<弓手>\033[0m");
-		roles[2] = new Role("\033[0;33m" + name + "\033[0m",  "\033[1;93m<弓手>\033[0m", gui);
-		name = gameSignUp("\033[1;93m<盜賊>\033[0m");
-		roles[3] = new Role("\033[0;33m" + name + "\033[0m",   "\033[1;93m<盜賊>\033[0m", gui);
+		name = gameSignUp("<劍士>");
+		roles[0] = new Role(name, "<劍士>", gui);
+		name = gameSignUp("<法師>");
+		roles[1] = new Role(name,  "<法師>", gui);
+		name = gameSignUp("<弓手>");
+		roles[2] = new Role(name,  "<弓手>", gui);
+		name = gameSignUp("<盜賊>");
+		roles[3] = new Role(name,   "<盜賊>", gui);
 		System.out.println("");
 	}
 
