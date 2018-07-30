@@ -84,6 +84,7 @@ public class Map {
 		// 一步一步走（要看撿錢）
 		for(int a=0; a < movement; a++) {
 			roleList[nowRole].moveOn(nowRole);
+			gui.refreshBlock(blockList);
 			// 撿錢
 			pickedMoney += blockList[roleList[nowRole].getPosition()].pickMoney();
 		}
@@ -92,6 +93,8 @@ public class Map {
 		gui.outputArea.append(Color.BLACK, "   $ 你獲得了沿路上的 " + pickedMoney + " 枚金幣。\n");
 		
 		roleList[nowRole].addMoney(pickedMoney);
+		gui.refreshRole(roleList);
+		gui.refreshBlock(blockList);
 		this.event(roleList, nowRole);
 		return blockList[roleList[nowRole].getPosition()];
 	}
@@ -104,11 +107,14 @@ public class Map {
 	private void event(Role[] roleList, int nowRole) {
 		if(blockList[roleList[nowRole].getPosition()].getNormal() == true) { // 如果是踩到一般地
 			normalEvent(roleList, nowRole);
+			gui.refreshRole(roleList);
+			gui.refreshBlock(blockList);
 		}else { // 特殊地再細分
 			if(blockList[roleList[nowRole].getPosition()].getName().equals("[傳送門]")) { // Tube 水管
 				int moneyPick = 0;
 				for(int a = 1; a <= 8; a++) { // 走8步撿錢
 					roleList[nowRole].moveOn(nowRole);
+					gui.refreshBlock(blockList);
 					moneyPick += blockList[roleList[nowRole].getPosition()].pickMoney();
 				}
 				
@@ -121,6 +127,8 @@ public class Map {
 				gui.outputArea.append(Color.ORANGE, roleList[nowRole].getName());
 				gui.outputArea.append(Color.BLACK, " 經過了傳送門，沿途撿走了 " + moneyPick
 						+ " 枚金幣，現在有 " + roleList[nowRole].getMoney() + " 枚金幣了。\n");
+				gui.refreshRole(roleList);
+				gui.refreshBlock(blockList);
 			}
 			else if(blockList[roleList[nowRole].getPosition()].getName().equals("[陷阱]")){ // Trap 陷阱石頭
 				int drop = dropMoney(roleList[nowRole], 2);
@@ -144,6 +152,8 @@ public class Map {
 				gui.outputArea.append(Color.BLACK, "上有 " + blockList[roleList[nowRole].getPosition()].getMoneyDropped() + " 枚金幣了，而 ");
 				gui.outputArea.append(Color.ORANGE, roleList[nowRole].getName());
 				gui.outputArea.append(Color.BLACK, " 剩 " + roleList[nowRole].getMoney() + " 枚金幣。\n");
+				gui.refreshRole(roleList);
+				gui.refreshBlock(blockList);
 			}
 			else if(blockList[roleList[nowRole].getPosition()].getName().equals("[提款機]")){ // Money 提款機
 				//int moneyBlock = 1 + random.nextInt(6); // 隨機 1 + 0~5 = 1~6
@@ -175,6 +185,8 @@ public class Map {
 				gui.outputArea.append(Color.BLACK, " 可以跟銀行領取 " + gui.diceThrown + " 枚金幣，真幸運！\n");
 				
 				roleList[nowRole].addMoney(gui.diceThrown);
+				gui.refreshRole(roleList);
+				gui.refreshBlock(blockList);
 				
 				gui.diceThrown = 0;
 				gui.dice = false;
@@ -188,6 +200,8 @@ public class Map {
 					for (int i = 0; i < 4; i++) {
 						if (i != nowRole) giveMoney(roleList[i], roleList[nowRole], 2);
 					}
+					gui.refreshRole(roleList);
+					gui.refreshBlock(blockList);
 					break;
 				case "<法師>":
 					System.out.println("   & " + roleList[nowRole].getCareer() + "的星星能力：收集全部地上所有的錢。");
@@ -207,6 +221,8 @@ public class Map {
 					gui.outputArea.append(Color.BLACK, "     $ 你獲得了沿路上的 " + pickedMoney + " 枚金幣。\n");
 
 					roleList[nowRole].addMoney(pickedMoney);
+					gui.refreshRole(roleList);
+					gui.refreshBlock(blockList);
 					break;
 				case "<弓手>":
 					System.out.println("   & " + roleList[nowRole].getCareer() + "的星星能力：向所有自己的地盤收租。");
@@ -228,6 +244,8 @@ public class Map {
 					gui.outputArea.append(Color.BLACK, "     $ 你向所有房地產收租，共有 " + rentMoney + " 枚金幣。\n");
 					
 					roleList[nowRole].addMoney(rentMoney);
+					gui.refreshRole(roleList);
+					gui.refreshBlock(blockList);
 					break;
 				case "<盜賊>":
 					System.out.print("   & " + roleList[nowRole].getCareer() + "的星星能力：再丟一次骰子並獲得該值 + 5 枚金幣。");
@@ -242,6 +260,8 @@ public class Map {
 						try { Thread.sleep(1000); } catch (InterruptedException e) {}
 					}
 					roleList[nowRole].addMoney(gui.diceThrown + 5);
+					gui.refreshRole(roleList);
+					gui.refreshBlock(blockList);
 					System.out.println("     $ 你擲出了 " + gui.diceThrown + "，可獲得 " + (gui.diceThrown + 5) + " 枚金幣。");
 					gui.outputArea.append(Color.BLACK, "     $ 你擲出了 " + gui.diceThrown + "，可獲得 " + (gui.diceThrown + 5) + " 枚金幣。\n");
 					gui.diceThrown = 0;
@@ -295,6 +315,8 @@ public class Map {
 					gui.outputArea.append(Color.BLACK, " 買到了");
 					gui.outputArea.append(new Color(210,105,30), blockList[roleList[nowRole].getPosition()].getName());
 					gui.outputArea.append(Color.BLACK, "。\n");
+					gui.refreshRole(roleList);
+					gui.refreshBlock(blockList);
 				}
 				// 不買
 				else {
@@ -328,6 +350,8 @@ public class Map {
 				if(blockList[roleList[nowRole].getPosition()].getOwner().equals(roleList[(nowRole + b) % 4].getName()))
 					giveMoney(roleList[nowRole], roleList[(nowRole+b)%4], this.blockList[roleList[nowRole].getPosition()].getPrice());
 			}
+			gui.refreshRole(roleList);
+			gui.refreshBlock(blockList);
 		}
 	}
 	
@@ -475,6 +499,8 @@ public class Map {
 		case 6:
 		default: useAbility_1(roles[curRole]); break;
 		}
+		gui.refreshRole(roles);
+		gui.refreshBlock(blockList);
 	}
 
 	/**
@@ -586,6 +612,8 @@ public class Map {
 		
 		int goal = findForwardRole(roles, curRole);
 		int drop = dropMoney(roles[goal], (roles[curRole].getCareer().equals("<弓手>")) ? 4 : 3);
+		gui.refreshRole(roles);
+		gui.refreshBlock(blockList);
 		
 		blockList[roles[goal].getPosition()].setMoneyDropped(blockList[roles[goal].getPosition()].getMoneyDropped() + drop);
 		
@@ -637,6 +665,8 @@ public class Map {
 		
 		int goal = findBackwardRole(roles, curRole);
 		int drop = dropMoney(roles[goal], (roles[curRole].getCareer().equals("<法師>")) ? 4 : 3);
+		gui.refreshRole(roles);
+		gui.refreshBlock(blockList);
 		
 		blockList[roles[goal].getPosition()].setMoneyDropped(blockList[roles[goal].getPosition()].getMoneyDropped() + drop);
 		
@@ -694,6 +724,8 @@ public class Map {
 		{
 			if(!roles[goal].getName().equals(roles[curRole].getName())) {
 				drop = dropMoney(roles[goal], (roles[curRole].getCareer().equals("<劍士>")) ? 2 : 1);
+				gui.refreshRole(roles);
+				gui.refreshBlock(blockList);
 				blockList[roles[goal].getPosition()].setMoneyDropped(blockList[roles[goal].getPosition()].getMoneyDropped() + drop);
 				
 				System.out.println("     ! " + roles[goal].getName() + " 被打落 " + drop + " 枚金幣在"
@@ -793,7 +825,6 @@ public class Map {
 					System.out.println("       ? 第 " + (roleRec + 1) + " 位：" + roles[i].getName());
 					gui.outputArea.append(Color.BLACK, "       ? 第 " + (roleRec + 1) + " 位：");
 					gui.outputArea.append(Color.ORANGE, roles[i].getName() + "\n");
-					
 					place[roleRec] = i;
 					roleRec++;
 				}

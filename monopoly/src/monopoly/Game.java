@@ -144,6 +144,7 @@ public class Game {
 				gui.outputArea.append(Color.BLACK, " 目前位於");
 				gui.outputArea.append(new Color(210,105,30), walkBlock.getName());
 				gui.outputArea.append(Color.BLACK, "，身上有 " + roles[i].getMoney() + " 枚金幣。\n");
+				gui.refreshRole(roles);
 				gui.diceThrown = 0;
 				gui.dice = false;
 				
@@ -160,6 +161,7 @@ public class Game {
 					try { Thread.sleep(1000); } catch (InterruptedException e) {}
 				}
 				map.useAbility(roles, i, gui.diceThrown);
+				gui.refreshRole(roles);
 				gui.diceThrown = 0;
 				gui.dice = false;
 
@@ -284,6 +286,7 @@ public class Game {
 		gui.outputArea.append(Color.ORANGE, roles[curRole].getName());
 		gui.outputArea.append(Color.BLACK, " 遇到了生物 No." + boss.peek().getOrder() + "：小 ");
 		gui.outputArea.append(Color.RED, boss.peek().getName() + "\n");
+		gui.refreshBoss(boss.peek(), true);
 		try { Thread.sleep(1000); } catch (InterruptedException e) {}
 		//try { System.in.read(); } catch (Exception e) {}
 
@@ -371,6 +374,7 @@ public class Game {
 
 						// 移除那個 boss
 						boss.pop();
+						gui.refreshBoss(boss.peek(), false);
 
 						// 最後一隻Boss，可以額外獲得金幣
 						if(boss.isEmpty()) {
@@ -393,6 +397,7 @@ public class Game {
 						gui.outputArea.append(Color.BLACK, " ! ");
 						gui.outputArea.append(Color.RED, boss.peek().getName());
 						gui.outputArea.append(Color.BLACK, " 只吃 " + dice + " 個桃太郎糰子不會被騙回家，而要 " + boss.peek().getRequirement() + " 個才夠。\n");
+						try { Thread.sleep(2000); } catch (InterruptedException e) {}
 					}
 				}
 			}
@@ -432,17 +437,17 @@ public class Game {
 
 	private void title() {  
 		gui.outputArea.append(Color.black, "___  ___                              _       ");
-		gui.outputArea.append(Color.black, " _   _ _____ _   ___   _ \n");
+		gui.outputArea.append(new Color(205,38,38), " _   _ _____ _   ___   _ \n");
 		gui.outputArea.append(Color.black, "|  \\/  |                             | |      ");
-		gui.outputArea.append(Color.black, "| \\ | /  __ \\ | / / | | |\n");
+		gui.outputArea.append(new Color(205,38,38), "| \\ | /  __ \\ | / / | | |\n");
 		gui.outputArea.append(Color.black, "| .  . | ___  _ __   ___  _ __   ___ | |_   _ ");
-		gui.outputArea.append(Color.black, "|  \\| | /  \\/ |/ /| | | |\n");
+		gui.outputArea.append(new Color(205,38,38), "|  \\| | /  \\/ |/ /| | | |\n");
 		gui.outputArea.append(Color.black, "| |\\/| |/ _ \\| '_ \\ / _ \\| '_ \\ / _ \\| | | | |");
-		gui.outputArea.append(Color.black, "| . ` | |   |    \\| | | |\n");
+		gui.outputArea.append(new Color(205,38,38), "| . ` | |   |    \\| | | |\n");
 		gui.outputArea.append(Color.black, "| |  | | (_) | | | | (_) | |_) | (_) | | |_| |");
-		gui.outputArea.append(Color.black, "| |\\  | \\__/\\ |\\  \\ |_| |\n");
+		gui.outputArea.append(new Color(205,38,38), "| |\\  | \\__/\\ |\\  \\ |_| |\n");
 		gui.outputArea.append(Color.black, "\\_|  |_/\\___/|_| |_|\\___/| .__/ \\___/|_|\\__, |");
-		gui.outputArea.append(Color.black, "\\_| \\_/\\____|_| \\_/\\___/ \n");
+		gui.outputArea.append(new Color(205,38,38), "\\_| \\_/\\____|_| \\_/\\___/ \n");
 		gui.outputArea.append(Color.black, "                         | |             __/ |\n");
 		gui.outputArea.append(Color.black, "                         |_|            |___/ \n");
 		// gui.outputArea.append(Color.black, " _   _ _____ _   ___   _ \n");
