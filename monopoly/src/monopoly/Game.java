@@ -29,7 +29,20 @@ public class Game {
 		map     = new Map();
 		boss    = new Stack<Boss>();
 		roles   = new Role[4];
+		String name = "";
 
+		System.out.println("___  ___                              _              _   _ _____ _   ___   _ ");
+		System.out.println("|  \\/  |                             | |            | \\ | /  __ \\ | / / | | |");
+		System.out.println("| .  . | ___  _ __   ___  _ __   ___ | |_   _ ______|  \\| | /  \\/ |/ /| | | |");
+		System.out.println("| |\\/| |/ _ \\| '_ \\ / _ \\| '_ \\ / _ \\| | | | |______| . ` | |   |    \\| | | |");
+		System.out.println("| |  | | (_) | | | | (_) | |_) | (_) | | |_| |      | |\\  | \\__/\\ |\\  \\ |_| |");
+		System.out.println("\\_|  |_/\\___/|_| |_|\\___/| .__/ \\___/|_|\\__, |      \\_| \\_/\\____|_| \\_/\\___/ ");
+		System.out.println("                         | |             __/ |                               ");
+		System.out.println("                         |_|            |___/                                ");
+		System.out.println("                                                       ~~~~~~~~~ [\033[0;91m電\033[1;93m機\033[0;92m漢\033[0;96m化\033[0;94m組\033[0m]");
+		System.out.print("（按 Enter 開始）");
+		try { System.in.read(); } catch (Exception e) {}
+		
 		boss.push(new Boss("\033[1;31m<系上同學>\033[0m", 6, 1, 100, 6));
 		boss.push(new Boss("\033[1;31m<阿國>\033[0m",    5, 3, 50, 5));
 		boss.push(new Boss("\033[1;31m<雲平狗>\033[0m",   4, 2, 40, 4));
@@ -40,10 +53,40 @@ public class Game {
 
 		GuiDesign gui = new GuiDesign();
 
-		roles[0] = new Role("\033[0;33mVicky\033[0m", "\033[1;93m<劍士>\033[0m");
-		roles[1] = new Role("\033[0;33mAndy\033[0m",  "\033[1;93m<法師>\033[0m");
-		roles[2] = new Role("\033[0;33mLucy\033[0m",  "\033[1;93m<弓手>\033[0m");
-		roles[3] = new Role("\033[0;33mAlan\033[0m",   "\033[1;93m<盜賊>\033[0m");
+		System.out.println("");
+		name = gameSignUp("\033[1;93m<劍士>\033[0m");
+		roles[0] = new Role("\033[0;33m" + name + "\033[0m", "\033[1;93m<劍士>\033[0m");
+		name = gameSignUp("\033[1;93m<法師>\033[0m");
+		roles[1] = new Role("\033[0;33m" + name + "\033[0m",  "\033[1;93m<法師>\033[0m");
+		name = gameSignUp("\033[1;93m<弓手>\033[0m");
+		roles[2] = new Role("\033[0;33m" + name + "\033[0m",  "\033[1;93m<弓手>\033[0m");
+		name = gameSignUp("\033[1;93m<盜賊>\033[0m");
+		roles[3] = new Role("\033[0;33m" + name + "\033[0m",   "\033[1;93m<盜賊>\033[0m");
+		System.out.println("");
+	}
+	
+	/**
+	 * @brief Sign up requirement for roles
+	 */
+	private String gameSignUp(String career) {
+		String name = "";
+		
+		System.out.print(" . 請輸入職業為" + career + "的玩家姓名（英文）：");
+		name = input.next();
+		
+		while (!name.matches("[A-Z][a-zA-Z0-9]*") || name.length() > 8) {
+			if (!name.matches("[A-Z][a-zA-Z0-9]*")) {
+				System.out.println("   ! 姓名需由大寫開頭。");
+				System.out.print("   ! 請重新輸入：");
+				name = input.next();
+			} else if (name.length() > 8) {
+				System.out.println("   ! 姓名需在 8 個字元以內。");
+				System.out.print("   ! 請重新輸入：");
+				name = input.next();
+			}
+		}
+		
+		return name;
 	}
 
 	/**
@@ -51,19 +94,6 @@ public class Game {
 	  */
 	public void run() {
 		int dice = 0;
-		
-		System.out.println("___  ___                              _              _   _ _____ _   ___   _ ");
-		System.out.println("|  \\/  |                             | |            | \\ | /  __ \\ | / / | | |");
-		System.out.println("| .  . | ___  _ __   ___  _ __   ___ | |_   _ ______|  \\| | /  \\/ |/ /| | | |");
-		System.out.println("| |\\/| |/ _ \\| '_ \\ / _ \\| '_ \\ / _ \\| | | | |______| . ` | |   |    \\| | | |");
-		System.out.println("| |  | | (_) | | | | (_) | |_) | (_) | | |_| |      | |\\  | \\__/\\ |\\  \\ |_| |");
-		System.out.println("\\_|  |_/\\___/|_| |_|\\___/| .__/ \\___/|_|\\__, |      \\_| \\_/\\____|_| \\_/\\___/ ");
-		System.out.println("                         | |             __/ |                               ");
-		System.out.println("                         |_|            |___/                                ");
-		System.out.println("                                                       ~~~~~~~~~ [\033[0;91m電\033[1;93m機\033[0;92m漢\033[0;96m化\033[0;94m組\033[0m]");
-		System.out.print("（按 Enter 繼續）");
-		try { System.in.read(); } catch (Exception e) {}
-		
 loop:	while (true) {
 	
 			for (int i = 0; i < 4; i++)
