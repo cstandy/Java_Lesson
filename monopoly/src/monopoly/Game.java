@@ -14,6 +14,7 @@ public class Game {
 	private Role[] roles;     // list of 4 roles
 	Random random = new Random(); //use for dice to random 1~6
 	Scanner input = new Scanner(System.in);
+	GuiDesign gui;
 	
 	
 	public static void main(String[] args) {
@@ -27,8 +28,8 @@ public class Game {
 	  */
 	public Game() {
 
-		GuiDesign gui = new GuiDesign();
-		map     = new Map();
+		gui= new GuiDesign();
+		map     = new Map(gui);
 		boss    = new Stack<Boss>();
 		roles   = new Role[4];
 		String name = "";
@@ -73,15 +74,22 @@ public class Game {
 		String name = "";
 		
 		System.out.print(" . 請輸入職業為" + career + "的玩家姓名（英文）：");
-		name = input.next();
+		gui.outputArea.append(Color.black," . 請輸入職業為");
+		gui.outputArea.append(Color.blue, career);
+		gui.outputArea.append(Color.black, "的玩家姓名（英文）：");
+		// name = input.next();
+		name = gui.signUp();
 		
 		while (!name.matches("[A-Z][a-zA-Z0-9]*") || name.length() > 8) {
 			if (!name.matches("[A-Z][a-zA-Z0-9]*")) {
-				System.out.println("   ! 姓名需由大寫開頭。");
-				System.out.print("   ! 請重新輸入：");
+				// System.out.println("   ! 姓名需由大寫開頭。");
+				gui.outputArea.append(Color.black, "   ! 姓名需由大寫開頭。");
+				// System.out.print("   ! 請重新輸入：");
+				gui.outputArea.append(Color.black, "   ! 請重新輸入：");
 				name = input.next();
 			} else if (name.length() > 8) {
 				System.out.println("   ! 姓名需在 8 個字元以內。");
+				gui.outputArea.append(Color.black, "   ! 姓名需在 8 個字元以內。");
 				System.out.print("   ! 請重新輸入：");
 				name = input.next();
 			}

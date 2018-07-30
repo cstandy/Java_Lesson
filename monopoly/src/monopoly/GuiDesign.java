@@ -229,11 +229,9 @@ public class GuiDesign {
 	}
 
 	public String signUp() {
-		outputArea.append(Color.blue,"輸入名字：");
+		// 等待輸入，如果輸入有值才會繼續
 		while(this.userInput == null) {
-			for(int a=0; a<99999; a++) {
-				System.out.println("還在等待中．．．");
-			}
+			try { Thread.sleep(1000); } catch (InterruptedException e) {}
 		}
 		String name = this.userInput;
 		outputArea.append(Color.blue,name + "\n");
@@ -243,8 +241,9 @@ public class GuiDesign {
 
 	public int getDecision() {
 		outputArea.append(Color.blue,"輸入數字：");
+		// 等待輸入，如果輸入有值才會繼續
 		while(this.userInput == null) {
-			System.out.println("還在等待中．．．");
+			try { Thread.sleep(1000); } catch (InterruptedException e) {}
 		}
 		int integerInput = 0;
 		integerInput = Integer.parseInt(userInput);

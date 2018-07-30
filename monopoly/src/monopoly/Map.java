@@ -8,13 +8,15 @@ public class Map {
 	Block[] blockList = new Block[32];
 	Scanner mapInput = new Scanner(System.in);
 	Random random = new Random(); // use for dice to random 1~6
+	GuiDesign gui;
 
 	/* methods */
 
 	/**
 	 * @brief The Constructor of the class.
 	 */
-	public Map() {
+	public Map(GuiDesign gui) {
+		this.gui = gui;
 		blockList[0]  = new Block("\033[1;96m[世界起源]\033[0m",           	true,  false, 0, 0);
 		blockList[1]  = new Block("\033[0;94m[遊俠地下道]\033[0m",	false, true,  1, 1);
 		blockList[2]  = new Block("\033[1;96m[傳送門]\033[0m",            	false, false, 0, 0);
