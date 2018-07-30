@@ -122,7 +122,7 @@ public class Game {
 				//try { System.in.read(); } catch (Exception e) {}
 				//try { System.in.read(); } catch (Exception e) {}
 				gui.dice = true;
-				gui.outputArea.append(Color.BLACK, "請按下Throw Dice\n");
+				gui.outputArea.append(Color.BLACK, " . 請按下Throw Dice\n");
 				// 等待按按鈕，如果輸入有值才會繼續
 				while(this.gui.diceThrown == 0) {
 					try { Thread.sleep(1000); } catch (InterruptedException e) {}
@@ -143,7 +143,7 @@ public class Game {
 				//try { System.in.read(); } catch (Exception e) {}
 				//input.nextLine();
 				gui.dice = true;
-				gui.outputArea.append(Color.BLACK, "請按下Throw Dice\n");
+				gui.outputArea.append(Color.BLACK, " . 請按下Throw Dice\n");
 				// 等待按按鈕，如果輸入有值才會繼續
 				while(this.gui.diceThrown == 0) {
 					try { Thread.sleep(1000); } catch (InterruptedException e) {}
@@ -297,7 +297,6 @@ public class Game {
 				} else {
 					//System.out.print("   * " + roles[curRole].getName() +  " 挑戰餵食！（按 Enter 繼續）");
 					gui.outputArea.append(Color.BLACK, "   * " + roles[curRole].getName() +  " 挑戰餵食！\n");
-					try { Thread.sleep(1000); } catch (InterruptedException e) {}
 					//try { System.in.read(); } catch (Exception e) {}
 					roles[curRole].setMoney(remainMoney);
 					System.out.print("   * " + roles[curRole].getName() + " 花了錢買桃太郎糰子，剩 " + roles[curRole].getMoney() + " 元，");
@@ -307,9 +306,17 @@ public class Game {
 					lastBonus += boss.peek().getCost();
 
 					// 隨機產生 1-6 的數字
-					dice = 1 + random.nextInt(6);
-					System.out.println("餵了 " + dice + " 個桃太郎糰子。");
-					gui.outputArea.append(Color.BLACK, "餵了 " + dice + " 個桃太郎糰子。\n");
+					gui.dice = true;
+					gui.outputArea.append(Color.BLACK, " . 請按下Throw Dice\n");
+					// 等待按按鈕，如果輸入有值才會繼續
+					while(this.gui.diceThrown == 0) {
+						try { Thread.sleep(1000); } catch (InterruptedException e) {}
+					}
+					System.out.println("餵了 " + gui.diceThrown + " 個桃太郎糰子。");
+					gui.outputArea.append(Color.BLACK, "餵了 " + gui.diceThrown + " 個桃太郎糰子。\n");
+					dice = gui.diceThrown;
+					gui.diceThrown = 0;
+					gui.dice = false;
 
 					// 如果產生的數字超過要求就獲勝
 					if (dice >= boss.peek().getRequirement()) {
@@ -401,7 +408,7 @@ public class Game {
 		gui.outputArea.append(Color.GREEN, "漢");
 		gui.outputArea.append(Color.CYAN, "化");
 		gui.outputArea.append(Color.BLUE, "組");
-		gui.outputArea.append(Color.black, "]");
+		gui.outputArea.append(Color.black, "]\n");
 		
 
 	}

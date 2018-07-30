@@ -75,6 +75,9 @@ public class Map {
 	 * @parame movement:	要走幾步
 	 */
 	public Block walk(Role[] roleList, int movement, int nowRole) {
+		gui.diceThrown = 0;
+		gui.dice = false;
+		
 		int pickedMoney = 0;
 		
 		// 一步一步走（要看撿錢）
@@ -139,20 +142,29 @@ public class Map {
 						+ roleList[nowRole].getMoney() + " 枚金幣。\n");
 			}
 			else if(blockList[roleList[nowRole].getPosition()].getName().equals("\033[1;96m[提款機]\033[0m")){ // Money 提款機
-				int moneyBlock = 1 + random.nextInt(6); // 隨機 1 + 0~5 = 1~6
+				//int moneyBlock = 1 + random.nextInt(6); // 隨機 1 + 0~5 = 1~6
 				
-				roleList[nowRole].addMoney(moneyBlock);
+				System.out.print("   $ " + roleList[nowRole].getName() + " 走到了提款機，可以丟骰子拿錢：");
+				try { Thread.sleep(1000); } catch (InterruptedException e) {}
+				//try { System.in.read(); } catch (Exception e) {}
+				//try { System.in.read(); } catch (Exception e) {}
 				
-				System.out.print("   $ " + roleList[nowRole].getName() + " 走到了提款機，可以丟骰子拿錢（按 Enter 繼續）：");
-				try { System.in.read(); } catch (Exception e) {}
-				try { System.in.read(); } catch (Exception e) {}
+				gui.outputArea.append(Color.BLACK, "   $ " + roleList[nowRole].getName() + " 走到了提款機，可以丟骰子拿錢：\n");
+				gui.dice = true;
+				gui.outputArea.append(Color.BLACK, " . 請按下Throw Dice\n");
+				// 等待按按鈕，如果輸入有值才會繼續
+				while(this.gui.diceThrown == 0) {
+					try { Thread.sleep(1000); } catch (InterruptedException e) {}
+				}
+				System.out.println("     * " + roleList[nowRole].getName() + " 丟出了 " + gui.diceThrown + "。");
+				System.out.println("     $ " + roleList[nowRole].getName() + " 可以跟銀行領取 " + gui.diceThrown + " 枚金幣，真幸運！");
+				gui.outputArea.append(Color.BLACK, "     * " + roleList[nowRole].getName() + " 丟出了 " + gui.diceThrown + "。\n");
+				gui.outputArea.append(Color.BLACK, "     $ " + roleList[nowRole].getName() + " 可以跟銀行領取 " + gui.diceThrown + " 枚金幣，真幸運！\n");
 				
-				System.out.println("     * " + roleList[nowRole].getName() + " 丟出了 " + moneyBlock + "。");
-				System.out.println("     $ " + roleList[nowRole].getName() + " 可以跟銀行領取 " + moneyBlock + " 枚金幣，真幸運！");
+				roleList[nowRole].addMoney(gui.diceThrown);
 				
-				gui.outputArea.append(Color.BLACK, "   $ " + roleList[nowRole].getName() + " 走到了提款機，可以丟骰子拿錢（按 Enter 繼續）：\n");
-				gui.outputArea.append(Color.BLACK, "     * " + roleList[nowRole].getName() + " 丟出了 " + moneyBlock + "。\n");
-				gui.outputArea.append(Color.BLACK, "     $ " + roleList[nowRole].getName() + " 可以跟銀行領取 " + moneyBlock + " 枚金幣，真幸運！\n");
+				gui.diceThrown = 0;
+				gui.dice = false;
 			}
 			else if (blockList[roleList[nowRole].getPosition()].getName().equals("\033[1;96m[超級星星]\033[0m")) {
 				switch (roleList[nowRole].getCareer()) {
@@ -203,16 +215,20 @@ public class Map {
 					roleList[nowRole].addMoney(rentMoney);
 					break;
 				case "\033[1;93m<盜賊>\033[0m":
-					System.out.print("   & " + roleList[nowRole].getCareer() + "的星星能力：再丟一次骰子並獲得該值 + 5 枚金幣。（請按 Enter 繼續）");
+					System.out.print("   & " + roleList[nowRole].getCareer() + "的星星能力：再丟一次骰子並獲得該值 + 5 枚金幣。");
 					gui.outputArea.append(Color.BLACK, "   & " + roleList[nowRole].getCareer()
-							+ "的星星能力：再丟一次骰子並獲得該值 + 5 枚金幣。（請按 Enter 繼續）\n");
-					
-					try { System.in.read(); } catch (Exception e) {}
-					int moreMoney = 1 + random.nextInt(6);
-					
-					roleList[nowRole].addMoney(moreMoney + 5);
-					System.out.println("     $ 你擲出了 " + moreMoney + "，可獲得 " + (moreMoney + 5) + " 枚金幣。");
-					gui.outputArea.append(Color.BLACK, "     $ 你擲出了 " + moreMoney + "，可獲得 " + (moreMoney + 5) + " 枚金幣。\n");
+							+ "的星星能力：再丟一次骰子並獲得該值 + 5 枚金幣。\n");
+					gui.dice = true;
+					gui.outputArea.append(Color.BLACK, " . 請按下Throw Dice\n");
+					// 等待按按鈕，如果輸入有值才會繼續
+					while(this.gui.diceThrown == 0) {
+						try { Thread.sleep(1000); } catch (InterruptedException e) {}
+					}
+					roleList[nowRole].addMoney(gui.diceThrown + 5);
+					System.out.println("     $ 你擲出了 " + gui.diceThrown + "，可獲得 " + (gui.diceThrown + 5) + " 枚金幣。");
+					gui.outputArea.append(Color.BLACK, "     $ 你擲出了 " + gui.diceThrown + "，可獲得 " + (gui.diceThrown + 5) + " 枚金幣。\n");
+					gui.diceThrown = 0;
+					gui.dice = false;
 					break;
 				default: break;
 				}
@@ -403,6 +419,9 @@ public class Map {
 	 * @parame dice  The face of dice thrown.
 	 */
 	public void useAbility(Role[] roles, int curRole, int dice) {
+		gui.diceThrown = 0;
+		gui.dice = false;
+		
 		switch (dice) {
 		case 1:  useAbility_1(roles[curRole]); break;
 		case 2:  useAbility_2(roles, curRole); break;
