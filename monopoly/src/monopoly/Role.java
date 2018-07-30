@@ -9,12 +9,14 @@ public class Role {
 	private int money;
 	private int position;    // the position this role is
 	private int blockNumber; // How many block this role have
+	GuiDesign gui;
 
 	/* methods */
 	/**
 	 * @brief The Constructor of the class.
 	 */
-	public Role(String name, String career) {
+	public Role(String name, String career, GuiDesign gui) {
+		this.gui = gui;
 		this.name   = name;
 		this.career = career;
 		point       = 0;
@@ -98,5 +100,9 @@ public class Role {
 	/**
 	 * @brief Player's position +1.
 	 */
-	public void moveOn() {this.position = (this.position+1)%32;}
+	public void moveOn(int currentRole) {
+		this.position = (this.position+1)%32;
+		gui.movePosition(this, currentRole);
+		try { Thread.sleep(300); } catch (InterruptedException e) {}
+		}
 }
