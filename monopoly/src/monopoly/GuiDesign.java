@@ -272,7 +272,7 @@ public class GuiDesign {
 				blockArea[a].setText(blockIn[a].getName() + "\n" 
 						+ "金幣： " + blockIn[a].getMoneyDropped() + "\n" 
 						+ "價錢： " + blockIn[a].getPrice() + "\n" 
-						+ blockIn[a].getOwner() + "的");
+						+ blockIn[a].getOwner() + "的地");
 			}
 			else if(a%2 == 1 && blockIn[a].getOwner().equals("")) {
 				blockArea[a].setText(blockIn[a].getName() + "\n" 
