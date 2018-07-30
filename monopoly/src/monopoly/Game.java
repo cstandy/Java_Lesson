@@ -26,6 +26,8 @@ public class Game {
 	  * @brief Constructor of Game.
 	  */
 	public Game() {
+
+		GuiDesign gui = new GuiDesign();
 		map     = new Map();
 		boss    = new Stack<Boss>();
 		roles   = new Role[4];
@@ -51,7 +53,6 @@ public class Game {
 		boss.push(new Boss("\033[1;31m<松鼠>\033[0m",    1, 1, 10, 3));
 		
 
-		GuiDesign gui = new GuiDesign();
 
 		System.out.println("");
 		name = gameSignUp("\033[1;93m<劍士>\033[0m");
