@@ -85,7 +85,7 @@ public class Map {
 		}
 		
 		System.out.println("   $ 你獲得了沿路上的 " + pickedMoney + " 枚金幣。");
-		gui.outputArea.append(Color.BLACK, "   $ 你獲得了沿路上的 " + pickedMoney + " 枚金幣。");
+		gui.outputArea.append(Color.BLACK, "   $ 你獲得了沿路上的 " + pickedMoney + " 枚金幣。\n");
 		
 		roleList[nowRole].addMoney(pickedMoney);
 		this.event(roleList, nowRole);
@@ -103,7 +103,7 @@ public class Map {
 		}else { // 特殊地再細分
 			if(blockList[roleList[nowRole].getPosition()].getName().equals("\033[1;96m[傳送門]\033[0m")) { // Tube 水管
 				int moneyPick = 0;
-				for(int a=1; a <= 8; a++) {	// 走8步撿錢
+				for(int a = 1; a <= 8; a++) {	// 走8步撿錢
 					roleList[nowRole].moveOn(nowRole);
 					moneyPick += blockList[roleList[nowRole].getPosition()].pickMoney();
 				}
@@ -115,7 +115,7 @@ public class Map {
 						+ " 枚金幣，現在有 " + roleList[nowRole].getMoney() + " 枚金幣了。");
 				gui.outputArea.append(Color.BLACK, "   $ " + roleList[nowRole].getName()
 						+ " 經過了水管，沿途撿走了 " + moneyPick
-						+ " 枚金幣，現在有 " + roleList[nowRole].getMoney() + " 枚金幣了。");
+						+ " 枚金幣，現在有 " + roleList[nowRole].getMoney() + " 枚金幣了。\n");
 			}
 			else if(blockList[roleList[nowRole].getPosition()].getName().equals("\033[1;96m[陷阱]\033[0m")){ // Trap 陷阱石頭
 				int drop = dropMoney(roleList[nowRole], 2);
@@ -149,7 +149,7 @@ public class Map {
 				System.out.println("     * " + roleList[nowRole].getName() + " 丟出了 " + moneyBlock + "。");
 				System.out.println("     $ " + roleList[nowRole].getName() + " 可以跟銀行領取 " + moneyBlock + " 枚金幣，真幸運！");
 				
-				gui.outputArea.append(Color.BLACK, "   $ " + roleList[nowRole].getName() + " 走到了提款機，可以丟骰子拿錢（按 Enter 繼續）：");
+				gui.outputArea.append(Color.BLACK, "   $ " + roleList[nowRole].getName() + " 走到了提款機，可以丟骰子拿錢（按 Enter 繼續）：\n");
 				gui.outputArea.append(Color.BLACK, "     * " + roleList[nowRole].getName() + " 丟出了 " + moneyBlock + "。\n");
 				gui.outputArea.append(Color.BLACK, "     $ " + roleList[nowRole].getName() + " 可以跟銀行領取 " + moneyBlock + " 枚金幣，真幸運！\n");
 			}
@@ -178,12 +178,13 @@ public class Map {
 					}
 					
 					System.out.println("     $ 你獲得了沿路上的 " + pickedMoney + " 枚金幣。");
-					
+					gui.outputArea.append(Color.BLACK, "     $ 你獲得了沿路上的 " + pickedMoney + " 枚金幣。\n");
+
 					roleList[nowRole].addMoney(pickedMoney);
 					break;
 				case "\033[1;93m<弓手>\033[0m":
 					System.out.println("   & " + roleList[nowRole].getCareer() + "的星星能力：向所有自己的地盤收租。");
-					gui.outputArea.append(Color.BLACK, "   & " + roleList[nowRole].getCareer() + "的星星能力：向所有自己的地盤收租。");
+					gui.outputArea.append(Color.BLACK, "   & " + roleList[nowRole].getCareer() + "的星星能力：向所有自己的地盤收租。\n");
 					
 					int rentMoney = 0;
 					
@@ -191,33 +192,33 @@ public class Map {
 						if (blockList[i].getOwner().equals(roleList[nowRole].getName())) {
 							rentMoney += blockList[i].getPrice();
 							System.out.println("       + " + blockList[i].getName() + ": " + blockList[i].getPrice() + " 枚金幣。");
-							gui.outputArea.append(Color.BLACK, "       + " + blockList[i].getName() + ": " + blockList[i].getPrice() + " 枚金幣。");
+							gui.outputArea.append(Color.BLACK, "       + " + blockList[i].getName() + ": " + blockList[i].getPrice() + " 枚金幣。\n");
 						}
 					}
 					
 					System.out.println("     $ 你向所有房地產收租，共有 " + rentMoney + " 枚金幣。");
-					gui.outputArea.append(Color.BLACK, "     $ 你向所有房地產收租，共有 " + rentMoney + " 枚金幣。");
+					gui.outputArea.append(Color.BLACK, "     $ 你向所有房地產收租，共有 " + rentMoney + " 枚金幣。\n");
 					
 					roleList[nowRole].addMoney(rentMoney);
 					break;
 				case "\033[1;93m<盜賊>\033[0m":
 					System.out.print("   & " + roleList[nowRole].getCareer() + "的星星能力：再丟一次骰子並獲得該值 + 5 枚金幣。（請按 Enter 繼續）");
 					gui.outputArea.append(Color.BLACK, "   & " + roleList[nowRole].getCareer()
-							+ "的星星能力：再丟一次骰子並獲得該值 + 5 枚金幣。（請按 Enter 繼續）");
+							+ "的星星能力：再丟一次骰子並獲得該值 + 5 枚金幣。（請按 Enter 繼續）\n");
 					
 					try { System.in.read(); } catch (Exception e) {}
 					int moreMoney = 1 + random.nextInt(6);
 					
 					roleList[nowRole].addMoney(moreMoney + 5);
 					System.out.println("     $ 你擲出了 " + moreMoney + "，可獲得 " + (moreMoney + 5) + " 枚金幣。");
-					gui.outputArea.append(Color.BLACK, "     $ 你擲出了 " + moreMoney + "，可獲得 " + (moreMoney + 5) + " 枚金幣。");
+					gui.outputArea.append(Color.BLACK, "     $ 你擲出了 " + moreMoney + "，可獲得 " + (moreMoney + 5) + " 枚金幣。\n");
 					break;
 				default: break;
 				}
 			} 
 			else { // 其他暫時沒事做
 				System.out.println("   * " + roleList[nowRole].getName() + " 在這一回合裡什麼特別的事也沒發生呢。");
-				gui.outputArea.append(Color.BLACK, "   * " + roleList[nowRole].getName() + " 在這一回合裡什麼特別的事也沒發生呢。");
+				gui.outputArea.append(Color.BLACK, "   * " + roleList[nowRole].getName() + " 在這一回合裡什麼特別的事也沒發生呢。\n");
 			}
 		}
 	}
@@ -241,7 +242,7 @@ public class Map {
 						+ " 枚金幣，要買嗎？\n");
 				gui.outputArea.append(Color.BLACK, "     ? ");
 				gui.outputArea.append(Color.GREEN, "是(1)/否(0)");
-				gui.outputArea.append(Color.BLACK, "：");
+				gui.outputArea.append(Color.BLACK, "：\n");
 				
 				// 買
 				if(mapInput.nextInt() == 1) {
@@ -251,12 +252,12 @@ public class Map {
 					System.out.println("   * " + roleList[nowRole].getName() + " 買到了"
 							+ blockList[roleList[nowRole].getPosition()].getName() + "。");
 					gui.outputArea.append(Color.BLACK, "   * " + roleList[nowRole].getName() + " 買到了"
-							+ blockList[roleList[nowRole].getPosition()].getName() + "。");
+							+ blockList[roleList[nowRole].getPosition()].getName() + "。\n");
 				}
 				// 不買
 				else {
 					System.out.println("   * 你什麼都沒做，又平安的度過一回合。");
-					gui.outputArea.append(Color.BLACK, "   * 你什麼都沒做，又平安的度過一回合。");
+					gui.outputArea.append(Color.BLACK, "   * 你什麼都沒做，又平安的度過一回合。\n");
 				}
 			}
 			// 錢不夠
@@ -273,7 +274,7 @@ public class Map {
 					+ " 的地：" + blockList[roleList[nowRole].getPosition()].getName() + "。");
 			gui.outputArea.append(Color.BLACK, "   ! " + roleList[nowRole].getName()
 					+ "，你踩到了 " + blockList[roleList[nowRole].getPosition()].getOwner()
-					+ " 的地：" + blockList[roleList[nowRole].getPosition()].getName() + "。");
+					+ " 的地：" + blockList[roleList[nowRole].getPosition()].getName() + "。\n");
 			
 			for(int b = 1; b <= 3; b++) {
 				if(blockList[roleList[nowRole].getPosition()].getOwner().equals(roleList[(nowRole+b)%4].getName()))
@@ -287,7 +288,7 @@ public class Map {
 		int moneyReceived  = poorGuy.getMoney();
 		
 		System.out.println("   $ " + poorGuy.getName() + " 該付錢囉，你需要付 " + payment + " 枚金幣。");
-		gui.outputArea.append(Color.BLACK, "   $ " + poorGuy.getName() + " 該付錢囉，你需要付 " + payment + " 枚金幣。");
+		gui.outputArea.append(Color.BLACK, "   $ " + poorGuy.getName() + " 該付錢囉，你需要付 " + payment + " 枚金幣。\n");
 		
 		// 先把錢給吐出來
 		while((!poorGuy.lossMoney(payment)) && poorGuy.getBlockNumber() > 0) {//當錢不夠並且還有地就繼續賣（賣到脫褲子
@@ -297,7 +298,7 @@ public class Map {
 		// 把錢給他
 		if(moneyReceived >= payment) {// 夠還
 			System.out.println("   $ " + poorGuy.getName() + " 付給 " + luckyGuy.getName() + " " + payment + " 枚金幣。");
-			gui.outputArea.append(Color.BLACK, "   $ " + poorGuy.getName() + " 付給 " + luckyGuy.getName() + " " + payment + " 枚金幣。");
+			gui.outputArea.append(Color.BLACK, "   $ " + poorGuy.getName() + " 付給 " + luckyGuy.getName() + " " + payment + " 枚金幣。\n");
 			
 			poorGuy.setMoney(moneyReceived - payment);
 			luckyGuy.addMoney(payment);
@@ -307,7 +308,7 @@ public class Map {
 		else { // 還是不夠還
 			System.out.println("   $ " + poorGuy.getName() + " 的金幣不夠，只付給 " + luckyGuy.getName() + " " +  moneyReceived + " 枚金幣。");
 			gui.outputArea.append(Color.BLACK, "   $ " + poorGuy.getName() + " 的金幣不夠，只付給 "
-					+ luckyGuy.getName() + " " +  moneyReceived + " 枚金幣。");
+					+ luckyGuy.getName() + " " +  moneyReceived + " 枚金幣。\n");
 			
 			poorGuy.setMoney(0);
 			luckyGuy.addMoney(moneyReceived);
@@ -339,7 +340,7 @@ public class Map {
 	private int sell(Role poorGuy) {
 		System.out.println("   ! " + poorGuy.getName() + "，你的金幣不足（剩 " + poorGuy.getMoney() + " 枚金幣），該賣地囉，請問你要賣哪塊地？");
 		gui.outputArea.append(Color.BLACK, "   ! " + poorGuy.getName() + "，你的金幣不足（剩 " + poorGuy.getMoney()
-				+ " 枚金幣），該賣地囉，請問你要賣哪塊地？");
+				+ " 枚金幣），該賣地囉，請問你要賣哪塊地？\n");
 		
 		Block[] blockBelong = new Block[poorGuy.getBlockNumber()];
 		
@@ -354,16 +355,16 @@ public class Map {
 		
 		// 問玩家要賣哪一塊
 		System.out.println("   ? 你現在有這些地：");
-		gui.outputArea.append(Color.BLACK, "   ? 你現在有這些地：");
+		gui.outputArea.append(Color.BLACK, "   ? 你現在有這些地：\n");
 		
 		for(int b = 0; b < pointer; b++) {
 			System.out.println("     ? " + (b+1) + ". " + blockBelong[b].getName() + "價值 " + blockBelong[b].getPrice() + " 枚金幣。");
 			gui.outputArea.append(Color.BLACK, "     ? " + (b+1) + ". " + blockBelong[b].getName() + "價值 "
-					+ blockBelong[b].getPrice() + " 枚金幣。");
+					+ blockBelong[b].getPrice() + " 枚金幣。\n");
 		}
 		
 		System.out.print("   ? 請問你要賣哪塊？");
-		gui.outputArea.append(Color.BLACK, "   ? 請問你要賣哪塊？");
+		gui.outputArea.append(Color.BLACK, "   ? 請問你要賣哪塊？\n");
 		
 		int whichSold = mapInput.nextInt() - 1;
 		int sellMoney = blockBelong[whichSold].getPrice();
@@ -425,7 +426,7 @@ public class Map {
 		System.out.println("     $ " + luckyGuy.getName() + " 跟銀行領取 3 枚金幣，身上共有 " 
 				+ luckyGuy.getMoney() + " 枚金幣。");
 		gui.outputArea.append(Color.BLACK, "     $ " + luckyGuy.getName() + " 跟銀行領取 3 枚金幣，身上共有 " 
-				+ luckyGuy.getMoney() + " 枚金幣。");
+				+ luckyGuy.getMoney() + " 枚金幣。\n");
 	}
 
 	/**
@@ -465,7 +466,7 @@ public class Map {
 		System.out.print("       ? \033[0;32m選擇一位\033[0m： ");
 		gui.outputArea.append(Color.BLACK, "       ? ");
 		gui.outputArea.append(Color.GREEN, "選擇一位");
-		gui.outputArea.append(Color.BLACK, "：");
+		gui.outputArea.append(Color.BLACK, "：\n");
 		
 		int goal = (mapInput.nextInt() + curRole) % 4;
 
@@ -499,10 +500,10 @@ public class Map {
 			System.out.println("     % \033[1;93m<弓手>\033[0m丟比較準，所以被丟到的人損失比較多。");
 			
 			gui.outputArea.append(Color.BLACK, "     % 因為 " + roles[curRole].getName() + " 是"
-					+ roles[curRole].getCareer() + "，所以有能力加乘！");
+					+ roles[curRole].getCareer() + "，所以有能力加乘！\n");
 			gui.outputArea.append(Color.BLACK, "     % ");
 			gui.outputArea.append(Color.YELLOW, "<弓手>");
-			gui.outputArea.append(Color.BLACK, "丟比較準，所以被丟到的人損失比較多。");
+			gui.outputArea.append(Color.BLACK, "丟比較準，所以被丟到的人損失比較多。\n");
 		}
 		
 		int goal = findForwardRole(roles, curRole);
@@ -640,7 +641,7 @@ public class Map {
 			int roleRec = 0;
 			
 			System.out.println("       ? 有多於一個人在同一個位置：");
-			gui.outputArea.append(Color.BLACK, "       ? 有多於一個人在同一個位置：");
+			gui.outputArea.append(Color.BLACK, "       ? 有多於一個人在同一個位置：\n");
 			
 			for (int i = 0; i < 4; i++)
 				if (diff[i] == minDiff && i != curRole) {
@@ -654,7 +655,7 @@ public class Map {
 			System.out.print("       ? \033[0;32m選擇一位\033[0m：");
 			gui.outputArea.append(Color.BLACK, "       ? ");
 			gui.outputArea.append(Color.GREEN, "選擇一位");
-			gui.outputArea.append(Color.BLACK, "：");
+			gui.outputArea.append(Color.BLACK, "：\n");
 			
 			forwardPosition = place[mapInput.nextInt() - 1];
 		}
@@ -700,7 +701,7 @@ public class Map {
 			System.out.print("       ? \033[0;32m選擇一位\033[0m：");
 			gui.outputArea.append(Color.BLACK, "       ? ");
 			gui.outputArea.append(Color.GREEN, "選擇一位");
-			gui.outputArea.append(Color.BLACK, "：");
+			gui.outputArea.append(Color.BLACK, "：\n");
 			
 			backwardPosition = place[mapInput.nextInt() - 1];
 		}
