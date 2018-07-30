@@ -85,21 +85,6 @@ public class GuiDesign {
 		outputArea.setBorder(lineBorder);
 		outputArea.setFont(new Font("monospaced", Font.PLAIN, 14));
 
-		/*just for test
-		outputArea.append(Color.red,"dcfjhgfdfghjjfhdh\n");
-		outputArea.append(Color.red,"dcfjhgfdfghjjfhdh\n");
-		outputArea.append(Color.red,"dcfjhgfdfghjjfhdh\n");
-		outputArea.append(Color.red,"dcfjhgfdfghjjfhdh\n");
-		outputArea.append(Color.red,"dcfjhgfdfghjjfhdh\n");
-		outputArea.append(Color.red,"dcfjhgfdfghjjfhdh\n");
-		outputArea.append(Color.red,"dcfjhgfdfghjjfhdh\n");
-		outputArea.append(Color.red,"dcfjhgfdfghjjfhdh\n");
-		outputArea.append(Color.red,"dcfjhgfdfghjjfhdh\n");
-		outputArea.append(Color.red,"dcfjhgfdfghjjfhdh\n");
-		outputArea.append(Color.red,"一個哇啦哇啦哇啦哇啦兩個哇啦哇啦哇啦哇啦三個哇啦哇啦哇啦哇啦四個哇啦哇啦哇啦哇啦五個哇啦哇啦哇啦哇啦\n");
-		outputArea.append(Color.red,"oneeeeeeeetwoooooooothreeeeeeefourrrrrrrfiveeeeeeesixxxxxxxxsevennnnnneighttttttnineeeeeeetennnnnnnn\n");
-		 */
-
 		// 角色列表顯示於block上的四角
 		for(int b=0; b<4; b++) {
 			for(int a=0; a<32; a++) {
@@ -211,10 +196,10 @@ public class GuiDesign {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				//if(map.dice) {
-					Random random = new Random();
-					int a = random.nextInt(6)+1;
-					diceThrown = a;
-					diceArea.setText("你骰到了" + a + "點");
+				Random random = new Random();
+				int a = random.nextInt(6)+1;
+				diceThrown = a;
+				diceArea.setText("你骰到了" + a + "點");
 				//}
 			}
 		});
@@ -237,7 +222,7 @@ public class GuiDesign {
 		bossArea.setBackground(Color.WHITE);
 		bossArea.setBounds(830, 477, 240, 206);
 		bossArea.setBorder(lineBorder);
-		bossArea.setFont(new Font("monospaced", Font.PLAIN, 14));
+		bossArea.setFont(new Font("monospaced", Font.PLAIN, 20));
 		frame.getContentPane().add(bossArea);
 
 		frame.setVisible(true);
@@ -283,32 +268,94 @@ public class GuiDesign {
 	}
 	public void refreshBlock(Block[] blockIn) {
 		for(int a=0; a<32; a++) {
-			blockArea[a].setText(blockIn[a].getName() + "\n" 
-					+ "金幣：" + blockIn[a].getMoneyDropped() + "\n" 
-					+ "價錢：" + blockIn[a].getPrice() + "\n" 
-					+ blockIn[a].getOwner() + "的");
+			if(a%2 == 1 && !blockIn[a].getOwner().equals("")) {
+				blockArea[a].setText(blockIn[a].getName() + "\n" 
+						+ "金幣： " + blockIn[a].getMoneyDropped() + "\n" 
+						+ "價錢： " + blockIn[a].getPrice() + "\n" 
+						+ blockIn[a].getOwner() + "的");
+			}
+			else if(a%2 == 1 && blockIn[a].getOwner().equals("")) {
+				blockArea[a].setText(blockIn[a].getName() + "\n" 
+						+ "金幣： " + blockIn[a].getMoneyDropped() + "\n" 
+						+ "價錢： " + blockIn[a].getPrice());
+			}
+			else {
+				blockArea[a].setText(blockIn[a].getName() + "\n" 
+						+ "金幣： " + blockIn[a].getMoneyDropped());
+			}
 		}
 	}
 	public void refreshRole(Role[] roleIn) {
 		for(int a=0; a<4; a++) {
-			blockArea[a].setText(roleIn[a] + "\n" 
-					+ "：" + roleIn[a] + "\n" 
-					+ "：" + roleIn[a] + "\n" 
-					+ roleIn[a] + "");
+			switch (roleIn[a].getCareer()) {
+			case "\033[1;93m<劍士>\033[0m":
+				roleArea[a].setText("名字：" + roleIn[a].getName() + "       " 
+						+ "職業：" + roleIn[a].getCareer() + "\n" 
+						+ "超級星星：\n  向每個人收 2 枚金幣\n"
+						+ "碰！！：增加為 2 點傷害\n" 
+						+ "金錢： " + roleIn[a].getMoney() + "\n"
+						+ "分數累積： " + roleIn[a].getPoint() + "分");
+				break;
+			case "\033[1;93m<法師>\033[0m":
+				roleArea[a].setText("名字：" + roleIn[a].getName() + "       " 
+						+ "職業：" + roleIn[a].getCareer() + "\n" 
+						+ "超級星星：\n  收集全部地上所有的錢\n"
+						+ "紅龜殼：增加紅龜殼傷害\n" 
+						+ "金錢： " + roleIn[a].getMoney() + "\n"
+						+ "分數累積： " + roleIn[a].getPoint() + "分");
+				break;
+			case "\033[1;93m<弓手>\033[0m":
+				roleArea[a].setText("名字：" + roleIn[a].getName() + "       " 
+						+ "職業：" + roleIn[a].getCareer() + "\n" 
+						+ "超級星星：\n  向銀行收所擁有的地租\n"
+						+ "綠龜殼：增加綠龜殼傷害\n" 
+						+ "金錢： " + roleIn[a].getMoney() + "\n"
+						+ "分數累積： " + roleIn[a].getPoint() + "分");
+				break;
+			case "\033[1;93m<盜賊>\033[0m":
+				roleArea[a].setText("名字：" + roleIn[a].getName() + "       " 
+						+ "職業：" + roleIn[a].getCareer() + "\n" 
+						+ "超級星星：\n  再次丟骰子並獲得該值 +5 枚金幣\n"
+						+ "小烏賊：增加奪取金幣量\n" 
+						+ "金錢： " + roleIn[a].getMoney() + "\n"
+						+ "分數累積： " + roleIn[a].getPoint() + "分");
+				break;
+			default: break;
+			}
 		}
 	}
 	public void refreshBoss(Boss bossIn, Boolean turnOn) {
 		if(turnOn) {
-			bossArea.setText(bossIn + "\n" 
-					+ "：" + bossIn + "\n" 
-					+ "：" + bossIn + "\n" 
-					+ bossIn + "");
+			bossArea.setText( "第 " + bossIn.getOrder() + " 隻 BOSS\n"
+					+ bossIn.getName() + "\n" 
+					+ "參加費用： " + bossIn.getCost() + "\n" 
+					+ "餵食數量： " + bossIn.getRequirement() + "\n" 
+					+ "可得分數： " + bossIn.getPoint());
 		}
 		else {
-			bossArea.setText("?????" + "\n" 
-					+ "：" + "?????" + "\n" 
-					+ "：" + "?????" + "\n" 
-					+ "?????" + "");
+			bossArea.setText("第 " + bossIn.getOrder() + " 隻 BOSS\n"
+					+ "?????\n" 
+					+ "參加費用： ?????\n" 
+					+ "餵食數量： ?????\n" 
+					+ "可得分數： ?????");
+		}
+	}
+	public void refreshBoss(Boss bossIn, Boolean turnOn, int money) {
+		if(turnOn) {
+			bossArea.setText( "第 6 隻 BOSS\n"
+					+ bossIn.getName() + "\n" 
+					+ "參加費用： " + bossIn.getCost() + "\n" 
+					+ "餵食數量： " + bossIn.getRequirement() + "\n" 
+					+ "可得分數： " + bossIn.getPoint() + "\n"
+					+ "累積金錢： " + money);
+		}
+		else {
+			bossArea.setText( "第 6 隻 BOSS\n"
+					+ "?????\n" 
+					+ "參加費用： ?????\n" 
+					+ "餵食數量： ?????\n" 
+					+ "可得分數： ?????\n"
+					+ "累積金錢： ?????");
 		}
 	}
 }
