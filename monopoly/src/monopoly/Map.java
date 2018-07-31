@@ -195,7 +195,9 @@ public class Map {
 				switch (roleList[nowRole].getCareer()) {
 				case "<劍士>":
 					System.out.println("   & " + roleList[nowRole].getCareer() + "的星星能力：向每個人收 2 枚金幣。");
-					gui.outputArea.append(Color.BLACK, "   & " + roleList[nowRole].getCareer() + "的星星能力：向每個人收 2 枚金幣。\n");
+					gui.outputArea.append(Color.BLACK, "   & ");
+					gui.outputArea.append(Color.BLUE, roleList[nowRole].getCareer());
+					gui.outputArea.append(Color.BLACK, "的星星能力：向每個人收 2 枚金幣。\n");
 					
 					for (int i = 0; i < 4; i++) {
 						if (i != nowRole) giveMoney(roleList[i], roleList[nowRole], 2);
@@ -205,7 +207,9 @@ public class Map {
 					break;
 				case "<法師>":
 					System.out.println("   & " + roleList[nowRole].getCareer() + "的星星能力：收集全部地上所有的錢。");
-					gui.outputArea.append(Color.BLACK, "   & " + roleList[nowRole].getCareer() + "的星星能力：收集全部地上所有的錢。\n");
+					gui.outputArea.append(Color.BLACK, "   & ");
+					gui.outputArea.append(Color.BLUE, roleList[nowRole].getCareer());
+					gui.outputArea.append(Color.BLACK, "的星星能力：收集全部地上所有的錢。\n");
 					
 					int pickedMoney = 0;
 					
@@ -225,8 +229,31 @@ public class Map {
 					gui.refreshBlock(blockList);
 					break;
 				case "<弓手>":
+					System.out.print("   & " + roleList[nowRole].getCareer() + "的星星能力：再丟一次骰子並獲得該值 + 5 枚金幣。");
+					gui.outputArea.append(Color.BLACK, "   & ");
+					gui.outputArea.append(Color.BLUE, roleList[nowRole].getCareer());
+					gui.outputArea.append(Color.BLACK, "的星星能力：再丟一次骰子並獲得該值 + 5 枚金幣。\n");
+					gui.dice = true;
+					gui.outputArea.append(Color.BLACK, " . 玩家 ");
+					gui.outputArea.append(new Color(255,20,147), roleList[nowRole].getName());
+					gui.outputArea.append(Color.BLACK, " 請按下Throw Dice\n");
+					// 等待按按鈕，如果輸入有值才會繼續
+					while(this.gui.diceThrown == 0) {
+						try { Thread.sleep(1000); } catch (InterruptedException e) {}
+					}
+					roleList[nowRole].addMoney(gui.diceThrown + 5);
+					gui.refreshRole(roleList);
+					gui.refreshBlock(blockList);
+					System.out.println("     $ 你擲出了 " + gui.diceThrown + "，可獲得 " + (gui.diceThrown + 5) + " 枚金幣。");
+					gui.outputArea.append(Color.BLACK, "     $ 你擲出了 " + gui.diceThrown + "，可獲得 " + (gui.diceThrown + 5) + " 枚金幣。\n");
+					gui.diceThrown = 0;
+					gui.dice = false;
+					break;
+				case "<盜賊>":
 					System.out.println("   & " + roleList[nowRole].getCareer() + "的星星能力：向所有自己的地盤收租。");
-					gui.outputArea.append(Color.BLACK, "   & " + roleList[nowRole].getCareer() + "的星星能力：向所有自己的地盤收租。\n");
+					gui.outputArea.append(Color.BLACK, "   & ");
+					gui.outputArea.append(Color.BLACK, roleList[nowRole].getCareer());
+					gui.outputArea.append(Color.BLACK, "的星星能力：向所有自己的地盤收租。\n");
 					
 					int rentMoney = 0;
 					
@@ -247,27 +274,7 @@ public class Map {
 					gui.refreshRole(roleList);
 					gui.refreshBlock(blockList);
 					break;
-				case "<盜賊>":
-					System.out.print("   & " + roleList[nowRole].getCareer() + "的星星能力：再丟一次骰子並獲得該值 + 5 枚金幣。");
-					gui.outputArea.append(Color.BLACK, "   & " + roleList[nowRole].getCareer()
-							+ "的星星能力：再丟一次骰子並獲得該值 + 5 枚金幣。\n");
-					gui.dice = true;
-					gui.outputArea.append(Color.BLACK, " . 玩家 ");
-					gui.outputArea.append(new Color(255,20,147), roleList[nowRole].getName());
-					gui.outputArea.append(Color.BLACK, " 請按下Throw Dice\n");
-					// 等待按按鈕，如果輸入有值才會繼續
-					while(this.gui.diceThrown == 0) {
-						try { Thread.sleep(1000); } catch (InterruptedException e) {}
-					}
-					roleList[nowRole].addMoney(gui.diceThrown + 5);
-					gui.refreshRole(roleList);
-					gui.refreshBlock(blockList);
-					System.out.println("     $ 你擲出了 " + gui.diceThrown + "，可獲得 " + (gui.diceThrown + 5) + " 枚金幣。");
-					gui.outputArea.append(Color.BLACK, "     $ 你擲出了 " + gui.diceThrown + "，可獲得 " + (gui.diceThrown + 5) + " 枚金幣。\n");
-					gui.diceThrown = 0;
-					gui.dice = false;
-					break;
-				default: break;
+					default: break;
 				}
 			} 
 			else { // 其他暫時沒事做
@@ -329,7 +336,7 @@ public class Map {
 				System.out.println("   $ " + roleList[nowRole].getName() + "，雖然是空地，但你沒金幣可以買，只能下次再來囉～");
 				gui.outputArea.append(Color.BLACK, "   $ ");
 				gui.outputArea.append(new Color(255,20,147), roleList[nowRole].getName());
-				gui.outputArea.append(Color.BLACK, "，雖然是空地，但你沒金幣可以買，只能下次再來囉～");
+				gui.outputArea.append(Color.BLACK, "，雖然是空地，但你沒金幣可以買，只能下次再來囉～\n");
 			}
 		}
 		// 有人的
@@ -539,9 +546,11 @@ public class Map {
 			
 			gui.outputArea.append(Color.BLACK, "     % 因為 ");
 			gui.outputArea.append(new Color(255,20,147), roles[curRole].getName());
-			gui.outputArea.append(Color.BLACK, " 是" + roles[curRole].getCareer() + "，所以有能力加乘！\n");
+			gui.outputArea.append(Color.BLACK, " 是");
+			gui.outputArea.append(Color.BLUE, roles[curRole].getCareer());
+			gui.outputArea.append(Color.BLACK, "，所以有能力加乘！\n");
 			gui.outputArea.append(Color.BLACK, "     % ");
-			gui.outputArea.append(Color.YELLOW, "<盜賊>");
+			gui.outputArea.append(Color.BLUE, "<盜賊>");
 			gui.outputArea.append(Color.BLACK, " 可以向某位玩家奪取 3 枚金幣！\n");
 		} else {
 			System.out.println("     % 你現在可以向某位玩家奪取 2 枚金幣！");
@@ -604,9 +613,11 @@ public class Map {
 			
 			gui.outputArea.append(Color.BLACK, "     % 因為 ");
 			gui.outputArea.append(new Color(255,20,147), roles[curRole].getName());
-			gui.outputArea.append(Color.BLACK, " 是" + roles[curRole].getCareer() + "，所以有能力加乘！\n");
+			gui.outputArea.append(Color.BLACK, " 是");
+			gui.outputArea.append(Color.BLUE, roles[curRole].getCareer());
+			gui.outputArea.append(Color.BLACK, "，所以有能力加乘！\n");
 			gui.outputArea.append(Color.BLACK, "     % ");
-			gui.outputArea.append(Color.YELLOW, "<弓手>");
+			gui.outputArea.append(Color.BLUE, "<弓手>");
 			gui.outputArea.append(Color.BLACK, "丟比較準，所以被丟到的人損失比較多。\n");
 		}
 		
@@ -657,9 +668,11 @@ public class Map {
 			
 			gui.outputArea.append(Color.BLACK, "     % 因為 ");
 			gui.outputArea.append(new Color(255,20,147), roles[curRole].getName());
-			gui.outputArea.append(Color.BLACK, " 是"	+ roles[curRole].getCareer() + "，所以有能力加乘！\n");
+			gui.outputArea.append(Color.BLACK, " 是");
+			gui.outputArea.append(Color.BLUE, roles[curRole].getCareer());
+			gui.outputArea.append(Color.BLACK, "，所以有能力加乘！\n");
 			gui.outputArea.append(Color.BLACK, "     % ");
-			gui.outputArea.append(Color.YELLOW, "<法師>");
+			gui.outputArea.append(Color.BLUE, "<法師>");
 			gui.outputArea.append(Color.BLACK, "背後有長眼睛，很會丟，所以被丟到的人損失比較多。\n");
 		}
 		
@@ -710,9 +723,11 @@ public class Map {
 			
 			gui.outputArea.append(Color.BLACK, "     % 因為 ");
 			gui.outputArea.append(new Color(255,20,147), roles[curRole].getName());
-			gui.outputArea.append(Color.BLACK, " 是"	+ roles[curRole].getCareer() + "，所以有能力加乘！\n");
+			gui.outputArea.append(Color.BLACK, " 是");
+			gui.outputArea.append(Color.BLUE, roles[curRole].getCareer());
+			gui.outputArea.append(Color.BLACK, "，所以有能力加乘！\n");
 			gui.outputArea.append(Color.BLACK, "     % ");
-			gui.outputArea.append(Color.YELLOW, "<劍士>");
+			gui.outputArea.append(Color.BLUE, "<劍士>");
 			gui.outputArea.append(Color.BLACK, "使所有玩家在原地被打落 2 枚金幣。\n");
 		} else {
 			System.out.println("     % 所有玩家在原地被打落 1 枚金幣。");
