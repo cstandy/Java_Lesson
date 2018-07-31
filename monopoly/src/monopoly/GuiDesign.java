@@ -240,15 +240,38 @@ public class GuiDesign {
 		return name;
 	}
 
-	public int getDecision() {
-		//outputArea.append(Color.blue,"輸入數字：");
+	/**
+	 * @brief Get user input for any decision with simple foolproof
+	 * @param start The lower bound for input.
+	 * @param end   The upper bound for input.
+	 */
+	
+	public int getDecision(int start, int end) {
+		// outputArea.append(Color.blue,"輸入數字：");
+		
 		// 等待輸入，如果輸入有值才會繼續
 		while(this.userInput == null) {
 			try { Thread.sleep(1000); } catch (InterruptedException e) {}
 		}
+		
+		outputArea.append(Color.blue, userInput + "\n");
+		
+		while (!this.userInput.matches("[" + start + "-" + end + "]{1}")) {
+			outputArea.append(Color.RED, "     ! 請輸入 " + start + " 至 " + end + " 的數字：");
+			this.userInput = null;
+			
+			// 等待輸入，如果輸入有值才會繼續
+			while(this.userInput == null) {
+				try { Thread.sleep(1000); } catch (InterruptedException e) {}
+			}
+			
+
+			outputArea.append(Color.blue, userInput + "\n");
+		}
+		
 		int integerInput = 0;
 		integerInput = Integer.parseInt(userInput);
-		outputArea.append(Color.blue,integerInput + "\n");
+		// outputArea.append(Color.blue,integerInput + "\n");
 		this.userInput = null;
 		return integerInput;
 	}

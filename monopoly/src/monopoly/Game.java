@@ -315,7 +315,7 @@ public class Game {
 				gui.outputArea.append(new Color(255,20,147), roles[curRole].getName());
 				gui.outputArea.append(Color.BLACK," 太窮了，動物都不理你！狗不理！\n");
 				skip[curRole] = true;
-			} else {	// 錢夠挑戰才詢問
+			} else { // 錢夠挑戰才詢問
 				System.out.println("   ! " + boss.peek().getName() + " 如果吃 " + boss.peek().getRequirement() + " 個桃太郎糰子，就會跟你回家。");
 				gui.outputArea.append(Color.BLACK, "   ! ");
 				gui.outputArea.append(Color.RED, boss.peek().getName());
@@ -328,7 +328,7 @@ public class Game {
 
 				// 如果不挑戰，就標示起來
 				//if (input.nextInt() == 0) {
-				if(gui.getDecision() == 0) {
+				if(gui.getDecision(0, 1) == 0) {
 					skip[curRole] = true;
 				} else {
 					//System.out.print("   * " + roles[curRole].getName() +  " 挑戰餵食！（按 Enter 繼續）");

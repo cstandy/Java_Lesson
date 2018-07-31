@@ -311,7 +311,7 @@ public class Map {
 				
 				// 買
 				// if(mapInput.nextInt() == 1) {
-				if(gui.getDecision() == 1) {
+				if(gui.getDecision(0, 1) == 1) {
 					roleList[nowRole].setMoney(roleList[nowRole].getMoney() - blockList[roleList[nowRole].getPosition()].getPrice()); // 付錢
 					blockList[roleList[nowRole].getPosition()].setOwner(roleList[nowRole].getName()); // 得到土地（owner
 					roleList[nowRole].setBlockNumber(true); // 增加土地數量 + 1
@@ -458,7 +458,7 @@ public class Map {
 		gui.outputArea.append(Color.BLACK, "   ? 請問你要賣哪塊？");
 		
 		// int whichSold = mapInput.nextInt() - 1;
-		int whichSold = gui.getDecision() - 1;
+		int whichSold = gui.getDecision(1, poorGuy.getBlockNumber()) - 1;
 		int sellMoney = blockBelong[whichSold].getPrice();
 		
 		poorGuy.addMoney(sellMoney); // 拿錢
@@ -574,7 +574,7 @@ public class Map {
 		gui.outputArea.append(Color.BLACK, "：");
 		
 		// int goal = (mapInput.nextInt() + curRole) % 4;
-		int goal = (gui.getDecision() + curRole) % 4;
+		int goal = (gui.getDecision(1, 3) + curRole) % 4;
 
 		int moneyReceived = giveMoney(roles[goal], roles[curRole], (roles[curRole].getCareer().equals("<盜賊>")) ? 3 : 2);
 		
@@ -803,7 +803,7 @@ public class Map {
 			gui.outputArea.append(Color.BLACK, "：");
 			
 			// forwardPosition = place[mapInput.nextInt() - 1];
-			forwardPosition = place[gui.getDecision() - 1];
+			forwardPosition = place[gui.getDecision(1, roleRec) - 1];
 		}
 		
 		return forwardPosition;
@@ -850,7 +850,7 @@ public class Map {
 			gui.outputArea.append(Color.BLACK, "：");
 			
 			// backwardPosition = place[mapInput.nextInt() - 1];
-			backwardPosition = place[gui.getDecision() - 1];
+			backwardPosition = place[gui.getDecision(1, roleRec) - 1];
 		}
 		
 		return backwardPosition;
