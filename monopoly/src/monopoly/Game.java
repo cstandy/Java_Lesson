@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.Stack;
+
+import javax.management.relation.RoleList;
 import javax.swing.*;
 
 public class Game {
@@ -85,7 +87,7 @@ public class Game {
 		// name = input.next();
 		name = gui.signUp();
 
-		while (!name.matches("[A-Z][a-zA-Z0-9]*") || name.length() > 8) {
+		while (true) {  
 			if (!name.matches("[A-Z][a-zA-Z0-9]*")) {
 				System.out.println("   ! 姓名需由大寫開頭。");
 				gui.outputArea.append(Color.black, "   ! 姓名需由大寫開頭。\n");
@@ -100,10 +102,27 @@ public class Game {
 				gui.outputArea.append(Color.black, "   ! 請重新輸入：");
 				// name = input.next();
 				name = gui.signUp();
+			}else if(nameUsed(name)) { // 玩家名字已存在
+				gui.outputArea.append(Color.black, "   ! 姓名不得與其他玩家重複。\n");
+				gui.outputArea.append(Color.black, "   ! 請重新輸入：");
+				name = gui.signUp();
+			}
+			else { // 合法名字則跳出 
+				break;
 			}
 		}
 
 		return name;
+	}
+	
+	//  判斷名字有沒有被其他人用過
+	private boolean nameUsed(String name) {
+		for(int i = 0; i < 4; i++) {
+			if(roles[i]!=null && roles[i].getName().equals(name)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	/**
@@ -128,7 +147,7 @@ public class Game {
 				gui.dice = true;
 				gui.outputArea.append(Color.BLACK, " . 玩家 ");
 				gui.outputArea.append(new Color(255,20,147), roles[i].getName());
-				gui.outputArea.append(Color.BLACK, " 請按下 Throw Dice 走路\n");
+				gui.outputArea.append(Color.BLACK, " 請按下 < 丟 骰 子 ! > 走路\n");
 				// 等待按按鈕，如果輸入有值才會繼續
 				while(this.gui.diceThrown == 0) {
 					try { Thread.sleep(1000); } catch (InterruptedException e) {}
@@ -157,7 +176,7 @@ public class Game {
 				gui.dice = true;
 				gui.outputArea.append(Color.BLACK, " . 玩家 ");
 				gui.outputArea.append(new Color(255,20,147), roles[i].getName());
-				gui.outputArea.append(Color.BLACK, " 請按下 Throw Dice 來發動能力\n");
+				gui.outputArea.append(Color.BLACK, " 請按下 < 丟 骰 子 ! > 來發動能力\n");
 				// 等待按按鈕，如果輸入有值才會繼續
 				while(this.gui.diceThrown == 0) {
 					try { Thread.sleep(1000); } catch (InterruptedException e) {}
@@ -354,7 +373,7 @@ public class Game {
 					gui.dice = true;
 					gui.outputArea.append(Color.BLACK, " . 玩家 ");
 					gui.outputArea.append(new Color(255,20,147), roles[curRole].getName());
-					gui.outputArea.append(Color.BLACK, " 請按下 Throw Dice 來餵食\n");
+					gui.outputArea.append(Color.BLACK, " 請按下 < 丟 骰 子 ! > 來餵食\n");
 					// 等待按按鈕，如果輸入有值才會繼續
 					while(this.gui.diceThrown == 0) {
 						try { Thread.sleep(1000); } catch (InterruptedException e) {}

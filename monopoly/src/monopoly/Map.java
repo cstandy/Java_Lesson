@@ -173,7 +173,7 @@ public class Map {
 				gui.dice = true;
 				gui.outputArea.append(Color.BLACK, "     * 玩家 ");
 				gui.outputArea.append(new Color(255,20,147), roleList[nowRole].getName());
-				gui.outputArea.append(Color.BLACK, " 請按下 Throw Dice\n");
+				gui.outputArea.append(Color.BLACK, " 請按下 < 丟 骰 子 ! >\n");
 				// 等待按按鈕，如果輸入有值才會繼續
 				while(this.gui.diceThrown == 0) {
 					try { Thread.sleep(1000); } catch (InterruptedException e) {}
@@ -240,7 +240,7 @@ public class Map {
 					gui.dice = true;
 					gui.outputArea.append(Color.BLACK, " . 玩家 ");
 					gui.outputArea.append(new Color(255,20,147), roleList[nowRole].getName());
-					gui.outputArea.append(Color.BLACK, " 請按下Throw Dice\n");
+					gui.outputArea.append(Color.BLACK, " 請按下< 丟 骰 子 ! >\n");
 					// 等待按按鈕，如果輸入有值才會繼續
 					while(this.gui.diceThrown == 0) {
 						try { Thread.sleep(1000); } catch (InterruptedException e) {}

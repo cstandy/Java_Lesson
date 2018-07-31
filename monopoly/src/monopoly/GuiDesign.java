@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import javax.print.attribute.AttributeSet;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
@@ -51,6 +52,7 @@ public class GuiDesign {
 	private JLayeredPane layeredPane;
 	public int diceThrown = 0;
 	public boolean dice = false;
+	private JLabel label;
 
 	/**
 	 * Create the application.
@@ -187,9 +189,17 @@ public class GuiDesign {
 		input.setBorder(lineBorder);
 		input.setFont(new Font("monospaced", Font.PLAIN, 24));
 		frame.getContentPane().add(input);
+		
+		// 輸入文字條的小跟班
+		label = new JLabel("輸入欄：");
+		label.setBounds(110,520,70,20);
+		label.setVisible(true);
+		label.setFont(new Font("monospaced", Font.PLAIN, 14));
+		
+		frame.getContentPane().add(label);
 
 		// 骰子按鈕
-		diceButton = new JButton("Throw Dice!");
+		diceButton = new JButton("丟 骰 子 ！");
 		diceButton.setBounds(265, 540, 300, 40);
 		diceButton.setBorder(lineBorder);
 		diceButton.setFont(new Font("monospaced", Font.PLAIN, 24));
