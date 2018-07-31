@@ -95,6 +95,10 @@ public class Map {
 		roleList[nowRole].addMoney(pickedMoney);
 		gui.refreshRole(roleList);
 		gui.refreshBlock(blockList);
+
+		try { Thread.sleep(300); } catch (InterruptedException e) {}
+
+		
 		this.event(roleList, nowRole);
 		return blockList[roleList[nowRole].getPosition()];
 	}
@@ -252,7 +256,7 @@ public class Map {
 				case "<盜賊>":
 					System.out.println("   & " + roleList[nowRole].getCareer() + "的星星能力：向所有自己的地盤收租。");
 					gui.outputArea.append(Color.BLACK, "   & ");
-					gui.outputArea.append(Color.BLACK, roleList[nowRole].getCareer());
+					gui.outputArea.append(Color.BLUE, roleList[nowRole].getCareer());
 					gui.outputArea.append(Color.BLACK, "的星星能力：向所有自己的地盤收租。\n");
 					
 					int rentMoney = 0;
@@ -751,7 +755,9 @@ public class Map {
 				
 				gui.outputArea.append(Color.BLACK, "     ! ");
 				gui.outputArea.append(new Color(255,20,147), roles[goal].getName());
-				gui.outputArea.append(Color.BLACK, " 被打落 " + drop + " 枚金幣在" + blockList[roles[goal].getPosition()].getName() + "上。\n");
+				gui.outputArea.append(Color.BLACK, " 被打落 " + drop + " 枚金幣在");
+				gui.outputArea.append(new Color(210,105,30), blockList[roles[goal].getPosition()].getName());
+				gui.outputArea.append(Color.BLACK, "上。\n");
 				gui.outputArea.append(Color.BLACK, "   $ 現在");
 				gui.outputArea.append(new Color(210,105,30), blockList[roles[goal].getPosition()].getName());
 				gui.outputArea.append(Color.BLACK, "上有 " + blockList[roles[goal].getPosition()].getMoneyDropped() + " 枚金幣了，而 ");

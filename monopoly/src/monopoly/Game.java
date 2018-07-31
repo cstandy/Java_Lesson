@@ -45,15 +45,15 @@ public class Game {
 		System.out.println("                         |_|            |___/                                ");
 		System.out.println("                                                       ~~~~~~~~~ [\033[0;91m電\033[1;93m機\033[0;92m漢\033[0;96m化\033[0;94m組\033[0m]");
 		//System.out.print("（按 Enter 開始）");
-		try { Thread.sleep(1000); } catch (InterruptedException e) {}
+		try { Thread.sleep(500); } catch (InterruptedException e) {}
 		//try { System.in.read(); } catch (Exception e) {}
 
 		boss.push(new Boss("<系上同學>", 6, 1, 100, 6));
-		boss.push(new Boss("<阿國>",    5, 3, 50, 5));
-		boss.push(new Boss("<雲平狗>",   4, 2, 40, 4));
-		boss.push(new Boss("<大笨鳥>",   3, 2, 30, 4));
-		boss.push(new Boss("<普物龜>",   2, 1, 20, 3));
-		boss.push(new Boss("<松鼠>",    1, 1, 10, 3));
+		// boss.push(new Boss("<阿國>",    5, 3, 50, 5));
+		// boss.push(new Boss("<雲平狗>",   4, 2, 40, 4));
+		// boss.push(new Boss("<大笨鳥>",   3, 2, 30, 4));
+		// boss.push(new Boss("<普物龜>",   2, 1, 20, 3));
+		// boss.push(new Boss("<松鼠>",    1, 1, 10, 3));
 
 
 
@@ -222,6 +222,7 @@ public class Game {
 
 			// 列出所有的土地並加分
 			System.out.println("   # 擁有的土地有：");
+			gui.outputArea.append(Color.BLACK, "   # 擁有的土地有：\n");
 			for (int j = 0; j < 32; j++) {
 				if (map.blockList[j].getOwner() == roles[i].getName()) {
 					System.out.println("     # " + map.blockList[j].getName() + ": " + (map.blockList[j].getPrice() * 10 + 10) + " 分。");
@@ -250,7 +251,7 @@ public class Game {
 				"| | | | | | | | | | ( (/ /| |    \r\n" + 
 				" \\____|_|_| |_|_| |_|\\____)_|    \r\n" + 
 				"                                 ");
-		gui.outputArea.append(Color.BLACK, "       _                         \r\n" + 
+		gui.outputArea.append(new Color(255, 215, 0), "       _                         \r\n" + 
 				"      (_)                        \r\n" + 
 				" _ _ _ _ ____  ____   ____  ____ \r\n" + 
 				"| | | | |  _ \\|  _ \\ / _  )/ ___)\r\n" + 
@@ -266,6 +267,9 @@ public class Game {
 				gui.outputArea.append(new Color(255,20,147), roles[i].getName());
 			}
 		}
+		
+		gui.outputArea.append(new Color(102, 205, 0), "  ==================== Thank you for playing ===================  \n\n");
+		
 	}
 
 	/**
@@ -332,14 +336,17 @@ public class Game {
 					skip[curRole] = true;
 				} else {
 					//System.out.print("   * " + roles[curRole].getName() +  " 挑戰餵食！（按 Enter 繼續）");
-					gui.outputArea.append(Color.BLACK, "   * " + roles[curRole].getName() +  " 挑戰餵食！\n");
+					gui.outputArea.append(Color.BLACK, "   * ");
+					gui.outputArea.append(new Color(255,20,147), roles[curRole].getName());
+					gui.outputArea.append(Color.BLACK, " 挑戰餵食！\n");
 					//try { System.in.read(); } catch (Exception e) {}
 					roles[curRole].setMoney(remainMoney);
 					System.out.print("   * " + roles[curRole].getName() + " 花了錢買桃太郎糰子，剩 " + roles[curRole].getMoney() + " 元，");
 					gui.outputArea.append(Color.BLACK, "   * ");
 					gui.outputArea.append(new Color(255,20,147), roles[curRole].getName());
 					gui.outputArea.append(Color.BLACK, " 花了錢買桃太郎糰子，剩 " + roles[curRole].getMoney() + " 元，\n");
-
+					gui.refreshRole(roles);
+					
 					// 把大家花的錢存起來，在打最後一隻王時才會返還該次全體費用作為Bonus					
 					lastBonus += boss.peek().getCost();
 
@@ -377,7 +384,8 @@ public class Game {
 
 						// 移除那個 boss
 						boss.pop();
-						gui.refreshBoss(boss.peek(), false);
+						if(!boss.isEmpty()) {gui.refreshBoss(boss.peek(), false);}
+						
 
 						// 最後一隻Boss，可以額外獲得金幣
 						if(boss.isEmpty()) {
@@ -388,6 +396,7 @@ public class Game {
 							gui.outputArea.append(Color.BLACK, " $ 現在 ");
 							gui.outputArea.append(new Color(255,20,147), roles[curRole].getName());
 							gui.outputArea.append(Color.BLACK, "身上有 " + roles[curRole].getMoney() + " 枚金幣！\n");
+							gui.refreshRole(roles);
 						}
 
 						System.out.println(" =================================================================");
@@ -468,19 +477,22 @@ public class Game {
 		gui.outputArea.append(Color.BLUE, "組");
 		gui.outputArea.append(Color.black, "]\n");
 		
+		/*
 		gui.outputArea.append(Color.black, "  ==================================================================  \n\n");
-		gui.outputArea.append(Color.black, " . 遊戲類型：本遊戲為融合了各種元素的大富翁，角色擁有職業技能，適合 4 人遊玩\n");
-		gui.outputArea.append(Color.black, "          （當然也可以自己玩，不過太邊緣了，請多交朋友）\n");
-		gui.outputArea.append(Color.black, "  __________________________________________________________________  \n");
-		gui.signUp();
-
+		
+		gui.outputArea.append(Color.black, " . 遊戲面板：中央為資訊輸出區，右側為角色資訊欄，右下為 BOSS 資訊欄\n\n");
+		
 		gui.outputArea.append(Color.black, " . 操作說明：下方有 3 個方塊\n");
-		gui.outputArea.append(Color.black, "           * 左邊為輸入區（用於輸入名字及數字）\n");
-		gui.outputArea.append(Color.black, "           * 中間為丟骰子的按鈕\n");
+		gui.outputArea.append(Color.black, "           * 左邊為輸入區，須先移動鼠標至此，後輸入名字或數字或 Enter 繼續\n");
+		gui.outputArea.append(Color.black, "           * 中間為丟骰子的按鈕，以滑鼠左鍵點擊\n");
 		gui.outputArea.append(Color.black, "           * 右邊會顯示骰子的數值\n\n");
-		gui.outputArea.append(Color.black, "  __________________________________________________________________  \n");
+		gui.outputArea.append(Color.black, "  __________________________<按 ENTER 繼續>__________________________  \n");
 		gui.signUp();
 		
+		gui.outputArea.append(Color.black, " . 遊戲類型：本遊戲為融合了各種元素的大富翁，角色擁有職業技能，適合 4 人遊玩\n");
+		gui.outputArea.append(Color.black, "          （當然也可以自己玩，不過太邊緣了，請多交朋友）\n\n");
+		gui.outputArea.append(Color.black, "  __________________________<按 ENTER 繼續>__________________________  \n");
+		gui.signUp();
 		
 		gui.outputArea.append(Color.black, " . 遊戲流程：玩家每回合有投擲 1 次移動骰子和 1 次能力骰子的機會\n");
 		gui.outputArea.append(Color.black, "           1. 先丟骰子決定移動距離\n");
@@ -499,18 +511,92 @@ public class Game {
 		gui.outputArea.append(Color.black, "              * 碰！！ - 打大家的臉，大家嚇到掉 1 枚金幣\n");
 		gui.outputArea.append(Color.black, "           4. 如果通過起點，則會翻開一張 BOSS 牌，進入戰鬥\n");
 		gui.outputArea.append(Color.black, "           5. BOSS 戰由經過起點之玩家開始，依序挑戰直到有人成功或全員放棄\n");
-		gui.outputArea.append(Color.black, "           6. 換進入 BOSS 戰前的下一位玩家，重複執行到最後一隻 BOSS 被打敗為止\n");
-		gui.outputArea.append(Color.black, "  __________________________________________________________________  \n");
+		gui.outputArea.append(Color.black, "           6. 換進入 BOSS 戰前的下一位玩家，重複執行到最後一隻 BOSS 被打敗為止\n\n");
+		gui.outputArea.append(Color.black, "  __________________________<按 ENTER 繼續>__________________________  \n");
 		gui.signUp();
 
 		gui.outputArea.append(Color.black, " . 遊戲目的：獲得最高分數的玩家獲勝\n");
 		gui.outputArea.append(Color.black, "           * 其中地產可獲得地租＊10 + 10分\n");
 		gui.outputArea.append(Color.black, "           * 金幣每 5 元計 10分，未滿則不計分\n");
 		gui.outputArea.append(Color.black, "           * 打敗 BOSS 會有另外的分數，請多參與戰鬥\n");
-		gui.outputArea.append(Color.black, "           * 打敗最後一隻 BOSS 可額外獲得該次戰鬥所有投入金幣\n");		
-		gui.outputArea.append(Color.black, "  ===================   S    T    A     R     T   ==================  \n");
+		gui.outputArea.append(Color.black, "           * 打敗最後一隻 BOSS 可額外獲得該次戰鬥投入的所有金幣\n\n");
+		gui.outputArea.append(Color.black, "  __________________________<按 ENTER 繼續>__________________________  \n");
 		gui.signUp();
+		gui.outputArea.append(Color.black, "\n\n  ===================   S    T    A     R     T   ==================  \n");
+		
+		*/
+		
+		gui.outputArea.append(Color.black, "  =====================================================================  \n\n");
 
+		gui.outputArea.append(Color.black, " . 遊戲面板：中央為");
+		gui.outputArea.append(new Color(30, 144, 255), "資訊輸出區");
+		gui.outputArea.append(Color.black, "，右側為");
+		gui.outputArea.append(new Color(30, 144, 255), "角色資訊欄");
+		gui.outputArea.append(Color.black, "，右下為 ");
+		gui.outputArea.append(new Color(30, 144, 255), "BOSS 資訊欄\n\n");
+		
+		gui.outputArea.append(Color.black, " . 操作說明：資訊輸出欄下方有 3 個小區塊\n");
+		gui.outputArea.append(Color.black, "           * 左邊為");
+		gui.outputArea.append(new Color(30, 144, 255), "輸入區");
+		gui.outputArea.append(Color.black, "，須先移動鼠標至此，後");
+		gui.outputArea.append(new Color(30, 144, 255), "輸入名字或數字或 Enter 繼續\n");
+		gui.outputArea.append(Color.black, "           * 中間為丟骰子的按鈕，以");
+		gui.outputArea.append(new Color(30, 144, 255), "滑鼠左鍵點擊\n");
+		gui.outputArea.append(Color.black, "           * 右邊會顯示骰子的數值\n\n");
+		
+		gui.outputArea.append(new Color(154, 205, 50),  "  ___________________________<按 ENTER 繼續>___________________________  \n");
+		gui.signUp();
+		
+		gui.outputArea.append(Color.black, " . 遊戲類型：本遊戲為融合了各種元素的大富翁，角色擁有");
+		gui.outputArea.append(new Color(30, 144, 255), "職業技能");
+		gui.outputArea.append(Color.black, "，適合 4 人遊玩\n");
+		gui.outputArea.append(Color.black, "          （當然也可以自己玩，不過太邊緣了，請多交朋友）\n\n");
+		gui.outputArea.append(new Color(154, 205, 50), "  ___________________________<按 ENTER 繼續>___________________________  \n");
+		gui.signUp();
+		
+		gui.outputArea.append(Color.black, " . 遊戲流程：玩家每回合有投擲 1 次");
+		gui.outputArea.append(new Color(30, 144, 255), "移動骰子");
+		gui.outputArea.append(Color.black, "和 1 次");
+		gui.outputArea.append(new Color(30, 144, 255), "能力骰子");
+		gui.outputArea.append(Color.black, "的機會\n");
+		gui.outputArea.append(Color.black, "           1. 先丟骰子決定移動距離\n");
+		gui.outputArea.append(Color.black, "           2. 移動到該格子，沿途可以撿走路上的金幣，然後執行目的地那一格的規則\n");
+		gui.outputArea.append(Color.black, "              * 一般土地（可買賣，收租賺個錢）\n");
+		gui.outputArea.append(Color.black, "              * 傳送門（可以移動到下一個最近的傳送門）\n");
+		gui.outputArea.append(Color.black, "              * 提款機（可領個錢，耍個廢）\n");
+		gui.outputArea.append(Color.black, "              * 陷阱（會被戳，很痛，會噴個 2 枚金幣）\n");
+		gui.outputArea.append(Color.black, "              * 超級星星（可以發動職業技能，很有用的東西）\n");
+		gui.outputArea.append(Color.black, "              * 什麼事都沒有，浪費人生的格子\n");
+		gui.outputArea.append(Color.black, "           3. 再次丟骰子決定使用什麼特殊能力\n");
+		gui.outputArea.append(Color.black, "              * 錢錢錢 - 跟銀行領錢錢\n");
+		gui.outputArea.append(Color.black, "              * 小烏賊 - 跟別人偷 2 枚金幣\n");
+		gui.outputArea.append(Color.black, "              * 綠龜殼 - 打前面人家臉，讓他嚇到掉 3 枚金幣\n");
+		gui.outputArea.append(Color.black, "              * 紅龜殼 - 打後面人家臉，讓他嚇到掉 3 枚金幣\n");
+		gui.outputArea.append(Color.black, "              * 碰！！ - 打大家的臉，大家嚇到掉 1 枚金幣\n");
+		gui.outputArea.append(Color.black, "           4. 如果通過起點，則會");
+		gui.outputArea.append(new Color(30, 144, 255), "翻開一張 BOSS 牌");
+		gui.outputArea.append(Color.black, "，進入戰鬥\n");
+		gui.outputArea.append(Color.black, "           5. BOSS 戰由經過起點之玩家開始，依序挑戰直到有人成功或全員放棄\n");
+		gui.outputArea.append(Color.black, "           6. 換進入 BOSS 戰前的下一位玩家，重複執行");
+		gui.outputArea.append(new Color(30, 144, 255), "到最後一隻 BOSS 被打敗為止\n\n");
+		gui.outputArea.append(new Color(154, 205, 50), "  ___________________________<按 ENTER 繼續>___________________________  \n");
+		gui.signUp();
+		
+		
+		gui.outputArea.append(Color.black, " . 遊戲目的：獲得");
+		gui.outputArea.append(new Color(30, 144, 255), "最高分數的玩家獲勝\n");
+		gui.outputArea.append(Color.black, "           * 其中地產可獲得地租＊10 + 10分\n");
+		gui.outputArea.append(Color.black, "           * 金幣每 5 元計 10分，未滿則不計分\n");
+		gui.outputArea.append(Color.black, "           * 打敗 BOSS 會有另外的分數，請多參與戰鬥\n");
+		gui.outputArea.append(Color.black, "           * 打敗最後一隻 BOSS 可額外獲得該次戰鬥投入的所有金幣\n\n");
+		gui.outputArea.append(new Color(154, 205, 50), "  ___________________________<按 ENTER 繼續>___________________________  \n");
+		
+		gui.signUp();
+		
+		gui.outputArea.append(Color.black, "  =========================");
+		gui.outputArea.append(Color.red, "   S  T  A  R  T   ");
+		gui.outputArea.append(Color.black, "========================  \n\n");
+		
 		
 		
 		

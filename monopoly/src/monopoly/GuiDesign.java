@@ -117,7 +117,7 @@ public class GuiDesign {
 
 		// 遊戲方塊區
 		for(int a=0; a < 32; a++) {
-			blockArea[a] = new JTextArea("哇啦哇啦哇啦哇啦哇啦哇啦哇啦哇啦哇啦哇啦"+"\n金幣\n價錢\n所有人");
+			blockArea[a] = new JTextArea("");
 			blockArea[a].setForeground(Color.BLACK);
 			blockArea[a].setEditable(false);
 			blockArea[a].setBackground(Color.WHITE);
@@ -158,7 +158,7 @@ public class GuiDesign {
 
 		// 右邊角色列表
 		for(int a=0; a < 4; a++) {
-			roleArea[a] = new JTextArea(""+a);
+			roleArea[a] = new JTextArea("");
 			roleArea[a].setForeground(Color.BLACK);
 			roleArea[a].setEditable(false);
 			roleArea[a].setBackground(Color.WHITE);
@@ -217,7 +217,7 @@ public class GuiDesign {
 		frame.getContentPane().add(diceArea);
 
 		// 右下角BOSS顯示
-		bossArea = new JTextArea("ioot");
+		bossArea = new JTextArea("");
 		bossArea.setForeground(Color.BLACK);
 		bossArea.setEditable(false);
 		bossArea.setBackground(Color.WHITE);
@@ -235,7 +235,7 @@ public class GuiDesign {
 			try { Thread.sleep(500); } catch (InterruptedException e) {}
 		}
 		String name = this.userInput;
-		outputArea.append(Color.blue,name + "\n");
+		outputArea.append(new Color(255,20,147), name + "\n");
 		this.userInput = null;
 		return name;
 	}
@@ -330,7 +330,7 @@ public class GuiDesign {
 			case "<弓手>":
 				roleArea[a].setText("名字：" + roleIn[a].getName() + "       " 
 						+ "職業：" + roleIn[a].getCareer() + "\n" 
-						+ "超級星星：\n  向銀行收所擁有的地租\n"
+						+ "超級星星：\n  再次丟骰子並獲得該值 +5 枚金幣\n"
 						+ "綠龜殼：增加綠龜殼傷害\n" 
 						+ "金錢： " + roleIn[a].getMoney() + "\n"
 						+ "分數累積： " + roleIn[a].getPoint() + "分");
@@ -338,7 +338,7 @@ public class GuiDesign {
 			case "<盜賊>":
 				roleArea[a].setText("名字：" + roleIn[a].getName() + "       " 
 						+ "職業：" + roleIn[a].getCareer() + "\n" 
-						+ "超級星星：\n  再次丟骰子並獲得該值 +5 枚金幣\n"
+						+ "超級星星：\n  向銀行收所擁有的地租\n"
 						+ "小烏賊：增加奪取金幣量\n" 
 						+ "金錢： " + roleIn[a].getMoney() + "\n"
 						+ "分數累積： " + roleIn[a].getPoint() + "分");
