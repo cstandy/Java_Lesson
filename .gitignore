@@ -5,6 +5,5 @@
 
 .recommenders/
 .settings/
-/bin/
 .classpath
 .project
