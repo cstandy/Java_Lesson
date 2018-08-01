@@ -31,10 +31,13 @@ import java.awt.TextArea;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.DataOutputStream;
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Random;
 import java.util.Scanner;
 import java.awt.Font;
+import java.awt.GraphicsEnvironment;
 
 public class GuiDesign {
 
@@ -53,6 +56,7 @@ public class GuiDesign {
 	public int diceThrown = 0;
 	public boolean dice = false;
 	private JLabel label;
+	private Font font;
 
 	/**
 	 * Create the application.
@@ -73,6 +77,18 @@ public class GuiDesign {
 
 		LineBorder lineBorder=new LineBorder(new Color(190,190,190),3);
 
+		// 自訂中文字型
+		String fName = "./华文宋体.ttf";
+		InputStream is;
+		try {
+			is = GuiDesign.class.getResourceAsStream(fName);
+			font = Font.createFont(Font.TRUETYPE_FONT, is);
+		}catch(Exception e) {
+			System.out.println("bomb!!!");
+		}
+		font = font.deriveFont((float)14);
+		
+		
 		// 輸出界面
 		outputArea = new ColorPane();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -86,7 +102,7 @@ public class GuiDesign {
 		outputArea.setEditable(false);
 		outputArea.setBackground(Color.WHITE);
 		outputArea.setBorder(lineBorder);
-		outputArea.setFont(new Font("monospaced", Font.PLAIN, 14));
+		outputArea.setFont(font);// new Font("monospaced", Font.PLAIN, 14));
 
 		// 角色列表顯示於block上的四角
 		for(int b=0; b<4; b++) {
@@ -189,13 +205,13 @@ public class GuiDesign {
 		input.setBorder(lineBorder);
 		input.setFont(new Font("monospaced", Font.PLAIN, 24));
 		frame.getContentPane().add(input);
-		
+
 		// 輸入文字條的小跟班
 		label = new JLabel("輸入欄：");
 		label.setBounds(110,520,70,20);
 		label.setVisible(true);
 		label.setFont(new Font("monospaced", Font.PLAIN, 14));
-		
+
 		frame.getContentPane().add(label);
 
 		// 骰子按鈕
@@ -255,30 +271,30 @@ public class GuiDesign {
 	 * @param start The lower bound for input.
 	 * @param end   The upper bound for input.
 	 */
-	
+
 	public int getDecision(int start, int end) {
 		// outputArea.append(Color.blue,"輸入數字：");
-		
+
 		// 等待輸入，如果輸入有值才會繼續
 		while(this.userInput == null) {
 			try { Thread.sleep(1000); } catch (InterruptedException e) {}
 		}
-		
+
 		outputArea.append(Color.blue, userInput + "\n");
-		
+
 		while (!this.userInput.matches("[" + start + "-" + end + "]{1}")) {
 			outputArea.append(Color.RED, "     ! 請輸入 " + start + " 至 " + end + " 的數字：");
 			this.userInput = null;
-			
+
 			// 等待輸入，如果輸入有值才會繼續
 			while(this.userInput == null) {
 				try { Thread.sleep(1000); } catch (InterruptedException e) {}
 			}
-			
+
 
 			outputArea.append(Color.blue, userInput + "\n");
 		}
-		
+
 		int integerInput = 0;
 		integerInput = Integer.parseInt(userInput);
 		// outputArea.append(Color.blue,integerInput + "\n");
@@ -391,5 +407,6 @@ public class GuiDesign {
 					+ "累積金錢： ?????");
 		}
 	}
+
 }
 
