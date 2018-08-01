@@ -56,7 +56,8 @@ public class GuiDesign {
 	public int diceThrown = 0;
 	public boolean dice = false;
 	private JLabel label;
-	private Font font;
+	private Font fontdragon;
+	private Font fontblack;
 
 	/**
 	 * Create the application.
@@ -77,16 +78,26 @@ public class GuiDesign {
 
 		LineBorder lineBorder=new LineBorder(new Color(190,190,190),3);
 
-		// 自訂中文字型
-		String fName = "./kai.ttf";
+		// 自訂中文字型＿龍門石碑體
+		String fName = "./dragon.ttf";
 		InputStream is;
 		try {
 			is = GuiDesign.class.getResourceAsStream(fName);
-			font = Font.createFont(Font.TRUETYPE_FONT, is);
+			fontdragon = fontdragon.createFont(Font.TRUETYPE_FONT, is);
 		}catch(Exception e) {
 			System.out.println("bomb!!!");
 		}
-		font = font.deriveFont((float)14);
+		fontdragon = fontdragon.deriveFont((float)14);
+		
+		// 自訂中文字型＿正黑體
+		fName = "./black.ttf";
+		try {
+			is = GuiDesign.class.getResourceAsStream(fName);
+			fontblack = fontdragon.createFont(Font.TRUETYPE_FONT, is);
+		}catch(Exception e) {
+			System.out.println("bomb!!!");
+		}
+		fontblack = fontblack.deriveFont((float)14);
 		
 		
 		// 輸出界面
@@ -102,7 +113,7 @@ public class GuiDesign {
 		outputArea.setEditable(false);
 		outputArea.setBackground(Color.WHITE);
 		outputArea.setBorder(lineBorder);
-		outputArea.setFont(font);// new Font("monospaced", Font.PLAIN, 14));
+		outputArea.setFont(fontdragon); // new Font("monospaced", Font.PLAIN, 14));
 
 		// 角色列表顯示於block上的四角
 		for(int b=0; b<4; b++) {
@@ -151,7 +162,7 @@ public class GuiDesign {
 			else{
 				blockArea[a].setBounds(730, (a%8)*72+35, 90, 72);
 			}
-			blockArea[a].setFont(new Font("monospaced", Font.PLAIN, 12));
+			blockArea[a].setFont(fontblack.deriveFont((float)12)); // new Font("monospaced", Font.PLAIN, 12));
 			blockArea[a].setBorder(lineBorder);
 			frame.getContentPane().add(blockArea[a]);
 			layeredPane.add(blockArea[a],new Integer(200));
@@ -185,7 +196,7 @@ public class GuiDesign {
 			else if(a==1) {roleArea[a].setBorder(new LineBorder(new Color(154,205,50), 3));}
 			else if(a==2) {roleArea[a].setBorder(new LineBorder(new Color(92,172,238), 3));}
 			else{roleArea[a].setBorder(new LineBorder(new Color(255,215,0), 3));}
-			roleArea[a].setFont(new Font("monospaced", Font.PLAIN, 14));
+			roleArea[a].setFont(fontblack); // new Font("monospaced", Font.PLAIN, 14));
 			frame.getContentPane().add(roleArea[a]);
 		}
 
@@ -203,14 +214,14 @@ public class GuiDesign {
 		input.setBounds(110, 540, 145, 40);
 		input.setColumns(10);
 		input.setBorder(lineBorder);
-		input.setFont(new Font("monospaced", Font.PLAIN, 24));
+		input.setFont(fontblack.deriveFont((float)24)); // new Font("monospaced", Font.PLAIN, 24));
 		frame.getContentPane().add(input);
 
 		// 輸入文字條的小跟班
 		label = new JLabel("輸入欄：");
 		label.setBounds(110,520,70,20);
 		label.setVisible(true);
-		label.setFont(new Font("monospaced", Font.PLAIN, 14));
+		label.setFont(fontblack); // new Font("monospaced", Font.PLAIN, 14));
 
 		frame.getContentPane().add(label);
 
@@ -218,7 +229,7 @@ public class GuiDesign {
 		diceButton = new JButton("丟 骰 子 ！");
 		diceButton.setBounds(265, 540, 300, 40);
 		diceButton.setBorder(lineBorder);
-		diceButton.setFont(new Font("monospaced", Font.PLAIN, 24));
+		diceButton.setFont(fontdragon.deriveFont((float)24)); // new Font("monospaced", Font.PLAIN, 24));
 		diceButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -239,7 +250,7 @@ public class GuiDesign {
 		diceArea.setBackground(Color.WHITE);
 		diceArea.setBounds(575, 540, 145, 40);
 		diceArea.setBorder(lineBorder);
-		diceArea.setFont(new Font("monospaced", Font.PLAIN, 21));
+		diceArea.setFont(fontblack.deriveFont((float)21)); // new Font("monospaced", Font.PLAIN, 21));
 		frame.getContentPane().add(diceArea);
 
 		// 右下角BOSS顯示
@@ -249,7 +260,7 @@ public class GuiDesign {
 		bossArea.setBackground(Color.WHITE);
 		bossArea.setBounds(830, 477, 240, 206);
 		bossArea.setBorder(lineBorder);
-		bossArea.setFont(new Font("monospaced", Font.PLAIN, 20));
+		bossArea.setFont(fontblack.deriveFont((float)20)); // new Font("monospaced", Font.PLAIN, 20));
 		frame.getContentPane().add(bossArea);
 
 		frame.setVisible(true);
