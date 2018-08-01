@@ -51,11 +51,11 @@ public class Game {
 		//try { System.in.read(); } catch (Exception e) {}
 
 		boss.push(new Boss("<系上同學>", 6, 1, 100, 6));
-		// boss.push(new Boss("<阿國>",    5, 3, 50, 5));
-		// boss.push(new Boss("<雲平狗>",   4, 2, 40, 4));
-		// boss.push(new Boss("<大笨鳥>",   3, 2, 30, 4));
-		// boss.push(new Boss("<普物龜>",   2, 1, 20, 3));
-		// boss.push(new Boss("<松鼠>",    1, 1, 10, 3));
+		boss.push(new Boss("<阿國>",    5, 3, 50, 5));
+		boss.push(new Boss("<雲平狗>",   4, 2, 40, 4));
+		boss.push(new Boss("<大笨鳥>",   3, 2, 30, 4));
+		boss.push(new Boss("<普物龜>",   2, 1, 20, 3));
+		boss.push(new Boss("<松鼠>",    1, 1, 10, 3));
 
 
 
@@ -335,6 +335,7 @@ public class Game {
 		}else{
 			gui.refreshBoss(boss.peek(), true);
 		}
+		gui.outputArea.append(Color.BLACK, "");
 
 		try { Thread.sleep(1000); } catch (InterruptedException e) {}
 		//try { System.in.read(); } catch (Exception e) {}
@@ -612,7 +613,7 @@ public class Game {
 		gui.outputArea.append(new Color(30, 144, 255), "能力骰子");
 		gui.outputArea.append(Color.black, "的機會\n");
 		gui.outputArea.append(Color.black, "           1. 先丟骰子決定移動距離\n");
-		gui.outputArea.append(Color.black, "           2. 移動到該格子，沿途可以撿走路上的金幣，然後執行目的地那一格的規則\n");
+		gui.outputArea.append(Color.black, "           2. 移動到該格，沿途可以撿走路上的金幣，然後執行目的地該格規則\n");
 		gui.outputArea.append(Color.black, "              * 一般土地（可買賣，收租賺個錢）\n");
 		gui.outputArea.append(Color.black, "              * 傳送門（可以移動到下一個最近的傳送門）\n");
 		gui.outputArea.append(Color.black, "              * 提款機（可領個錢，耍個廢）\n");
@@ -629,8 +630,8 @@ public class Game {
 		gui.outputArea.append(new Color(30, 144, 255), "翻開一張 BOSS 牌");
 		gui.outputArea.append(Color.black, "，進入戰鬥\n");
 		gui.outputArea.append(Color.black, "           5. BOSS 戰由經過起點之玩家開始，依序挑戰直到有人成功或全員放棄\n");
-		gui.outputArea.append(Color.black, "           6. 換進入 BOSS 戰前的下一位玩家，重複執行");
-		gui.outputArea.append(new Color(30, 144, 255), "到最後一隻 BOSS 被打敗為止\n\n");
+		gui.outputArea.append(Color.black, "           6. 換進入 BOSS 戰前的次位玩家，");
+		gui.outputArea.append(new Color(30, 144, 255), "直到最後一隻 BOSS 被打敗為止\n\n");
 		gui.outputArea.append(new Color(154, 205, 50), "  ___________________________<按 ENTER 繼續>___________________________  \n");
 		gui.signUp();
 		

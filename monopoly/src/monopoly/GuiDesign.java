@@ -80,7 +80,7 @@ public class GuiDesign {
 		LineBorder lineBorder=new LineBorder(new Color(190,190,190),3);
 
 		// 自訂中文字型＿龍門石碑體
-		String fName = "./dragon.ttf";
+		String fName = "dragon.ttf";
 		InputStream is;
 		try {
 			is = GuiDesign.class.getResourceAsStream(fName);
@@ -91,7 +91,7 @@ public class GuiDesign {
 		fontdragon = fontdragon.deriveFont((float)14);
 		
 		// 自訂中文字型＿正黑體
-		fName = "./black.ttf";
+		fName = "black.ttf";
 		try {
 			is = GuiDesign.class.getResourceAsStream(fName);
 			fontblack = fontdragon.createFont(Font.TRUETYPE_FONT, is);
@@ -114,7 +114,7 @@ public class GuiDesign {
 		outputArea.setEditable(false);
 		outputArea.setBackground(Color.WHITE);
 		outputArea.setBorder(lineBorder);
-		outputArea.setFont(fontdragon); // new Font("monospaced", Font.PLAIN, 14));
+		outputArea.setFont(fontdragon.deriveFont((float)15)); // new Font("monospaced", Font.PLAIN, 14));
 
 		// 角色列表顯示於block上的四角
 		for(int b=0; b<4; b++) {
