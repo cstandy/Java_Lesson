@@ -33,9 +33,9 @@ public class Map {
 		blockList[12] = new Block("[陷阱]",               false, false, 0, 0);
 		blockList[13] = new Block("[九乘九]",               false, true,  2, 4);
 		blockList[14] = new Block("[超級星星]",               false, false, 0, 0);
-		blockList[15] = new Block("[21世紀風味館]",         	false, true,  2, 4);
+		blockList[15] = new Block("[廿一世紀]",         	false, true,  2, 4);
 		blockList[16] = new Block("[D-24]",               true,  false, 0, 0);
-		blockList[17] = new Block("[電機三館麥當勞]",         false, true,  3, 5);
+		blockList[17] = new Block("[三館麥當勞]",         false, true,  3, 5);
 		blockList[18] = new Block("[傳送門]",               false, false, 0, 0);
 		blockList[19] = new Block("[7-11大學店]",           false, true,  3, 5);
 		blockList[20] = new Block("[提款機]",              false, false, 0, 0);

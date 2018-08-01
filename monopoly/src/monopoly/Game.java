@@ -80,10 +80,10 @@ public class Game {
 	private String gameSignUp(String career) {
 		String name = "";
 
-		System.out.print(" . 請輸入職業為" + career + "的玩家姓名（英文）：");
+		System.out.print(" . 請輸入職業為" + career + "的玩家姓名（中英不限，5 字以內）：");
 		gui.outputArea.append(Color.black," . 請輸入職業為");
 		gui.outputArea.append(Color.blue, career);
-		gui.outputArea.append(Color.black, "的玩家姓名（英文）：");
+		gui.outputArea.append(Color.black, "的玩家姓名（中英不限，5 字以內）：");
 		// name = input.next();
 		name = gui.signUp();
 
@@ -95,9 +95,9 @@ public class Game {
 				gui.outputArea.append(Color.black, "   ! 請重新輸入：");
 				// name = input.next();
 				name = gui.signUp();
-			} else */if (name.length() > 8) {
-				System.out.println("   ! 姓名需在 8 個字元以內。");
-				gui.outputArea.append(Color.black, "   ! 姓名需在 8 個字元以內。\n");
+			} else */if (name.length() > 5) {
+				System.out.println("   ! 姓名需在 5 個字元以內。");
+				gui.outputArea.append(Color.black, "   ! 姓名需在 5 個字元以內。\n");
 				System.out.print("   ! 請重新輸入：");
 				gui.outputArea.append(Color.black, "   ! 請重新輸入：");
 				// name = input.next();
@@ -161,7 +161,10 @@ public class Game {
 				}
 				System.out.println("   . 擲出了 " + gui.diceThrown + "。");
 				gui.outputArea.append(Color.BLACK, "   . 擲出了 " + gui.diceThrown + "。\n");
+				
 				Block walkBlock = map.walk(roles, gui.diceThrown, i);
+				// Block walkBlock = map.walk(roles, gui.diceThrown * 5, i);
+				
 				//System.out.println("   $ 玩家 " + roles[i].getName()
 				//		+ " 目前位於" + map.walk(roles, gui.diceThrown, i).getName()
 				//		+ "，身上有 " + roles[i].getMoney() + " 枚金幣。");
@@ -229,8 +232,16 @@ public class Game {
 		System.out.println("                                           $$ |                    $$    $$/                                                 ");
 		System.out.println("                                           $$/                      $$$$$$/                                                  ");
 
-
-
+		gui.outputArea.append(Color.ORANGE, "      /$$$$$$                                         \n");
+		gui.outputArea.append(Color.ORANGE, "     /$$__  $$                                        \n");
+		gui.outputArea.append(Color.ORANGE, "    | $$  \\__/  /$$$$$$$  /$$$$$$   /$$$$$$   /$$$$$$ \n");
+		gui.outputArea.append(Color.ORANGE, "    |  $$$$$$  /$$_____/ /$$__  $$ /$$__  $$ /$$__  $$\n");
+		gui.outputArea.append(Color.ORANGE, "     \\____  $$| $$      | $$  \\ $$| $$  \\__/| $$$$$$$$\n");
+		gui.outputArea.append(Color.ORANGE, "     /$$  \\ $$| $$      | $$  | $$| $$      | $$_____/\n");
+		gui.outputArea.append(Color.ORANGE, "    |  $$$$$$/|  $$$$$$$|  $$$$$$/| $$      |  $$$$$$$\n");
+		gui.outputArea.append(Color.ORANGE, "     \\______/  \\_______/ \\______/ |__/       \\_______/\n");
+		gui.outputArea.append(Color.ORANGE, "                                                      \n");
+		
 		// 將所有人的分數分別加總
 		for (int i = 0; i < 4; i++) {
 			System.out.println(" # " + roles[i].getName() + ":");
@@ -290,11 +301,11 @@ public class Game {
 			if (score[i] == winScore) {
 				System.out.println(" & " + roles[i].getName());
 				gui.outputArea.append(Color.BLACK, " & ");
-				gui.outputArea.append(new Color(255,20,147), roles[i].getName());
+				gui.outputArea.append(new Color(255,20,147), roles[i].getName() + "\n");
 			}
 		}
 		
-		gui.outputArea.append(new Color(102, 205, 0), "  ==================== Thank you for playing ===================  \n\n");
+		gui.outputArea.append(new Color(102, 205, 0), "  ======================= Thank you for playing =======================  \n\n");
 		
 	}
 
@@ -318,7 +329,13 @@ public class Game {
 		gui.outputArea.append(new Color(255,20,147), roles[curRole].getName());
 		gui.outputArea.append(Color.BLACK, " 遇到了生物 No." + boss.peek().getOrder() + "：小 ");
 		gui.outputArea.append(Color.RED, boss.peek().getName() + "\n");
-		gui.refreshBoss(boss.peek(), true);
+		
+		if(boss.peek().getOrder() == 6){
+			gui.refreshBoss(boss.peek(), true, 0);
+		}else{
+			gui.refreshBoss(boss.peek(), true);
+		}
+
 		try { Thread.sleep(1000); } catch (InterruptedException e) {}
 		//try { System.in.read(); } catch (Exception e) {}
 
@@ -367,15 +384,18 @@ public class Game {
 					gui.outputArea.append(Color.BLACK, " 挑戰餵食！\n");
 					//try { System.in.read(); } catch (Exception e) {}
 					roles[curRole].setMoney(remainMoney);
-					System.out.print("   * " + roles[curRole].getName() + " 花了錢買桃太郎糰子，剩 " + roles[curRole].getMoney() + " 元，");
+					System.out.print("   * " + roles[curRole].getName() + " 花了錢買桃太郎糰子，剩 " + roles[curRole].getMoney() + " 元。");
 					gui.outputArea.append(Color.BLACK, "   * ");
 					gui.outputArea.append(new Color(255,20,147), roles[curRole].getName());
-					gui.outputArea.append(Color.BLACK, " 花了錢買桃太郎糰子，剩 " + roles[curRole].getMoney() + " 元，\n");
+					gui.outputArea.append(Color.BLACK, " 花了錢買桃太郎糰子，剩 " + roles[curRole].getMoney() + " 元。\n");
 					gui.refreshRole(roles);
 					
 					// 把大家花的錢存起來，在打最後一隻王時才會返還該次全體費用作為Bonus					
-					lastBonus += boss.peek().getCost();
-
+					if(boss.peek().getOrder() == 6){
+						lastBonus += boss.peek().getCost();
+						gui.refreshBoss(boss.peek(), true, lastBonus);
+					}
+					
 					// 隨機產生 1-6 的數字
 					gui.dice = true;
 					gui.outputArea.append(Color.BLACK, " . 玩家 ");
@@ -410,8 +430,14 @@ public class Game {
 
 						// 移除那個 boss
 						boss.pop();
-						if(!boss.isEmpty()) {gui.refreshBoss(boss.peek(), false);}
-						
+						if (!boss.isEmpty()) {
+							if (boss.peek().getOrder() <= 5) {
+								gui.refreshBoss(boss.peek(), false);
+							}
+							else if (boss.peek().getOrder() == 6) {
+								gui.refreshBoss(boss.peek(), false, 0);
+							} else {}
+						}
 
 						// 最後一隻Boss，可以額外獲得金幣
 						if(boss.isEmpty()) {
@@ -435,7 +461,7 @@ public class Game {
 						gui.outputArea.append(Color.BLACK, " ! ");
 						gui.outputArea.append(Color.RED, boss.peek().getName());
 						gui.outputArea.append(Color.BLACK, " 只吃 " + dice + " 個桃太郎糰子不會被騙回家，而要 " + boss.peek().getRequirement() + " 個才夠。\n");
-						try { Thread.sleep(2000); } catch (InterruptedException e) {}
+						try { Thread.sleep(1500); } catch (InterruptedException e) {}
 					}
 				}
 			}

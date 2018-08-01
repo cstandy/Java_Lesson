@@ -65,9 +65,10 @@ public class GuiDesign {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
+		frame = new JFrame("成大富翁 - 電機漢化組");
 		frame.setBounds(0, 0, 1080, 720);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setResizable(false);
 		frame.getContentPane().setLayout(null);
 		layeredPane = frame.getLayeredPane();
 
@@ -322,7 +323,7 @@ public class GuiDesign {
 		for(int a=0; a<4; a++) {
 			switch (roleIn[a].getCareer()) {
 			case "<劍士>":
-				roleArea[a].setText("名字：" + roleIn[a].getName() + "       " 
+				roleArea[a].setText("名字：" + roleIn[a].getName() + "   " 
 						+ "職業：" + roleIn[a].getCareer() + "\n" 
 						+ "超級星星：\n  向每個人收 2 枚金幣\n"
 						+ "碰！！：增加為 2 點傷害\n" 
@@ -330,7 +331,7 @@ public class GuiDesign {
 						+ "分數累積： " + roleIn[a].getPoint() + "分");
 				break;
 			case "<法師>":
-				roleArea[a].setText("名字：" + roleIn[a].getName() + "       " 
+				roleArea[a].setText("名字：" + roleIn[a].getName() + "   " 
 						+ "職業：" + roleIn[a].getCareer() + "\n" 
 						+ "超級星星：\n  收集全部地上所有的錢\n"
 						+ "紅龜殼：增加紅龜殼傷害\n" 
@@ -338,7 +339,7 @@ public class GuiDesign {
 						+ "分數累積： " + roleIn[a].getPoint() + "分");
 				break;
 			case "<弓手>":
-				roleArea[a].setText("名字：" + roleIn[a].getName() + "       " 
+				roleArea[a].setText("名字：" + roleIn[a].getName() + "   " 
 						+ "職業：" + roleIn[a].getCareer() + "\n" 
 						+ "超級星星：\n  再次丟骰子並獲得該值 +5 枚金幣\n"
 						+ "綠龜殼：增加綠龜殼傷害\n" 
@@ -346,7 +347,7 @@ public class GuiDesign {
 						+ "分數累積： " + roleIn[a].getPoint() + "分");
 				break;
 			case "<盜賊>":
-				roleArea[a].setText("名字：" + roleIn[a].getName() + "       " 
+				roleArea[a].setText("名字：" + roleIn[a].getName() + "   " 
 						+ "職業：" + roleIn[a].getCareer() + "\n" 
 						+ "超級星星：\n  向銀行收所擁有的地租\n"
 						+ "小烏賊：增加奪取金幣量\n" 
