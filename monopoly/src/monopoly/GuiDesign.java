@@ -78,7 +78,7 @@ public class GuiDesign {
 		LineBorder lineBorder=new LineBorder(new Color(190,190,190),3);
 
 		// 自訂中文字型
-		String fName = "./华文宋体.ttf";
+		String fName = "./kai.ttf";
 		InputStream is;
 		try {
 			is = GuiDesign.class.getResourceAsStream(fName);
