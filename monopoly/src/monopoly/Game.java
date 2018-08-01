@@ -88,14 +88,14 @@ public class Game {
 		name = gui.signUp();
 
 		while (true) {  
-			if (!name.matches("[A-Z][a-zA-Z0-9]*")) {
+			/*if (!name.matches("[]*")) {
 				System.out.println("   ! 姓名需由大寫開頭。");
 				gui.outputArea.append(Color.black, "   ! 姓名需由大寫開頭。\n");
 				System.out.print("   ! 請重新輸入：");
 				gui.outputArea.append(Color.black, "   ! 請重新輸入：");
 				// name = input.next();
 				name = gui.signUp();
-			} else if (name.length() > 8) {
+			} else */if (name.length() > 8) {
 				System.out.println("   ! 姓名需在 8 個字元以內。");
 				gui.outputArea.append(Color.black, "   ! 姓名需在 8 個字元以內。\n");
 				System.out.print("   ! 請重新輸入：");
@@ -105,6 +105,13 @@ public class Game {
 			}else if(nameUsed(name)) { // 玩家名字已存在
 				gui.outputArea.append(Color.black, "   ! 姓名不得與其他玩家重複。\n");
 				gui.outputArea.append(Color.black, "   ! 請重新輸入：");
+				name = gui.signUp();
+			}else if(name.length() < 1) {
+				System.out.println("   ! 姓名需在 1 個字元以上。");
+				gui.outputArea.append(Color.black, "   ! 姓名需在 1 個字元以上。\n");
+				System.out.print("   ! 請重新輸入：");
+				gui.outputArea.append(Color.black, "   ! 請重新輸入：");
+				// name = input.next();
 				name = gui.signUp();
 			}
 			else { // 合法名字則跳出 
