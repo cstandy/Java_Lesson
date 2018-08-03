@@ -32,6 +32,11 @@ $ java HelloWorld
 + 李信杰老師
 + [FINAL](https://hackmd.io/jlLl9wDDQYajRH6R-yEyDg)
 
+### Final Project: Monopoly
+
++ monopoly 分支：console 版本的遊戲
++ gui 分支：gui 版本的遊戲
+
 ### chap1 基本介紹 與 第一支程式
 
 + 使用Eclipse開發 (IDE)
